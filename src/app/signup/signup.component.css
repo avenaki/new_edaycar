@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+.signup-form {
+  background-color: white;
+  width:50%;
+  min-height: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+
+}
+.nav-signup {
+
+  overflow: hidden;
+  top:0;
+  width: 100%;
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.signup-header{
+  font-size: 24px;
+  text-align: center;
+  font-family: 'Exo 2', sans-serif;
+  color:#474747;
+}
+.container {
+  margin-top: 20px;
+  font-family: 'Exo 2', sans-serif;
+}
+
+.nav-signup-item-passenger {
+  background-color: dodgerblue;
+  display:block;
+  width:100%;
+  height:40px;
+  text-align: center;
+  color:white;
+}
+.nav-signup-item-driver {
+  display:block;
+  background-color: midnightblue;
+  width:100%;
+  height:40px;
+  text-align: center;
+  color:white;
+}
+.nav-signup-item-driver:hover {
+  background-color: dodgerblue;
+
+}
+.nav-text{
+  vertical-align: -webkit-baseline-middle;
+  font-size: 14px;
+}
+

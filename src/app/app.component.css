@@ -1,12 +1,56 @@
-.navbar-fixed-top {
-  width:100%;
-  height: 6%;
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed|Unica+One&display=swap');
+
+.navbar {
+  background-image: linear-gradient(to bottom, #1d1d1f, #302f36 );
+  overflow: hidden;
   position: fixed;
-  border: 1px solid dodgerblue;
-}
-.navContainer{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+}
+.nav-item  {
+  display:block;
+  margin-left: 15%;
+  color: whitesmoke;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 16px;
+}
+.nav-item:hover{
+  opacity: 0.7;
+}
+
+.nav-brand {
+  align-self: center;
+  margin-left: 2%;
+  font-family: 'Unica One', cursive;
+  font-size: 20px;
+  font-style: revert;
+  //color:#C8DDAB;
+  color:#85d685;
+  flex-shrink: 0;
+
+}
+.brand-text {
+  color:#ff7158;
+}
+.nav-container{
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  margin-left: 3%;
+}
+.logger {
+ margin-left: 72%;
+  flex-shrink: 0;
+}
+
+.content {
+margin-top:100px;
 }
 

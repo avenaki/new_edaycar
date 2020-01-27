@@ -1,13 +1,20 @@
-<div>
-<div class="navbar-fixed-top">
-  <div class="navContainer">
-    <div class="navbar-brand">Angular Router</div>
-      <div class="nav-item"><a class="nav-link" routerLink="home">Главная</a></div>
-      <div class="nav-item"><a class="nav-link" routerLink="trips">Поездки</a></div>
-      <div class="nav-item nav-item-log-in"><a class="nav-link" routerLink="login">Вход</a></div>
+<head>
+  <meta charset="utf-8" />
+  <base href="/" />
+</head>
 
+<div class="navbar">
+  <div class="nav-brand">
+    <div> EDAYCAR  </div>
+  </div>
+  <div class="nav-container">
+    <div class="nav-item" routerLink="">Главная</div>
+    <div class="nav-item" routerLink="trips">Поездки</div>
+  </div>
+  <div class="logger nav-container">
+    <div class="nav-item" routerLink="login">Войти</div>
   </div>
 </div>
-
+<div class="content">
 <router-outlet></router-outlet>
 </div>

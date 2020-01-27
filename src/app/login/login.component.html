@@ -1,0 +1,25 @@
+<div class="login-form">
+  <div class="login-header"> Вход </div>
+<form [formGroup]="loginForm">
+   <div class="container">
+      <div class="container-item">
+        <label for="login" class="input-label"> Логин </label>
+          <input class="login-forms"  type="text" formControlName="login"  id="login" placeholder="Username" required="required" />
+        <div *ngIf="loginForm.controls['login'].invalid && (loginForm.controls['login'].dirty || loginForm.controls['login'].touched)"
+             class="alert alert-danger">
+        </div>
+      </div>
+      <div class="container-item">
+        <label for="password" class="input-label"> Пароль </label>
+        <input class="login-forms" type="password" formControlName="password"  id = "password" placeholder="Password" required="required" />
+        <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+             class="alert alert-danger"> </div>
+      </div>
+   </div>
+  <div class="buttons-container">
+   <button class="button login"> Отправить</button>
+    <button class="button signup" routerLink="signup"> Зарегистрироваться</button>
+  </div>
+</form>
+</div>
+
