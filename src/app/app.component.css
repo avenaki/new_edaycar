@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed|Unica+One&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css');
 
 .navbar {
   background-image: linear-gradient(to bottom, #1d1d1f, #302f36 );
@@ -51,6 +52,6 @@
 }
 
 .content {
-margin-top:100px;
+margin-top:50px;
 }
 

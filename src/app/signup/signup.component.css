@@ -31,7 +31,7 @@
 }
 
 .nav-signup-item-passenger {
-  background-color: dodgerblue;
+  background-color: midnightblue;
   display:block;
   width:100%;
   height:40px;
@@ -46,12 +46,15 @@
   text-align: center;
   color:white;
 }
-.nav-signup-item-driver:hover {
+.driver-selected {
   background-color: dodgerblue;
-
+}
+.passenger-selected {
+  background-color: dodgerblue;
 }
 .nav-text{
   vertical-align: -webkit-baseline-middle;
   font-size: 14px;
 }
+
 

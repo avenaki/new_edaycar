@@ -4,8 +4,7 @@ import {SignupDriverComponent} from './signup-driver/signup-driver.component';
 import {SignupPassengerComponent} from './signup-passenger/signup-passenger.component';
 import {SignupComponent} from './signup.component';
 import {RouterModule} from '@angular/router';
-import {AppRoutingModule} from '../app-routing.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SignupRoutingModule} from './signup-routing.module';
 
 @NgModule({
@@ -25,7 +24,8 @@ import {SignupRoutingModule} from './signup-routing.module';
     RouterModule,
     SignupRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
-  providers: [  ]
+  providers: [ ]
 })
-export class StudentFormsModule { }
+export class SignupModule { }

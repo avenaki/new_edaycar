@@ -10,7 +10,7 @@ import {SignupDriverComponent} from './signup/signup-driver/signup-driver.compon
 export const appRoutes: Routes = [
   { path: "", component: AboutComponent },
   { path: "login", component: LoginComponent},
-  { path:"signup",  loadChildren: "./signup/signup.module"},
+  { path:"signup",  loadChildren: "./signup/signup.module#SignupModule"},
 
 ];
 @NgModule({

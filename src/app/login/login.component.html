@@ -1,25 +1,51 @@
+<div class="form-align">
 <div class="login-form">
   <div class="login-header"> Вход </div>
 <form [formGroup]="loginForm">
    <div class="container">
       <div class="container-item">
-        <label for="login" class="input-label"> Логин </label>
-          <input class="login-forms"  type="text" formControlName="login"  id="login" placeholder="Username" required="required" />
-        <div *ngIf="loginForm.controls['login'].invalid && (loginForm.controls['login'].dirty || loginForm.controls['login'].touched)"
-             class="alert alert-danger">
+        <div class="container-row">
+          <label for="login" class="input-label"> Логин
+          </label>
+          <div *ngIf="loginForm.get('login').invalid &&  loginForm.get('login').touched" class=" alert-danger alert-danger-login tooltip">
+
+         <div> ? </div>
+
+          <div class=" alert-message alert-message-login">
+            <div *ngIf="loginForm.get('login').errors.required">
+              Необходимо ввести логин
+            </div>
+            <div *ngIf="loginForm.get('login').errors.minLength">
+              Логин должен быть не менее 6 символов
+            </div>
+          </div>
+          </div>
         </div>
+          <input class="login-forms"  type="text" formControlName="login"  id="login" placeholder="Username" required="required" />
+
       </div>
       <div class="container-item">
+        <div class="container-row">
         <label for="password" class="input-label"> Пароль </label>
+          <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+               class="alert alert-danger alert-danger-password">
+            <div>?</div>
+          <div class="alert-message alert-message-password">
+            <div *ngIf="loginForm.controls['password'].errors.minLength">
+              Пароль должен быть не менее 8 символов
+            </div>
+          </div>
+        </div>
+
+        </div>
         <input class="login-forms" type="password" formControlName="password"  id = "password" placeholder="Password" required="required" />
-        <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
-             class="alert alert-danger"> </div>
+
       </div>
    </div>
   <div class="buttons-container">
    <button class="button login"> Отправить</button>
-    <button class="button signup" routerLink="signup"> Зарегистрироваться</button>
+    <button class="button signup" [routerLink]="['/signup/driver']"> Зарегистрироваться</button>
   </div>
 </form>
 </div>
-
+</div>
