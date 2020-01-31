@@ -1,51 +1,24 @@
-<div class="form-align">
-<div class="login-form">
-  <div class="login-header"> Вход </div>
-<form [formGroup]="loginForm">
-   <div class="container">
-      <div class="container-item">
-        <div class="container-row">
-          <label for="login" class="input-label"> Логин
-          </label>
-          <div *ngIf="loginForm.get('login').invalid &&  loginForm.get('login').touched" class=" alert-danger alert-danger-login tooltip">
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
 
-         <div> ? </div>
-
-          <div class=" alert-message alert-message-login">
-            <div *ngIf="loginForm.get('login').errors.required">
-              Необходимо ввести логин
-            </div>
-            <div *ngIf="loginForm.get('login').errors.minLength">
-              Логин должен быть не менее 6 символов
-            </div>
-          </div>
-          </div>
-        </div>
-          <input class="login-forms"  type="text" formControlName="login"  id="login" placeholder="Username" required="required" />
-
-      </div>
-      <div class="container-item">
-        <div class="container-row">
-        <label for="password" class="input-label"> Пароль </label>
-          <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
-               class="alert alert-danger alert-danger-password">
-            <div>?</div>
-          <div class="alert-message alert-message-password">
-            <div *ngIf="loginForm.controls['password'].errors.minLength">
-              Пароль должен быть не менее 8 символов
-            </div>
-          </div>
-        </div>
-
-        </div>
-        <input class="login-forms" type="password" formControlName="password"  id = "password" placeholder="Password" required="required" />
-
-      </div>
-   </div>
-  <div class="buttons-container">
-   <button class="button login"> Отправить</button>
-    <button class="button signup" [routerLink]="['/signup/driver']"> Зарегистрироваться</button>
+<div class="login">
+  <div class="login-header">
+    <h3>Вход</h3>
   </div>
-</form>
+  <div class="login-form">
+    <form [formGroup]="loginForm">
+    <h4>Логин</h4>
+    <input type="text"  formControlName="login"/><br>
+    <h4>Пароль</h4>
+    <input type="password" formControlName="password" />
+    <br>
+    <input type="button" value="Войти" class="login-button"/>
+    <br>
+    <a class="sign-up">Зарегистрироваться!</a>
+    <br>
+    </form>
+  </div>
+
 </div>
+<div class="error-page">
+  <div class="try-again">Error: Try again?</div>
 </div>

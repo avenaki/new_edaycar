@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SignupDriverComponent } from './signup-driver.component';
+import { SignupDriverComponent } from "./signup-driver.component";
 
-describe('SignupDriverComponent', () => {
+describe("SignupDriverComponent", () => {
   let component: SignupDriverComponent;
   let fixture: ComponentFixture<SignupDriverComponent>;
 
@@ -19,7 +19,7 @@ describe('SignupDriverComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

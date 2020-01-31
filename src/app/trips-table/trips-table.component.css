@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+
+.login-forms {
+  height: 20px;
+  margin: auto;
+  margin-bottom: 10px;
+  background: #effff9;
+  outline: none;
+  padding: 8px;
+  font-size: 13px;
+  color: midnightblue;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 4px;
+  box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+  width: 260px;
+
+}
+.login-forms.ng-touched.ng-invalid{
+  border-color: #ff7158;
+}
+.login-forms.ng-touched.ng-valid{
+  background: white;
+  box-shadow: none;
+  border: 1px solid #85d685;
+}
+.login-forms:hover {
+  border: 1px solid white;
+
+}
+
+.container {
+  width:100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.container-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 46px;
+}
+
+.input-label {
+  display: block;
+  width:265px;
+  height:20px;
+  align-content: center;
+  font-family: 'Exo 2', sans-serif;
+  color:#474747;
+  margin:auto;
+
+}
+.login-header{
+  margin-top: 20px;
+  font-size: 26px;
+  text-align: center;
+  font-family: 'Exo 2', sans-serif;
+  color:#474747;
+}
+.button {
+  width:200px;
+  height:35px;
+  border-radius: 4px;
+  outline: none;
+  border:none;
+  font-family: 'Exo 2', sans-serif;
+  align-content: center;
+  margin: auto;
+  margin-top: 12px;
+
+}
+.signup {
+  background-color: gray();
+  border: 1px solid dimgrey;
+}
+
+.login {
+  background-color: #85d685;
+  color: white;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.login-form {
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: whitesmoke;
+
+}
+.button:hover{
+  opacity: 0.7;
+}
+
+.alert-danger {
+  height: 20px;
+  width:30px;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: 'Exo 2', sans-serif;
+  color:#474747;
+}
+.container-row {
+  display: flex;
+  flex-direction: row;
+}
+.form-align {
+  margin-top: 80px;
+}
+.alert-message {
+  color: #ff7158;
+  font-size: 10px;
+  margin-left:10px;
+  font-family: 'Exo 2', sans-serif;
+  width:50%;
+}
+.alert-message-login {
+  display: none;
+}
+.alert-message-password {
+  display: none;
+
+}
+.alert-danger-login:hover {
+  opacity:0.7;
+}
+.alert-danger-login:hover+.alert-message-login{
+  display: block;
+}
+
+.alert-danger-password:hover {
+  opacity:0.7;
+}
+.alert-danger-password:hover+.alert-message-password{
+  display: block;
+}
+
+[tooltip] {
+  position: relative;
+}
+
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  font-size: .9em;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent; /* opinion 4 */
+  z-index: 1001; /* absurdity 1 */
+}
+[tooltip]::after {
+  content: attr(tooltip);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 12px;
+  text-align: center;
+  min-width: 5em;
+  max-width: 30em;
+
+  padding: 1ch 1.5ch;
+  border-radius: .3ch;
+  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.39);
+  background: #333;
+  color: #dedcdb;
+  font-weight: lighter;
+  z-index: 1000;
+  height:30px;
+  width:200px;
+
+
+}
+
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -.5em);
+}
+
+@keyframes tooltips-vert {
+  to {
+    opacity: .9;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: .9;
+    transform: translate(0, -50%);
+  }
+}
+
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+[tooltip][flow^="right"]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #333;
+  right: calc(0em - 5px);
+  transform: translate(.5em, -50%);
+}
+[tooltip][flow^="right"]::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(.5em, -50%);
+}
+
+

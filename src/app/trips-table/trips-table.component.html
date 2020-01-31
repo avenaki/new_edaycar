@@ -1,1 +1,33 @@
-тут будет таблица
+<div class="form-align">
+  <div class="login-form">
+    <div class="login-header"> Вход </div>
+    <form [formGroup]="loginForm">
+      <div class="container">
+        <div class="container-item">
+          <div class="container-row">
+            <input class="login-forms"  type="text" formControlName="login"  id="login"  required="required" />
+            <div class="alert alert-danger alert-danger-password">
+              <div tooltip="Введите не менее 4 символов. Разрешена латиница и цифры" flow="right"
+                   *ngIf="loginForm.get('login').invalid &&  loginForm.get('login').touched" > <i class="fas fa-question"></i> </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="container-item">
+          <div class="container-row">
+
+            <input class="login-forms" type="password" formControlName="password"  id = "password"  required="required" />
+            <div  class="alert alert-danger alert-danger-password">
+              <div tooltip="Введите не менее 6 символов" flow="right" *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+              > <i class="fas fa-question"></i> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="buttons-container">
+        <button class="button login"> Отправить</button>
+        <button class="button signup" [routerLink]="['/signup/driver']"> Зарегистрироваться</button>
+      </div>
+    </form>
+  </div>
+</div>

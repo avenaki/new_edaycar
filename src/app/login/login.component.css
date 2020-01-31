@@ -1,146 +1,109 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
-
-.login-forms {
-  height: 20px;
-  width:50%;
-  margin: auto;
-  margin-bottom: 10px;
-  background: #effff9;
-  outline: none;
-  padding: 10px;
-  font-size: 13px;
-  color: midnightblue;
-  border: 1px solid rgba(0,0,0,0.3);
-  border-radius: 4px;
-  box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+body {
+  background:url('http://cdn.wallpapersafari.com/13/6/Mpsg2b.jpg');
+  margin:0px;
+  font-family: 'Ubuntu', sans-serif;
+  background-size: 100% 110%;
 }
-.login-forms.ng-touched.ng-invalid{
-  border-color: #ff7158;
-}
-.login-forms.ng-touched.ng-valid{
-  background: white;
-  box-shadow: none;
-  border: 1px solid #85d685;
-}
-.login-forms:hover {
-  border: 1px solid white;
-
-}
-
-.container {
-  width:100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 10px;
-}
-.container-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.input-label {
-  display: block;
-  width:60px;
-  height:20px;
-  align-content: center;
+h1, h2, h3, h4, h5, h6, a {
+  margin:0; padding:0;
   font-family: 'Exo 2', sans-serif;
-  margin-bottom: 15px;
-
 }
-.login-header{
-  margin-top: 40px;
-  font-size: 30px;
-  text-align: center;
-  font-family: 'Exo 2', sans-serif;
-  color:#474747;
-}
-.button {
-  width:200px;
-  height:35px;
-  border-radius: 4px;
-  outline: none;
-  border:none;
-  font-family: 'Exo 2', sans-serif;
-  align-content: center;
-  margin: auto;
-  margin-top: 12px;
-
-}
-.signup {
-background-color: gray();
-  border: 1px solid dimgrey;
-}
-
 .login {
-  background-color: #85d685;
-  color: white;
+  margin:0 auto;
+  max-width:500px;
+  margin-top:90px;
+}
+.login-header {
+  color: #302f36;
+  text-align:center;
+  font-size:200%;
 }
 
-.buttons-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 40px;
+.login-form {
+  border:.5px solid #fff;
+  background: white;
+  border-radius:10px;
+  font-family: 'Exo 2', sans-serif;
+
+}
+.login-form h4 {
+  text-align:left;
+  margin-left:40px;
+  color:#fff;
 }
 .login-form {
-  background-color: white;
-  width:35%;
-  min-height: 450px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
+  box-sizing:border-box;
+  padding-top:15px;
+  padding-bottom:10%;
+  margin:5% auto;
+  text-align:center;
+  font-weight: normal;
+  border: 1px solid darkgrey;
+}
+.login input[type="text"],
+.login input[type="password"] {
+  max-width:400px;
+  width: 80%;
+  line-height:3em;
+  font-family: 'Ubuntu', sans-serif;
+  margin:1em 2em;
+  border-radius:5px;
+
+  outline:none;
+  padding-left:10px;
+
+
+  background: #e0ffe0;
+
+  font-size: 13px;
+  color: #474747;
+  border: 1px solid rgba(0,0,0,0.3);
+
+  box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
 
 }
-.button:hover{
-  opacity: 0.7;
+.login-form input[type="button"] {
+  height:30px;
+  width:100px;
+  background: #85d685;
+  border:1px solid white;
+  border-radius:20px;
+  color: white;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+  margin-bottom: 5%;
+}
+.sign-up{
+  margin:auto;
+  cursor:pointer;
+  text-decoration:underline;
+  color: #85d685;
+  margin-top: 10%;
+}
+.no-access {
+  color:#E86850;
+  margin:20px 0px 20px -57%;
+  text-decoration:underline;
+  cursor:pointer;
+}
+.try-again {
+  color:#f2f2f2;
+  text-decoration:underline;
+  cursor:pointer;
 }
 
-.alert-danger {
-margin-left: 5px;
-  height: 20px;
-  font-weight: bold;
-  font-size: 14px;
-  font-family: 'Exo 2', sans-serif;
-  color: #ff7158;
-}
-.container-row {
-  display: flex;
-  flex-direction: row;
-  margin-left: 20%;
-}
-.form-align {
-  margin-top: 80px;
-}
-.alert-message {
-  color: #ff7158;
-  font-size: 10px;
-  margin-left:10px;
-  font-family: 'Exo 2', sans-serif;
-  width:50%;
-}
-.alert-message-login {
-  display: none;
-}
-.alert-message-password {
-  display: none;
-
-}
-.alert-danger-login:hover {
- opacity:0.7;
-}
-.alert-danger-login:hover+.alert-message-login{
-  display: block;
-}
-
-.alert-danger-password:hover {
-  opacity:0.7;
-}
-.alert-danger-password:hover+.alert-message-password{
-  display: block;
+/*Media Querie*/
+@media only screen and (min-width : 150px) and (max-width : 530px){
+  .login-form h4 {
+    text-align:center;
+    margin:0;
+  }
+  .sign-up, .no-access {
+    margin:10px 0;
+  }
+  .login-button {
+    margin-bottom:10px;
+  }
 }
