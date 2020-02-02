@@ -13,11 +13,13 @@ h1, h2, h3, h4, h5, h6, a {
   margin:0 auto;
   max-width:500px;
   margin-top:90px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-radius: 6px;
 }
 .login-header {
-  color: #302f36;
+  color: #474747;
   text-align:center;
-  font-size:200%;
+  font-size: 20px;
 }
 
 .login-form {
@@ -39,7 +41,6 @@ h1, h2, h3, h4, h5, h6, a {
   margin:5% auto;
   text-align:center;
   font-weight: normal;
-  border: 1px solid darkgrey;
 }
 .login input[type="text"],
 .login input[type="password"] {
@@ -48,21 +49,26 @@ h1, h2, h3, h4, h5, h6, a {
   line-height:3em;
   font-family: 'Ubuntu', sans-serif;
   margin:1em 2em;
-  border-radius:5px;
-
+  border-radius:2px;
   outline:none;
+  border: none;
   padding-left:10px;
-
-
-  background: #e0ffe0;
-
+  background: #edf6ff;
   font-size: 13px;
   color: #474747;
-  border: 1px solid rgba(0,0,0,0.3);
-
-  box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
 
 }
+
+.login input[type="text"]:hover,
+.login input[type="password"]:hover
+{
+  color: black;
+}
+.login input[type="text"].ng-touched.ng-invalid,
+.login input[type="password"].ng-touched.ng-invalid {
+  border: 1px solid #E86850;
+}
+
 .login-form input[type="button"] {
   height:30px;
   width:100px;
@@ -74,13 +80,16 @@ h1, h2, h3, h4, h5, h6, a {
   font-family: 'Ubuntu', sans-serif;
   cursor:pointer;
   margin-bottom: 5%;
+  margin-top:6%;
 }
 .sign-up{
   margin:auto;
   cursor:pointer;
-  text-decoration:underline;
-  color: #85d685;
+  color:  #474747;;
   margin-top: 10%;
+}
+.sign-up:hover{
+  color: #85d685;
 }
 .no-access {
   color:#E86850;
@@ -93,8 +102,18 @@ h1, h2, h3, h4, h5, h6, a {
   text-decoration:underline;
   cursor:pointer;
 }
+.alert-danger {
+  max-width:400px;
+  width: 80%;
+  padding-left:10px;
+  font-size: 10px;
+  font-family: 'Exo 2', sans-serif;
+  color: #E86850;
+  margin: 0em 4em;
+  position: fixed;
+  text-align: left;
+}
 
-/*Media Querie*/
 @media only screen and (min-width : 150px) and (max-width : 530px){
   .login-form h4 {
     text-align:center;
@@ -106,4 +125,16 @@ h1, h2, h3, h4, h5, h6, a {
   .login-button {
     margin-bottom:10px;
   }
+  .alert-danger {
+    width: 80%;
+    font-size: 10px;
+    font-family: 'Exo 2', sans-serif;
+    color: #E86850;
+    position: fixed;
+    text-align: left;
+    margin: 0em 2em;
+  }
+
 }
+
+

@@ -1,17 +1,16 @@
-<head>
-  <meta charset="utf-8" />
-  <base href="/" />
-</head>
-<div class="signup-header"> Регистрация </div>
+
 <div class="container">
 <div class="signup-form">
   <div class="nav-signup">
-    <div class="nav-signup-item-driver" routerLink="driver"  routerLinkActive="driver-selected"> <span class="nav-text">Водитель</span></div>
-    <div class="nav-signup-item-passenger" routerLink="passenger" routerLinkActive="passenger-selected"><span class="nav-text">Пассажир</span></div>
+    <div class="nav-signup-item" routerLink="driver"  routerLinkActive="driver-selected"> <span class="nav-text">Водитель</span></div>
+    <div class="nav-signup-item" routerLink="passenger" routerLinkActive="passenger-selected"><span class="nav-text">Пассажир</span></div>
   </div>
 <div>
   <router-outlet></router-outlet>
 </div>
 </div>
-
+  <div class="signup-button-container">
+  <input type="button" value="Зарегистрироваться" class="signup-button"/>
+  </div>
 </div>
+

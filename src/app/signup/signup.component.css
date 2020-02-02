@@ -1,13 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
 .signup-form {
   background-color: white;
-  width:50%;
   min-height: 400px;
-  margin: auto;
+  min-width: 300px;
+  width: 80%;
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  margin:0 auto;
+  max-width:900px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-radius: 6px;
+  margin-top: 30px;
+}
 
+.signup-button-container {
+  min-width: 300px;
+  width: 80%;
+  margin:0 auto;
+  display: flex;
+  justify-content: center;
 }
 .nav-signup {
 
@@ -26,35 +37,45 @@
   color:#474747;
 }
 .container {
-  margin-top: 20px;
+  margin-top: 80px;
   font-family: 'Exo 2', sans-serif;
+  width:100%;
 }
 
-.nav-signup-item-passenger {
-  background-color: midnightblue;
+.nav-signup-item{
+  background-color: #8bc791;
   display:block;
-  width:100%;
-  height:40px;
-  text-align: center;
-  color:white;
-}
-.nav-signup-item-driver {
-  display:block;
-  background-color: midnightblue;
   width:100%;
   height:40px;
   text-align: center;
   color:white;
 }
 .driver-selected {
-  background-color: dodgerblue;
+  background-color: #85d685;
 }
 .passenger-selected {
-  background-color: dodgerblue;
+  background-color: #85d685;
 }
 .nav-text{
-  vertical-align: -webkit-baseline-middle;
   font-size: 14px;
 }
+.container input[type="button"] {
+  height:30px;
+  width:200px;
+  background: #85d685;
+  border:1px solid white;
+  border-radius:20px;
+  color: white;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+  margin-top:3%;
+}
 
+.container input[type="button"]:hover {
+  opacity: 0.9;
+}
+.signup-button {
+  margin: auto;
+}
 
