@@ -16,7 +16,7 @@ export class Validator {
     return null;
   }
   experienceValidator (control: FormControl): { [s: string]: boolean } {
-    if (3 >= control.value || control.value >= 72 ) {
+    if (2 >= control.value || control.value >= 72 ) {
       return {"experience": true};
     }
     return null;
