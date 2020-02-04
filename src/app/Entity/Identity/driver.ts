@@ -1,24 +1,14 @@
 import { Trip } from "./trip";
+import { User } from "./user";
 
-export class Driver {
-  login: string;
-  password: string;
-  name: string;
-  surname: string;
-  patronymic: string;
-  birthDate: Date;
-  mobileNumber: string;
+export class Driver extends User {
+
   experience: number;
-  trips: Trip[];
+
   constructor(login: string, password: string, name: string, surname: string, patronymic: string, birthDate: Date,
-              mobileNumber: string, experience: number ) {
-    this.login = login;
-    this.password = password;
-    this.name = name;
-    this.surname = surname;
-    this.patronymic = patronymic;
-    this.birthDate = birthDate;
-    this.mobileNumber = mobileNumber;
+              mobileNumber: string, experience: number, trips: Trip[] ) {
+    super(login, password, name, surname, patronymic, birthDate, mobileNumber,  trips );
     this.experience = experience;
+
   }
 }
