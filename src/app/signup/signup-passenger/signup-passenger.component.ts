@@ -5,7 +5,7 @@ import { Validator } from "../validators";
 @Component({
   selector: "app-signup-passenger",
   templateUrl: "./signup-passenger.component.html",
-  styleUrls: ["./signup-passenger.component.css"]
+  styleUrls: ["../signup.component.less"]
 })
 export class SignupPassengerComponent implements OnInit {
 

@@ -1,7 +1,7 @@
-import { IUser } from "./iuser";
+import { IDriver } from "./idriver";
 import { Trip } from "./trip";
 
-export class User implements IUser {
+export class Driver implements IDriver {
   login: string;
   password: string;
   name: string;
@@ -10,9 +10,10 @@ export class User implements IUser {
   birthDate: Date;
   mobileNumber: string;
   trips: Trip[];
+  experience: number;
 
   constructor(login: string, password: string, name: string, surname: string, patronymic: string, birthDate: Date,
-              mobileNumber: string, trips: Trip[] ) {
+              mobileNumber: string, experience: number, trips: Trip[] ) {
     this.login = login;
     this.password = password;
     this.name = name;
@@ -20,7 +21,8 @@ export class User implements IUser {
     this.patronymic = patronymic;
     this.birthDate = birthDate;
     this.mobileNumber = mobileNumber;
+    this.experience = experience;
     this.trips = trips;
-  }
 
+  }
 }

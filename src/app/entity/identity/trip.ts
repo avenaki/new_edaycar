@@ -1,4 +1,4 @@
-import { Place } from "../Value/place";
+import { Place } from "../value/place";
 import { Driver } from "./driver";
 import { Passenger } from "./passenger";
 

@@ -1,5 +1,5 @@
 .navbar {
-  background-image: linear-gradient(to bottom, #1d1d1f, #302f36);
+  background-image: linear-gradient(to bottom, #1d1d1f, #302f36 );
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -8,20 +8,19 @@
   height: 45px;
   display: flex;
   flex-direction: row;
-}
-@media only screen and (min-width: 150px) and (max-width: 320px) {
-  .navbar {
-    height: 60px;
+
+  @media only screen and (min-width : 150px) and (max-width : 320px) {
+  height: 60px;
   }
 }
-.navbar_item {
-  display: block;
+.navbar_item  {
+  display:block;
   margin-left: 15%;
   color: whitesmoke;
   font-family: 'Exo 2', sans-serif;
   font-size: 16px;
 }
-.nav_item:hover {
+.nav_item:hover{
   opacity: 0.7;
 }
 .navbar_brand {
@@ -30,21 +29,21 @@
   font-family: 'Unica One', cursive;
   font-size: 20px;
   font-style: revert;
-  color: #85d685;
+  color:#85d685;
   flex-shrink: 0;
+
 }
-.navbar_container {
+.navbar_container{
   display: flex;
   flex-direction: row;
   align-self: center;
   margin-left: 3%;
 }
 .navbar_login {
-  display: block;
+  display:block;
   color: whitesmoke;
   font-family: 'Exo 2', sans-serif;
   font-size: 16px;
   margin-left: 72%;
   flex-shrink: 0;
 }
-/*# sourceMappingURL=app.component.css.map */

@@ -1,140 +1,118 @@
-@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
-body {
-  background:url('http://cdn.wallpapersafari.com/13/6/Mpsg2b.jpg');
-  margin:0px;
-  font-family: 'Ubuntu', sans-serif;
-  background-size: 100% 110%;
-}
-h1, h2, h3, h4, h5, h6, a {
-  margin:0; padding:0;
-  font-family: 'Exo 2', sans-serif;
-}
 .login {
-  margin:0 auto;
-  max-width:500px;
-  margin-top:90px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  max-width: 500px;
+  margin: 90px auto 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 6px;
 }
-.login-header {
+.login-form {
+  border: 0.5px solid #fff;
+  background: white;
+  border-radius: 10px;
+  font-family: 'Exo 2', sans-serif;
+}
+.login-form_input-header {
+  margin: 0;
+  padding: 0;
+  font-family: 'Exo 2', sans-serif;
+}
+@media only screen and (min-width: 150px) and (max-width: 530px) {
+  .login-form_input-header {
+    text-align: center;
+    margin: 0;
+  }
+}
+.login-form .login-form_input-header {
+  text-align: left;
+  margin-left: 40px;
+  color: #fff;
+}
+.login-form-header {
   color: #474747;
-  text-align:center;
+  text-align: center;
   font-size: 20px;
 }
-
-.login-form {
-  border:.5px solid #fff;
-  background: white;
-  border-radius:10px;
-  font-family: 'Exo 2', sans-serif;
-
-}
-.login-form h4 {
-  text-align:left;
-  margin-left:40px;
-  color:#fff;
-}
-.login-form {
-  box-sizing:border-box;
-  padding-top:15px;
-  padding-bottom:10%;
-  margin:5% auto;
-  text-align:center;
-  font-weight: normal;
-}
-.login input[type="text"],
-.login input[type="password"] {
-  max-width:400px;
-  width: 80%;
-  line-height:3em;
+.login-form_login-button {
+  height: 30px;
+  width: 100px;
+  background: #85d685;
+  border: 1px solid white;
+  border-radius: 20px;
+  color: white;
+  text-transform: uppercase;
   font-family: 'Ubuntu', sans-serif;
-  margin:1em 2em;
-  border-radius:2px;
-  outline:none;
+  cursor: pointer;
+  margin-bottom: 5%;
+  margin-top: 6%;
+}
+@media only screen and (min-width: 150px) and (max-width: 530px) {
+  .login-form_login-button {
+    margin-bottom: 10px;
+  }
+}
+.login-form_sign-up-button {
+  cursor: pointer;
+  color: #474747;
+}
+.login-form_sign-up-button:hover {
+  color: #85d685;
+}
+@media only screen and (min-width: 150px) and (max-width: 530px) {
+  .login-form_sign-up-button {
+    margin: 10px 0;
+  }
+}
+.login-form_input {
+  max-width: 400px;
+  width: 80%;
+  line-height: 3em;
+  font-family: 'Ubuntu', sans-serif;
+  margin: 1em 1em;
+  border-radius: 2px;
+  outline: none;
   border: none;
-  padding-left:10px;
+  padding-left: 10px;
   background: #edf6ff;
   font-size: 13px;
   color: #474747;
-
 }
-
-.login input[type="text"]:hover,
-.login input[type="password"]:hover
-{
+.login-form_input:hover {
   color: black;
 }
-.login input[type="text"].ng-touched.ng-invalid,
-.login input[type="password"].ng-touched.ng-invalid {
+.login-form_input.ng-touched.ng-invalid {
   border: 1px solid #E86850;
 }
-
-.login-form input[type="button"] {
-  height:30px;
-  width:100px;
-  background: #85d685;
-  border:1px solid white;
-  border-radius:20px;
-  color: white;
-  text-transform:uppercase;
-  font-family: 'Ubuntu', sans-serif;
-  cursor:pointer;
-  margin-bottom: 5%;
-  margin-top:6%;
+@media only screen and (min-width: 150px) and (max-width: 530px) {
+  .login-form_input {
+    margin: 0em 1em;
+  }
 }
-.sign-up{
-  margin:auto;
-  cursor:pointer;
-  color:  #474747;;
-  margin-top: 10%;
+.login-form_error {
+  height: 12px;
 }
-.sign-up:hover{
-  color: #85d685;
+@media only screen and (min-width: 150px) and (max-width: 530px) {
+  .login-form_error {
+    height: 20px;
+  }
 }
-.no-access {
-  color:#E86850;
-  margin:20px 0px 20px -57%;
-  text-decoration:underline;
-  cursor:pointer;
-}
-.try-again {
-  color:#f2f2f2;
-  text-decoration:underline;
-  cursor:pointer;
-}
-.alert-danger {
-  max-width:400px;
+.login-form_error_message {
+  max-width: 400px;
   width: 80%;
-  padding-left:10px;
   font-size: 10px;
   font-family: 'Exo 2', sans-serif;
   color: #E86850;
   margin: 0em 4em;
-  position: fixed;
   text-align: left;
 }
-
-@media only screen and (min-width : 150px) and (max-width : 530px){
-  .login-form h4 {
-    text-align:center;
-    margin:0;
-  }
-  .sign-up, .no-access {
-    margin:10px 0;
-  }
-  .login-button {
-    margin-bottom:10px;
-  }
-  .alert-danger {
-    width: 80%;
-    font-size: 10px;
-    font-family: 'Exo 2', sans-serif;
-    color: #E86850;
-    position: fixed;
-    text-align: left;
-    margin: 0em 2em;
-  }
-
+.login-form_buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-
+.login-form_input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/*# sourceMappingURL=login.component.css.map */

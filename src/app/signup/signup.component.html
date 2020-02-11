@@ -1,16 +1,15 @@
-
 <div class="container">
 <div class="signup-form">
-  <div class="nav-signup">
-    <div class="nav-signup-item" routerLink="driver"  routerLinkActive="driver-selected"> <span class="nav-text">Водитель</span></div>
-    <div class="nav-signup-item" routerLink="passenger" routerLinkActive="passenger-selected"><span class="nav-text">Пассажир</span></div>
+  <div class="signup-nav">
+    <div class="signup-nav_item" routerLink="driver"  routerLinkActive="signup-nav_driver"> <span class="signup-nav_text">Водитель</span></div>
+    <div class="signup-nav_item" routerLink="passenger" routerLinkActive="signup-nav_passenger"><span class="signup-nav_text">Пассажир</span></div>
   </div>
 <div>
   <router-outlet></router-outlet>
 </div>
 </div>
-  <div class="signup-button-container">
-  <input type="button" value="Зарегистрироваться" class="signup-button"/>
+  <div class="signup-form_button-container">
+  <input type="button" value="Зарегистрироваться" class="signup-form_button"/>
   </div>
 </div>
 

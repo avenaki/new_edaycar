@@ -6,7 +6,7 @@ import { Validator } from "../validators";
 @Component({
   selector: "app-signup-driver",
   templateUrl: "./signup-driver.component.html",
-  styleUrls: ["./signup-driver.component.css"]
+  styleUrls: ["../signup.component.less"]
 })
 export class SignupDriverComponent implements OnInit {
 

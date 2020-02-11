@@ -1,11 +1,14 @@
-import { initialUserState, IUserState } from "./user.state";
+import { IDriverState, initialDriverState } from "./driver.state";
+import { initialPassengerState, IPassengerState } from "./passenger.state";
 
 export interface IAppState {
-  users: IUserState;
+  drivers: IDriverState;
+  passengers: IPassengerState;
 }
 
 export const initialAppState: IAppState = {
-  users: initialUserState
+  drivers: initialDriverState,
+  passengers: initialPassengerState,
 };
 
 export function getInitialState(): IAppState {

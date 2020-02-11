@@ -3,51 +3,58 @@
   <form [formGroup]="signupPassengerForm">
     <div class="rowContainer">
       <div class="columnContainer">
-        <h5>Имя</h5>
-        <input type="text" class="input-name"  formControlName="name"/><br>
-        <div class="warning-container">
-          <div class="alert-danger" *ngIf="signupPassengerForm.get('name').invalid &&  signupPassengerForm.get('name').touched">
+        <h5 class="signup-form_text">Имя</h5>
+        <input type="text" class="signup-form_input"  formControlName="name"/><br>
+        <div class="signup-form_error">
+          <div class="signup-form_error_message" *ngIf="signupPassengerForm.get('name').invalid &&  signupPassengerForm.get('name').touched">
             Разрешена только кириллица
           </div>
         </div>
-        <h5>Фамилия</h5>
-        <input type="text"  class="input-surname" formControlName="surname"/><br>
-        <div class="warning-container">
-          <div class="alert-danger" *ngIf="signupPassengerForm.get('surname').invalid &&  signupPassengerForm.get('surname').touched">
+        <h5 class="signup-form_text">Фамилия</h5>
+        <input type="text"  class="signup-form_input" formControlName="surname"/><br>
+        <div class="signup-form_error">
+          <div class="signup-form_error_message" *ngIf="signupPassengerForm.get('surname').invalid &&  signupPassengerForm.get('surname').touched">
             Разрешена только кириллица
           </div>
         </div>
-        <h5>Отчество</h5>
-        <input type="text"  class="input-patronymic" formControlName="patronymic"/><br>
-        <div class="warning-container">
-          <div class="alert-danger" *ngIf="signupPassengerForm.get('patronymic').invalid &&  signupPassengerForm.get('patronymic').touched">
+        <h5 class="signup-form_text">Отчество</h5>
+        <input type="text"  class="signup-form_input" formControlName="patronymic"/><br>
+        <div class="signup-form_error">
+          <div class="signup-form_error_message" *ngIf="signupPassengerForm.get('patronymic').invalid &&  signupPassengerForm.get('patronymic').touched">
           </div>
         </div>
-        <h5>Дата рождения</h5>
-        <input type="date"  class="input-birthdate" formControlName="birthdate"/><br>
-        <div class="warning-container">
-          <div class="alert-danger" *ngIf="signupPassengerForm.get('birthdate').invalid &&  signupPassengerForm.get('birthdate').touched">
+        <h5 class="signup-form_text">Дата рождения</h5>
+        <input type="date"  class="signup-form_input" formControlName="birthdate"/><br>
+        <div class="signup-form_error">
+          <div class="signup-form_error_message" *ngIf="signupPassengerForm.get('birthdate').invalid &&  signupPassengerForm.get('birthdate').touched">
             Возраст должен быть больше 18 лет!
           </div>
         </div>
       </div>
       <div class="columnContainer">
-        <h5>Логин</h5>
-        <input type="text"  class="input-login" formControlName="login"/><br>
-        <div class="warning-container">
-          <div class="alert-danger" *ngIf="signupPassengerForm.get('login').invalid &&  signupPassengerForm.get('login').touched">   Введите более 4 символов латиницей или цифрами</div>
+        <h5 class="signup-form_text">Логин</h5>
+        <input type="text"  class="signup-form_input" formControlName="login"/><br>
+        <div class="signup-form_error">
+          <div class="signup-form_error_message" *ngIf="signupPassengerForm.get('login').invalid &&  signupPassengerForm.get('login').touched">   Введите более 4 символов латиницей или цифрами</div>
         </div>
-        <h5>Пароль</h5>
-        <input type="password" class="input-password"  formControlName="password"/><br>
-        <div class="warning-container">
-          <div class="alert-danger" *ngIf="signupPassengerForm.get('password').invalid &&  signupPassengerForm.get('password').touched">
+        <h5 class="signup-form_text">Пароль</h5>
+        <input type="password" class="signup-form_input"  formControlName="password"/><br>
+        <div class="signup-form_error">
+          <div class="signup-form_error_message" *ngIf="signupPassengerForm.get('password').invalid &&  signupPassengerForm.get('password').touched">
             Пароль должен быть не менее 6 символов
           </div>
         </div>
-        <h5>Номер телефона</h5>
-        <input type="number"  class="input-mobileNumber" formControlName="mobileNumber"/><br>
-        <div class="warning-container">
-          <div class="alert-danger" *ngIf="signupPassengerForm.get('mobileNumber').invalid &&  signupPassengerForm.get('mobileNumber').touched">
+        <h5 class="signup-form_text">Номер телефона</h5>
+        <input type="number"  class="signup-form_input" formControlName="mobileNumber"/><br>
+        <div class="signup-form_error">
+          <div class="signup-form_error_message" *ngIf="signupPassengerForm.get('mobileNumber').invalid &&  signupPassengerForm.get('mobileNumber').touched">
+            Номер должен начинаться с 8 </div>
+        </div>
+
+        <h5 class="signup-form_text">Номер телефона</h5>
+        <input type="number"  class="signup-form_input" formControlName="mobileNumber"/><br>
+        <div class="signup-form_error">
+          <div class="signup-form_error_message" *ngIf="signupPassengerForm.get('mobileNumber').invalid &&  signupPassengerForm.get('mobileNumber').touched">
             Номер должен начинаться с 8 </div>
         </div>
       </div>

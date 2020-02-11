@@ -1,0 +1,110 @@
+.login {
+  max-width:500px;
+  margin: 90px auto 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-radius: 6px;
+}
+.login-form {
+  border:.5px solid #fff;
+  background: white;
+  border-radius:10px;
+  font-family: 'Exo 2', sans-serif;
+}
+.login-form_input-header {
+  margin:0; padding:0;
+  font-family: 'Exo 2', sans-serif;
+
+  @media only screen and (min-width : 150px) and (max-width : 530px) {
+    text-align: center;
+    margin: 0;
+  }
+}
+.login-form .login-form_input-header {
+  text-align:left;
+  margin-left:40px;
+  color:#fff;
+}
+.login-form-header {
+  color: #474747;
+  text-align:center;
+  font-size: 20px;
+}
+.login-form_login-button {
+  height:30px;
+  width:100px;
+  background: #85d685;
+  border:1px solid white;
+  border-radius:20px;
+  color: white;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+  margin-bottom: 5%;
+  margin-top:6%;
+
+  @media only screen and (min-width : 150px) and (max-width : 530px) {
+    margin-bottom: 10px;
+  }
+}
+.login-form_sign-up-button {
+  cursor:pointer;
+  color:  #474747;;
+  &:hover {
+    color: #85d685;
+  }
+
+  @media only screen and (min-width : 150px) and (max-width : 530px) {
+    margin: 10px 0;
+  }
+}
+.login-form_input {
+  max-width:400px;
+  width: 80%;
+  line-height:3em;
+  font-family: 'Ubuntu', sans-serif;
+  margin:1em 1em;
+  border-radius:2px;
+  outline:none;
+  border: none;
+  padding-left:10px;
+  background: #edf6ff;
+  font-size: 13px;
+  color: #474747;
+  &:hover {
+    color: black;
+  }
+  &.ng-touched.ng-invalid {
+    border: 1px solid #E86850;
+  }
+  @media only screen and (min-width : 150px) and (max-width : 530px) {
+    margin: 0em 1em;
+  }
+}
+.login-form_error {
+  height: 12px;
+  @media only screen and (min-width : 150px) and (max-width : 530px) {
+    height: 20px;
+  }
+}
+.login-form_error_message {
+  max-width:400px;
+  width: 80%;
+  font-size: 10px;
+  font-family: 'Exo 2', sans-serif;
+  color: #E86850;
+  margin: 0em 4em;
+  text-align:left;
+
+}
+.login-form_buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-form_input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

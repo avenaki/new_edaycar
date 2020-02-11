@@ -1,25 +1,28 @@
-<link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
-
 <div class="login">
   <div class="login-form">
-    <div class="login-header">
+    <div class="login-form-header">
       <h3>Вход</h3>
     </div>
     <form [formGroup]="loginForm">
-    <h4>Логин</h4>
-    <input type="text"  formControlName="login"/><br>
-      <div class="alert-danger" *ngIf="loginForm.get('login').invalid &&  loginForm.get('login').touched">
+<div class="login-form_input-container">
+    <input class="login-form_input"   type="text"  formControlName="login"/> <br>
+  <div class="login-form_error">
+      <div class="login-form_error_message"  *ngIf="loginForm.get('login').invalid &&  loginForm.get('login').touched">
         Логин должен быть не менее 4 символов латинских букв или цифр.
       </div>
-    <h4>Пароль</h4>
-    <input type="password" formControlName="password" />
-      <div class="alert-danger" *ngIf="loginForm.get('password').invalid &&  loginForm.get('password').touched">
+  </div>
+  <br>
+    <input class="login-form_input"   type="password" formControlName="password" /> <br>
+  <div class="login-form_error">
+      <div class="login-form_error_message"  *ngIf="loginForm.get('password').invalid &&  loginForm.get('password').touched">
         Пароль должен быть не менее 6 символов.
       </div>
-    <br>
-    <input type="button" value="Войти" class="login-button"/>
-    <br>
-    <a class="sign-up" [routerLink]="['/signup/driver']">Зарегистрироваться!</a>
+  </div>
+</div>
+      <div class="login-form_buttons-container">
+    <input class="login-form_login-button"   type="button" value="Войти" />
+    <a class="login-form_sign-up-button" [routerLink]="['/signup/driver']">Зарегистрироваться!</a>
+      </div>
     <br>
     </form>
   </div>
