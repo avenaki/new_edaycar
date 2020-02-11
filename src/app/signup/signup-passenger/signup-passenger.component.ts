@@ -1,11 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Validator } from "../validators";
 
 @Component({
   selector: "app-signup-passenger",
   templateUrl: "./signup-passenger.component.html",
-  styleUrls: ["../signup.component.less"]
+  styleUrls: ["../signup.component.less"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignupPassengerComponent implements OnInit {
 

@@ -1,8 +1,8 @@
-import { IPassenger } from "../../entity/identity/ipassenger";
+import { IUser } from "../../entity/identity/iuser";
 
 export interface IPassengerState {
-  passengers: IPassenger[];
-  selectedPassenger: IPassenger;
+  passengers: IUser[];
+  selectedPassenger: IUser;
 }
 
 export const initialPassengerState: IPassengerState = {
