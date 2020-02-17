@@ -1,20 +1,34 @@
+<div class="form">
 <div class="create-trip-form">
-  <div class="columnContainer">
     <div class="rowContainer">
-      <div class="form_text"> Начало</div>
-      <input type="time"  class="create-trip-form_input" />
-    </div>
-    <div class="rowContainer">
+      <div>
+        <div class="form_text"> Начало</div>
+        <input type="time"  class="create-trip-form_input" />
+      </div>
+    <div>
       <div class="form_text"> Конец</div>
       <input type="time"  class="create-trip-form_input" />
     </div>
+    </div>
     <div class="rowContainer">
       <div class="form_text"> Куда</div>
-      <input type="text"  id="suggest" class="create-trip-form_input" />
+      <input type="text"   class="create-trip-form_input" #start />
     </div>
     <div class="rowContainer">
       <div class="form_text"> Откуда</div>
-      <input type="text" id="suggest1" class="create-trip-form_input" />
-    </div>
+      <div class="form-group">
+        <input type="text"    class="create-trip-form_input" #finish />
+      </div>
   </div>
+
+<agm-map
+  [latitude]="latitude"
+  [longitude]="longitude"
+  [zoom]="zoom" >
+  <agm-marker
+    [latitude]="startX"
+    [longitude]="startY"   [iconUrl]="startIconUrl"></agm-marker>
+  <agm-marker  [latitude]="finishX" [longitude]="finishY"   [iconUrl]="finishIconUrl"></agm-marker>
+</agm-map>
+</div>
 </div>

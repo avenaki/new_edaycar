@@ -1,6 +1,7 @@
+import { AgmCoreModule } from "@agm/core";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { AboutComponent } from "./about/about.component";
@@ -24,11 +25,16 @@ import { TripsTableComponent } from "./trips-table/trips-table.component";
     CreateTripComponent,
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyBQ2nmOQs_9PACtE1IKMX-rT7b0UcW_ZiQ",
+      libraries: ["places", "geometry"]
+    }),
     BrowserModule,
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
