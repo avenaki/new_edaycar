@@ -1,7 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from "./about/about.component";
+import { CreateTripComponent } from "./create-trip/create-trip.component";
 import { LoginComponent } from "./login/login.component";
+import { SignupComponent } from "./signup/signup.component";
 
 
 
@@ -9,7 +11,9 @@ import { LoginComponent } from "./login/login.component";
 export const appRoutes: Routes = [
   { path: "", component: AboutComponent },
   { path: "login", component: LoginComponent},
-  { path: "signup",  loadChildren: "./signup/signup.module#SignupModule"},
+  { path: "signup",  component: SignupComponent },
+  { path: "create", component: CreateTripComponent },
+
 
 ];
 @NgModule({

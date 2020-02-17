@@ -1,0 +1,572 @@
+Index: e2e/src/app.e2e-spec.ts
+===================================================================
+--- e2e/src/app.e2e-spec.ts	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ e2e/src/app.e2e-spec.ts	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
+@@ -1,23 +0,0 @@
+-import { AppPage } from './app.po';
+-import { browser, logging } from 'protractor';
+-
+-describe('workspace-project App', () => {
+-  let page: AppPage;
+-
+-  beforeEach(() => {
+-    page = new AppPage();
+-  });
+-
+-  it('should display welcome message', () => {
+-    page.navigateTo();
+-    expect(page.getTitleText()).toEqual('edaycar app is running!');
+-  });
+-
+-  afterEach(async () => {
+-    // Assert that there are no errors emitted from the browser
+-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+-    expect(logs).not.toContain(jasmine.objectContaining({
+-      level: logging.Level.SEVERE,
+-    } as logging.Entry));
+-  });
+-});
+Index: e2e/src/app.po.ts
+===================================================================
+--- e2e/src/app.po.ts	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ e2e/src/app.po.ts	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
+@@ -1,11 +0,0 @@
+-import { browser, by, element } from 'protractor';
+-
+-export class AppPage {
+-  navigateTo() {
+-    return browser.get(browser.baseUrl) as Promise<any>;
+-  }
+-
+-  getTitleText() {
+-    return element(by.css('app-root .content span')).getText() as Promise<string>;
+-  }
+-}
+Index: e2e/protractor.conf.js
+===================================================================
+--- e2e/protractor.conf.js	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ e2e/protractor.conf.js	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
+@@ -1,32 +0,0 @@
+-// @ts-check
+-// Protractor configuration file, see link for more information
+-// https://github.com/angular/protractor/blob/master/lib/config.ts
+-
+-const { SpecReporter } = require('jasmine-spec-reporter');
+-
+-/**
+- * @type { import("protractor").Config }
+- */
+-exports.config = {
+-  allScriptsTimeout: 11000,
+-  specs: [
+-    './src/**/*.e2e-spec.ts'
+-  ],
+-  capabilities: {
+-    browserName: 'chrome'
+-  },
+-  directConnect: true,
+-  baseUrl: 'http://localhost:4200/',
+-  framework: 'jasmine',
+-  jasmineNodeOpts: {
+-    showColors: true,
+-    defaultTimeoutInterval: 30000,
+-    print: function() {}
+-  },
+-  onPrepare() {
+-    require('ts-node').register({
+-      project: require('path').join(__dirname, './tsconfig.json')
+-    });
+-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+-  }
+-};
+\ No newline at end of file
+Index: e2e/tsconfig.json
+===================================================================
+--- e2e/tsconfig.json	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ e2e/tsconfig.json	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
+@@ -1,13 +0,0 @@
+-{
+-  "extends": "../tsconfig.json",
+-  "compilerOptions": {
+-    "outDir": "../out-tsc/e2e",
+-    "module": "commonjs",
+-    "target": "es5",
+-    "types": [
+-      "jasmine",
+-      "jasminewd2",
+-      "node"
+-    ]
+-  }
+-}
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ package.json	(date 1580471195983)
+@@ -3,8 +3,8 @@
+   "version": "0.0.0",
+   "scripts": {
+     "ng": "ng",
+-    "start": "ng serve",
+-    "build": "ng build",
++    "start": "ng lint && ng serve",
++    "build": "ng lint && ng build",
+     "test": "ng test",
+     "lint": "ng lint",
+     "e2e": "ng e2e"
+@@ -19,13 +19,17 @@
+     "@angular/platform-browser": "~8.2.14",
+     "@angular/platform-browser-dynamic": "~8.2.14",
+     "@angular/router": "~8.2.14",
++    "@ngrx/effects": "8.6.0",
++    "@ngrx/entity": "8.6.0",
++    "@ngrx/router-store": "8.6.0",
++    "@ngrx/store": "8.6.0",
+     "rxjs": "~6.4.0",
+     "tslib": "^1.10.0",
+     "zone.js": "~0.9.1"
+   },
+   "devDependencies": {
+-    "@angular-devkit/build-angular": "~0.803.23",
+-    "@angular/cli": "~8.3.23",
++    "@angular-devkit/build-angular": "~0.803.24",
++    "@angular/cli": "~8.3.24",
+     "@angular/compiler-cli": "~8.2.14",
+     "@angular/language-service": "~8.2.14",
+     "@types/node": "~8.9.4",
+@@ -41,7 +45,8 @@
+     "karma-jasmine-html-reporter": "^1.4.0",
+     "protractor": "~5.4.0",
+     "ts-node": "~7.0.0",
+-    "tslint": "~5.15.0",
++    "tslint": "~6.0.0",
++    "rxjs-tslint-rules": "~4.28.1",
+     "typescript": "~3.5.3"
+   }
+ }
+Index: angular.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- angular.json	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ angular.json	(date 1580471195979)
+@@ -99,27 +99,14 @@
+           "options": {
+             "tsConfig": [
+               "tsconfig.app.json",
+-              "tsconfig.spec.json",
+-              "e2e/tsconfig.json"
++              "tsconfig.spec.json"
+             ],
+             "exclude": [
+               "**/node_modules/**"
+             ]
+           }
+-        },
+-        "e2e": {
+-          "builder": "@angular-devkit/build-angular:protractor",
+-          "options": {
+-            "protractorConfig": "e2e/protractor.conf.js",
+-            "devServerTarget": "edaycar:serve"
+-          },
+-          "configurations": {
+-            "production": {
+-              "devServerTarget": "edaycar:serve:production"
+-            }
+-          }
+         }
+       }
+     }},
+   "defaultProject": "edaycar"
+-}
+\ No newline at end of file
++}
+Index: src/main.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main.ts	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ src/main.ts	(date 1580471110498)
+@@ -1,3 +1,4 @@
++// tslint:disable
+ import { enableProdMode } from '@angular/core';
+ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+ 
+Index: src/polyfills.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/polyfills.ts	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ src/polyfills.ts	(date 1580471110491)
+@@ -1,3 +1,4 @@
++// tslint:disable
+ /**
+  * This file includes polyfills needed by Angular and is loaded before the app.
+  * You can add your own extra polyfills to this file.
+Index: src/test.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test.ts	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ src/test.ts	(date 1580471110486)
+@@ -1,5 +1,5 @@
+ // This file is required by karma.conf.js and loads recursively all the .spec and framework files
+-
++// tslint:disable
+ import 'zone.js/dist/zone-testing';
+ import { getTestBed } from '@angular/core/testing';
+ import {
+Index: tsconfig.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- tsconfig.json	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ tsconfig.json	(date 1580470884414)
+@@ -17,7 +17,12 @@
+     "lib": [
+       "es2018",
+       "dom"
+-    ]
++    ],
++    "noImplicitThis": true,
++    "noUnusedLocals": true,
++    "noImplicitReturns": true,
++    "noUnusedParameters": true,
++    "noImplicitAny": true
+   },
+   "angularCompilerOptions": {
+     "fullTemplateTypeCheck": true,
+Index: tslint.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- tslint.json	(revision e88b116710beb232e8c4d83f9b2fd6971b95a14a)
++++ tslint.json	(date 1580470933746)
+@@ -1,37 +1,43 @@
+ {
+-  "extends": "tslint:recommended",
++  "rulesDirectory": [
++    "node_modules/codelyzer",
++    "node_modules/rxjs-tslint-rules"
++  ],
++  "extends": [
++    "codelyzer",
++    "rxjs-tslint-rules"
++  ],
+   "rules": {
+-    "array-type": false,
+-    "arrow-parens": false,
+-    "deprecation": {
+-      "severity": "warning"
+-    },
+-    "component-class-suffix": true,
+-    "contextual-lifecycle": true,
+-    "directive-class-suffix": true,
+-    "directive-selector": [
++    "no-host-metadata-property": true,
++    "template-no-negated-async": true,
++    "angular-whitespace": [
+       true,
+-      "attribute",
+-      "app",
+-      "camelCase"
++      "check-semicolon"
+     ],
+-    "component-selector": [
++    "arrow-return-shorthand": true,
++    "callable-types": true,
++    "class-name": true,
++    "comment-format": [
+       true,
+-      "element",
+-      "app",
+-      "kebab-case"
++      "check-space"
+     ],
+-    "import-blacklist": [
++    "curly": true,
++    "deprecation": {
++      "severity": "warn"
++    },
++    "eofline": true,
++    "forin": true,
++    "import-spacing": true,
++    "indent": [
+       true,
+-      "rxjs/Rx"
++      "spaces"
+     ],
+-    "interface-name": false,
+-    "max-classes-per-file": false,
++    "interface-over-type-literal": true,
++    "label-position": true,
+     "max-line-length": [
+       true,
+-      140
++      230
+     ],
+-    "member-access": false,
+     "member-ordering": [
+       true,
+       {
+@@ -43,7 +49,10 @@
+         ]
+       }
+     ],
+-    "no-consecutive-blank-lines": false,
++    "no-arg": true,
++    "no-any": true,
++    "no-bitwise": true,
++    "no-construct": true,
+     "no-console": [
+       true,
+       "debug",
+@@ -52,40 +61,216 @@
+       "timeEnd",
+       "trace"
+     ],
++    "ordered-imports": true,
++    "no-debugger": true,
++    "no-duplicate-super": true,
++    "no-duplicate-variable": true,
+     "no-empty": false,
+-    "no-inferrable-types": [
+-      true,
+-      "ignore-params"
+-    ],
++    "no-empty-interface": true,
++    "no-eval": true,
++    "no-forward-ref": true,
++    "no-inferrable-types": false,
++    "no-input-rename": true,
++    "no-misused-new": true,
++    "no-life-cycle-call": true,
+     "no-non-null-assertion": true,
+-    "no-redundant-jsdoc": true,
++    "no-output-rename": true,
++    "no-shadowed-variable": true,
++    "no-string-literal": false,
++    "no-string-throw": true,
+     "no-switch-case-fall-through": true,
+-    "no-var-requires": false,
+-    "object-literal-key-quotes": [
++    "no-trailing-whitespace": true,
++    "no-unnecessary-initializer": true,
++    "no-unsafe-any": false,
++    "no-unsafe-finally": true,
++    "no-unused-variable": false,
++    "no-var-keyword": true,
++    "object-literal-sort-keys": false,
++    "one-line": [
+       true,
+-      "as-needed"
++      "check-open-brace",
++      "check-catch",
++      "check-else",
++      "check-whitespace"
++    ],
++    "prefer-const": true,
++    "semicolon": [
++      true,
++      "always",
++      "strict-bound-class-methods"
++    ],
++    "triple-equals": [
++      true,
++      "allow-null-check"
++    ],
++    "typedef-whitespace": [
++      true,
++      {
++        "call-signature": "nospace",
++        "index-signature": "nospace",
++        "parameter": "nospace",
++        "property-declaration": "nospace",
++        "variable-declaration": "nospace"
++      }
++    ],
++    "no-duplicate-imports": [
++      true
++    ],
++    "unified-signatures": true,
++    "whitespace": [
++      true,
++      "check-branch",
++      "check-decl",
++      "check-operator",
++      "check-module",
++      "check-separator",
++      "check-type"
++    ],
++    "use-life-cycle-interface": true,
++    "use-pipe-transform-interface": true,
++    "component-class-suffix": true,
++    "directive-class-suffix": true,
++    "typedef": [
++      true,
++      "call-signature",
++      "parameter",
++      "property-declaration"
++    ],
++    "unnecessary-constructor": [
++      true,
++      {
++        "check-super-calls": true
++      }
+     ],
+-    "object-literal-sort-keys": false,
+-    "ordered-imports": false,
++    "invalid-void": true,
++    "strict-string-expressions": true,
++    "no-promise-as-boolean": true,
++    "no-async-without-await": true,
++    "no-null-undefined-union": true,
++    "no-tautology-expression": true,
++    "static-this": true,
++    "unnecessary-else": true,
++    "no-restricted-globals": true,
++    "function-constructor": true,
++    "unnecessary-bind": true,
++    "file-name-casing": [
++      true,
++      "kebab-case"
++    ],
++    "no-return-await": true,
++    "no-duplicate-switch-case": true,
++    "no-this-assignment": true,
++    "encoding": true,
++    "no-irregular-whitespace": true,
++    "prefer-conditional-expression": true,
++    "no-invalid-template-strings": true,
++    "adjacent-overload-signatures": true,
++    "no-import-side-effect": true,
++    "no-var-requires": true,
++    "prefer-for-of": true,
++    "no-conditional-assignment": true,
++    "no-for-in-array": true,
++    "no-invalid-this": true,
++    "no-require-imports": true,
++    "no-mergeable-namespace": true,
+     "quotemark": [
+       true,
+-      "single"
++      "double"
++    ],
++    "trailing-comma": [
++      true,
++      {
++        "multiline": {
++          "imports": "always",
++          "functions": "always",
++          "arrays": "always"
++        }
++      }
+     ],
+-    "trailing-comma": false,
++    "use-isnan": true,
++    "import-blacklist": [
++      true,
++      "rxjs/Rx"
++    ],
++    "no-unused-expression": [
++      true,
++      "allow-fast-null-checks"
++    ],
++    "radix": true,
++    "directive-selector": [
++      true,
++      "attribute",
++      "camelCase"
++    ],
++    "component-selector": [
++      true,
++      "element",
++      "kebab-case"
++    ],
++    "component-max-inline-declarations": true,
++    "contextual-lifecycle": true,
+     "no-conflicting-lifecycle": true,
+-    "no-host-metadata-property": true,
+-    "no-input-rename": true,
+     "no-inputs-metadata-property": true,
+     "no-output-native": true,
+-    "no-output-on-prefix": true,
+-    "no-output-rename": true,
+     "no-outputs-metadata-property": true,
++    "no-queries-metadata-property": true,
+     "template-banana-in-box": true,
+-    "template-no-negated-async": true,
+     "use-lifecycle-interface": true,
+-    "use-pipe-transform-interface": true
+-  },
+-  "rulesDirectory": [
+-    "codelyzer"
+-  ]
+-}
+\ No newline at end of file
++    "rxjs-no-connectable": true,
++    "rxjs-no-create": true,
++    "rxjs-no-exposed-subjects": true,
++    "rxjs-no-ignored-replay-buffer": true,
++    "rxjs-no-unsafe-takeuntil": {
++      "options": [
++        {
++          "allow": [
++            "count",
++            "defaultIfEmpty",
++            "endWith",
++            "every",
++            "finalize",
++            "finally",
++            "isEmpty",
++            "last",
++            "max",
++            "min",
++            "publish",
++            "publishBehavior",
++            "publishLast",
++            "publishReplay",
++            "reduce",
++            "share",
++            "shareReplay",
++            "skipLast",
++            "takeLast",
++            "throwIfEmpty",
++            "toArray"
++          ]
++        }
++      ]
++    },
++    "rxjs-no-unsafe-switchmap": {
++      "options": [
++        {
++          "disallow": [
++            "add",
++            "create",
++            "delete",
++            "post",
++            "put",
++            "remove",
++            "set",
++            "update"
++          ],
++          "observable": "action(s|\\$)?"
++        }
++      ]
++    },
++    "rxjs-no-unsafe-catch": true,
++    "rxjs-no-unsafe-first": true,
++    "rxjs-no-index": true,
++    "rxjs-no-subject-unsubscribe": true,
++    "rxjs-no-async-subscribe": true,
++    "rxjs-no-redundant-notify": true
++  }
++}

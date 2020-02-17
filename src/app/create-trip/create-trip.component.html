@@ -1,0 +1,102 @@
+<div class="create-trip-form">
+  <div class="columnContainer">
+    <div class="rowContainer">
+      <div class="form_text"> Начало</div>
+      <input type="time"  class="create-trip-form_input" />
+    </div>
+    <div class="rowContainer">
+      <div class="form_text"> Конец</div>
+      <input type="time"  class="create-trip-form_input" />
+    </div>
+    <div class="rowContainer">
+      <div class="form_text"> Куда</div>
+      <input type="text"  id="suggest" class="create-trip-form_input" />
+    </div>
+    <div class="rowContainer">
+      <div class="form_text"> Откуда</div>
+      <input type="text" id="suggest1" class="create-trip-form_input" />
+    </div>
+  </div>
+</div>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=1f350d70-cccc-4035-a308-d0f9e4a1b9bc&lang=ru_RU" type="text/javascript"> </script>
+
+<script>
+    function onLoad (ymaps) {
+        var suggestView = new ymaps.SuggestView('suggest', {
+            results: 1,
+            offset: [20, 30]
+        });
+    }
+    var myMap;
+    ymaps.ready(function () {
+        myMap = new ymaps.Map("map", {
+            center: [55.76, 37.64],
+            zoom: 10
+        });
+        myMap.events.add('click', function (e) {
+            if (!myMap.balloon.isOpen()) {
+                var coords = e.get('coords');
+                myMap.balloon.open(coords, {
+                    contentHeader: 'Событие!',
+                    contentBody: '<p>Задать, как:</p>' +
+                        '<button class="form-control btn btn-sm btn-primary" onclick="fillInput(\'start\',' + coords[0] + ',' + coords[1] + ');$(this).hide();">Начало</button>' +
+                        '<button  class="form-control btn btn-sm btn-primary" onclick="fillInput(\'finish\',' + coords[0] + ',' + coords[1] + ');$(this).hide();">Конец</button>',
+                    contentFooter: '<sup>Щелкните еще раз, чтобы закрыть</sup>'
+                });
+            }
+            else {
+                myMap.balloon.close();
+            }
+        });
+        $("#start").suggestions({
+            token: "10cc181a4e7e80752aa2541be359aa9e2d5e1489",
+            type: "ADDRESS",
+            /* Вызывается, когда пользователь выбирает одну из подсказок */
+            onSelect: function (suggestion) {
+            }
+        });
+        $("#finish").suggestions({
+            token: "10cc181a4e7e80752aa2541be359aa9e2d5e1489",
+            type: "ADDRESS",
+            /* Вызывается, когда пользователь выбирает одну из подсказок */
+            onSelect: function (suggestion) {
+            }
+        });
+    });
+    function fillByAddress(inputType, address) {
+        var myGeocoder = ymaps.geocode(address, { results: 1 }).then(
+            function (res) {
+                var firstGeoObject = res.geoObjects.get(0);
+                var coords = firstGeoObject.geometry.getCoordinates();
+                fillInput(inputType, coords[0], coords[1]);
+            })
+    }
+    var placemarkStart;
+    var placemarkFinish;
+    function fillInput(inputType, x, y) {
+        $("#" + inputType + "X").val(x)
+        $("#" + inputType + "Y").val(y);
+        if (inputType == "start") {
+            myMap.geoObjects.remove(placemarkStart);
+            placemarkStart = new ymaps.Placemark([x, y], {
+                balloonContent: '<strong>' + inputType + '</strong>'
+            }, {
+                preset: 'islands#dotIcon',
+                iconColor: 'green'
+            });
+            myMap.geoObjects.add(placemarkStart);
+        }
+        else {
+            myMap.geoObjects.remove(placemarkFinish);
+            placemarkFinish = new ymaps.Placemark([x, y], {
+                balloonContent: '<strong>' + inputType + '</strong>'
+            }, {
+                preset: 'islands#dotIcon',
+                iconColor: 'red'
+            });
+            myMap.geoObjects.add(placemarkFinish);
+        }
+        point = new ymaps.point(x, y);
+        myMap.panTo(point);
+    }
+</script>

@@ -8,9 +8,9 @@ import { Driver } from "../entity/identity/driver";
   providedIn: "root"
 })
 export class HttpService {
-  apiUrl = "localhost";
+  apiUrl = "http://localhost:5000/";
   constructor(private http: HttpClient) { }
   public addDriver( driver: Driver ): void {
-    this.http.post(this.apiUrl + "api/student/post",   driver ).subscribe();
+    this.http.post(this.apiUrl + "api/account/registrdriver",   driver ).subscribe();
   }
 }

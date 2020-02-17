@@ -1,6 +1,7 @@
 <head>
   <meta charset="utf-8" />
   <base href="/" />
+  <script src="//api-maps.yandex.ru/2.1/?apikey=1f350d70-cccc-4035-a308-d0f9e4a1b9bc&lang=ru_RU&load=SuggestView&onload=onLoad"> </script>
 </head>
 
 <div class="navbar">
@@ -10,11 +11,12 @@
   <div class="navbar_container">
     <div class="navbar_item" routerLink="">Главная</div>
     <div class="navbar_item" routerLink="trips">Поездки</div>
+    <div class="navbar_item" routerLink="create">Создать</div>
+    <div class="navbar_item" routerLink="login">Войти</div>
   </div>
-  <div class="navbar_container">
-    <div class="navbar_login" routerLink="login">Войти</div>
-  </div>
+
 </div>
 <div>
 <router-outlet></router-outlet>
 </div>
+
