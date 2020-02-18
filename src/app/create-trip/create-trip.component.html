@@ -1,26 +1,65 @@
 <div class="form">
 <div class="create-trip-form">
+  <div class="container">
+    <div class="columnContainer">
     <div class="rowContainer">
-      <div>
+<div class="rowContainer_item">
         <div class="form_text"> Начало</div>
-        <input type="time"  class="create-trip-form_input" />
+        <input type="time"  class="create-trip-form_input input-time" />
+</div>
+      <div class="rowContainer_item">
+      <div class="form_text"> Конец</div>
+      <input type="time"  class="create-trip-form_input input-time" />
+    </div>
+    </div>
+      <div class="rowContainer-checkbox">
+        <div >
+          <input class="checkbox-input" type="checkbox" id="monday" name="monday">
+          <label for="monday" class="form_text">Пн</label>
+        </div>
+        <div>
+          <input class="checkbox-input"  type="checkbox" id="tuesday" name="tuesday">
+          <label for="tuesday" class="form_text">Вт</label>
+        </div>
+        <div>
+          <input class="checkbox-input"  type="checkbox" id="wednesday" name="wednesday">
+          <label for="wednesday" class="form_text">Ср</label>
+        </div>
+        <div>
+          <input class="checkbox-input"  type="checkbox" id="" name="monday"
+                 >
+          <label for="monday" class="form_text">Ср</label>
+        </div>
+        <div>
+          <input class="checkbox-input"  type="checkbox" id="thursday" name="thursday">
+          <label for="thursday">Чт</label>
+        </div>
+        <div>
+          <input class="checkbox-input"  type="checkbox" id="friday" name="friday">
+          <label for="friday" class="form_text">Пт</label>
+        </div>
+        <div>
+          <input class="checkbox-input"   type="checkbox" id="saturday" name="saturday">
+          <label for="saturday" class="form_text">Сб</label>
+        </div>
+        <div>
+          <input class="checkbox-input" type="checkbox" id="sunday" name="sunday">
+          <label for="sunday" class="form_text">Вс</label>
+        </div>
       </div>
     <div>
-      <div class="form_text"> Конец</div>
-      <input type="time"  class="create-trip-form_input" />
-    </div>
-    </div>
-    <div class="rowContainer">
       <div class="form_text"> Куда</div>
       <input type="text"   class="create-trip-form_input" #start />
     </div>
-    <div class="rowContainer">
+    <div >
       <div class="form_text"> Откуда</div>
       <div class="form-group">
         <input type="text"    class="create-trip-form_input" #finish />
       </div>
+    </div>
   </div>
-
+</div>
+<div class="google-map">
 <agm-map
   [latitude]="latitude"
   [longitude]="longitude"
@@ -32,3 +71,5 @@
 </agm-map>
 </div>
 </div>
+</div>
+

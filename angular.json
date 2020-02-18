@@ -107,6 +107,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "edaycar"
+    }
+  },
+  "defaultProject": "edaycar",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "less"
+    }
+  }
 }

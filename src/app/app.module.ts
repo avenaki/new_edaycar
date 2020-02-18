@@ -11,14 +11,13 @@ import { CreateTripComponent } from "./create-trip/create-trip.component";
 import { LoginComponent } from "./login/login.component";
 import { HttpService } from "./services/http.service";
 import { SignupComponent } from "./signup/signup.component";
-import { TripsTableComponent } from "./trips-table/trips-table.component";
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TripsTableComponent,
     AboutComponent,
     LoginComponent,
     SignupComponent,
