@@ -1,27 +1,55 @@
 .create-trip-form {
- width: 80%;
-  max-width:500px;
-  margin: 10px auto 0;
+  width: 30vw;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   border-radius: 5px;
   padding: 2em 3em;
+  height: 70vh;
+  @media only screen and (min-width: 150px) and (max-width: 530px) {
+    width:65vw;
+    height: fit-content;
+  }
+}
+.map{
+  height: 100%;
+  width: 30vw;
+  border-radius: 6px;
+  @media only screen and (min-width: 150px) and (max-width: 530px) {
+  display: none;
+  }
 }
 agm-map {
-  height: 270px;
-  max-width:450px;
+  content: " ";
+  position: relative;
+  width: 30vw;
+  height: 78vh;
+
+  @media only screen and (min-width: 150px) and (max-width: 530px) {
+    display:none;
+  }
 }
 .form {
+  margin-top: 60px;
+  @media only screen and (min-width: 150px) and (max-width: 530px) {
   margin-top: 80px;
-  padding: 0px 20px;
+  }
+
 }
 .rowContainer {
   display: flex;
   flex-direction: row;
-  width: 80%;
-  max-width:450px;
+  justify-content: center;
+}
+.contentContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
 }
 .create-trip-form_input {
-  width:500px;
+  width: 100%;
+  max-width: 450px;
   line-height:2em;
   font-family: 'Ubuntu', sans-serif;
   outline:none;
@@ -31,18 +59,20 @@ agm-map {
   color: #474747;
   border-radius: 5px;
   margin-top: 10px;
+
 }
 .input-time{
-  width: 80px;
-  flex: 1 1 auto;
+  width: 90px;
   padding: 0em 1em;
   text-align: left;
+  align-self: flex-start;
 }
 .form_text {
   width: 100px;
-  margin-top: 30px;
   font-size: 14px;
   font-family: 'Exo 2', sans-serif;
+  color: #474747;
+  align-self: center;
 }
 .container {
   margin: 0 auto;
@@ -54,9 +84,6 @@ agm-map {
   margin-bottom: 30px;
 
 }
-.google-map {
-  margin-top: 20px;
-}
 .rowContainer_item {
   flex: 1 1 auto;
 }
@@ -64,10 +91,44 @@ agm-map {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 30px;
 }
-.checkbox-input{
-  border-radius: 8px;
-  outline: none;
-  border: 1px solid #7cc283;
+
+.form_text-large {
+  margin-top: 18px;
+  font-size: 14px;
+  font-family: 'Exo 2', sans-serif;
+  margin-bottom: 18px;
+
+}
+.custom-select select{
+  font-family: 'Exo 2', sans-serif;
+  border-radius: 6px;
+  border:1px solid #8ebacc;
+  width: 200px;
+}
+.time {
+align-self: baseline;
+}
+.form_button {
+  height: 45px;
+  width: 500px;
+  background: #85d685;
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 5%;
+  margin-top: 20px;
+
+  @media only screen and (min-width: 150px) and (max-width: 530px) {
+    margin-bottom: 10px;
+    width: 300px;
+  }
+}
+.button-container{
+  display: flex;
+  justify-content: center;
 }

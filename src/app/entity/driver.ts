@@ -11,6 +11,7 @@ export class Driver implements IDriver {
   mobileNumber: string;
   trips: Trip[];
   experience: number;
+  token?: string;
 
   constructor(login: string, password: string, name: string, surname: string, patronymic: string, birthDate: Date,
               mobileNumber: string, experience: number, trips: Trip[] ) {

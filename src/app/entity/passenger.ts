@@ -10,4 +10,5 @@ export class Passenger implements IUser {
   patronymic: string;
   surname: string;
   trips: Trip[];
+  token?: string;
 }

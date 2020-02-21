@@ -8,6 +8,7 @@ export interface IUser {
   patronymic: string;
   birthDate: Date;
   mobileNumber: string;
+  token?: string;
   trips: Trip[];
 
 }

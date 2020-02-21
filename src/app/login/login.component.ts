@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { HttpService } from "../services/http.service";
 
 @Component({
   selector: "app-login",
@@ -10,7 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private http: HttpService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -24,5 +25,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  login(): void {
+    this.http.login(this.loginForm.controls["username"].value, btoa(this.loginForm.controls["password"].value)).subscribe();
   }
+}
 

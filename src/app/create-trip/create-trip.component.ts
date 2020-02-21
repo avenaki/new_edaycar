@@ -1,5 +1,8 @@
 import { MapsAPILoader } from "@agm/core";
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
+import { Trip } from "../entity/trip";
+import DateTimeFormat = Intl.DateTimeFormat;
+import { HttpService } from "../services/http.service";
 
 
 @Component({
@@ -8,7 +11,8 @@ import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core"
   styleUrls: ["./create-trip.component.less"]
 })
 export class CreateTripComponent implements OnInit {
-  title: string = "AGM project";
+  startTime: DateTimeFormat;
+  finishTime: DateTimeFormat;
   latitude: number;
   longitude: number;
   zoom: number;
@@ -21,15 +25,16 @@ export class CreateTripComponent implements OnInit {
   public startIconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
   public finishIconUrl = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
+
   @ViewChild("start", { static: false })
   public startElementRef: ElementRef;
 
   @ViewChild("finish", { static: false })
   public finishElementRef: ElementRef;
-  constructor( private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) { }
+  selectedPassengersValue: number;
+  constructor( private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private http: HttpService) { }
 
   ngOnInit(): void {
-
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
@@ -44,8 +49,6 @@ export class CreateTripComponent implements OnInit {
         this.ngZone.run(() => {
 
           const place: google.maps.places.PlaceResult = autocompleteStart.getPlace();
-
-          // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
@@ -58,8 +61,6 @@ export class CreateTripComponent implements OnInit {
         this.ngZone.run(() => {
 
           const place: google.maps.places.PlaceResult = autocompleteFinish.getPlace();
-
-          // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
@@ -70,7 +71,6 @@ export class CreateTripComponent implements OnInit {
       });
     });
   }
-
   private setCurrentLocation(): void {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -95,7 +95,15 @@ export class CreateTripComponent implements OnInit {
       } else {
         window.alert("Geocoder failed due to: " + status);
       }
-
     });
+  }
+
+  submit(): void {
+  if (this.startX && this.startY && this.startTime && this.finishTime
+     && this.finishY && this.finishX && this.selectedPassengersValue) {
+    const newTrip = new Trip(null, this.startTime, this.finishTime,
+      this.startX, this.startY, this.finishX, this.finishY, this.selectedPassengersValue, null, null );
+    this.http.addTrip(newTrip);
+  }
   }
 }
