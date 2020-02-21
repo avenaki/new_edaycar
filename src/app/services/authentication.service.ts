@@ -3,33 +3,31 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { environment } from "../../environments/environment";
-import { IUser } from "../entity/iuser";
+import { UserModel } from "../entity/user-model";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<IUser>;
-  public currentUser: Observable<IUser>;
+  private currentUserSubject: BehaviorSubject<UserModel>;
+  public currentUser: Observable<UserModel>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem("currentIUser")));
+    this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem("currentUser")));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentIUserValue(): IUser {
+  public get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
   }
 
-  login(IUsername: string, password: string) {
-    return this.http.post<string>(`${environment.apiUrl}/Users/authenticate`, { IUsername, password })
-      .pipe(map(IUser => {
-        // login successful if there's a jwt token in the response
-        if (IUser && IUser.token) {
+  login(username: string, password: string): Observable<UserModel> {
+    return this.http.post<UserModel>(`${environment.apiUrl}api/account/login`, { login: username, password: password })
+      .pipe(map(data => {
+        if (data.login && data.token) {
           // store IUser details and jwt token in local storage to keep IUser logged in between page refreshes
-          localStorage.setItem("currentUser", JSON.stringify(IUser));
-          this.currentUserSubject.next(IUser);
+          localStorage.setItem("currentUser", JSON.stringify(data));
+          this.currentUserSubject.next(data);
         }
-
-        return IUser;
+        return data;
       }));
   }
 

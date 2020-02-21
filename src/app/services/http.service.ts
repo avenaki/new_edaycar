@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
@@ -18,10 +18,7 @@ export class HttpService {
   public addTrip( trip: Trip ): void {
     this.http.post(this.apiUrl + "api/trip/createtrip", trip ).subscribe();
   }
-  public login(login: string, password: string): Observable<number> {
-    let params = new HttpParams();
-    params = params.append("login", login);
-    params = params.append("password", password);
-    return this.http.get<number>(this.apiUrl + "api/account/login", { params });
+  public login(login: string, password: string): Observable<string> {
+    return this.http.post<string>(this.apiUrl + "api/account/login", { login: login, password: password });
   }
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { HttpService } from "../services/http.service";
+import { AuthenticationService } from "../services/authentication.service";
 
 @Component({
   selector: "app-login",
@@ -11,7 +11,7 @@ import { HttpService } from "../services/http.service";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private http: HttpService) { }
+  constructor(private fb: FormBuilder, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -19,14 +19,14 @@ export class LoginComponent implements OnInit {
 
   private initForm(): void {
     this.loginForm = this.fb.group({
-      login: new FormControl("Username", [Validators.required,  Validators.minLength(4), Validators.pattern("^[A-Za-z0-9]+$")]),
-      password: new FormControl("Password", [Validators.required, Validators.minLength(8),
+      login: new FormControl("", [Validators.required,  Validators.minLength(4), Validators.pattern("^[A-Za-z0-9]+$")]),
+      password: new FormControl("", [Validators.required, Validators.minLength(8),
       ])
     });
   }
 
   login(): void {
-    this.http.login(this.loginForm.controls["username"].value, btoa(this.loginForm.controls["password"].value)).subscribe();
+    this.authService.login(this.loginForm.controls["login"].value, btoa(this.loginForm.controls["password"].value)).subscribe();
   }
 }
 
