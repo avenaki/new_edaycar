@@ -10,5 +10,6 @@ export interface IUser {
   mobileNumber: string;
   token?: string;
   trips: Trip[];
+  accountPhoto: string;
 
 }

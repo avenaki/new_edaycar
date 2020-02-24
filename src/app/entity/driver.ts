@@ -12,9 +12,12 @@ export class Driver implements IDriver {
   trips: Trip[];
   experience: number;
   token?: string;
+  color: string;
+  accountPhoto: string;
+  carModel: string;
 
   constructor(login: string, password: string, name: string, surname: string, patronymic: string, birthDate: Date,
-              mobileNumber: string, experience: number, trips: Trip[] ) {
+              mobileNumber: string, experience: number, color: string, accountPhoto: string, carModel: string,  trips: Trip[] ) {
     this.login = login;
     this.password = password;
     this.name = name;
@@ -24,6 +27,9 @@ export class Driver implements IDriver {
     this.mobileNumber = mobileNumber;
     this.experience = experience;
     this.trips = trips;
+    this.color =  color;
+    this.carModel = carModel;
+    this.accountPhoto = accountPhoto;
 
   }
 }

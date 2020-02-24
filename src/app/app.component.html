@@ -1,3 +1,4 @@
+<div *ngIf="currentUser !== null && currentUser !== undefined">
 <div class="navbar">
   <div class="navbar_brand">
     <div> EDAYCAR  </div>
@@ -6,9 +7,12 @@
     <div class="navbar_item" routerLink="">Главная</div>
     <div class="navbar_item" routerLink="trips">Поездки</div>
     <div class="navbar_item" routerLink="create">Создать</div>
-    <div class="navbar_item" routerLink="login">Войти</div>
+    <div class="navbar_item" routerLink="profile-{{currentUser.role}}" >Профиль</div>
+    <div class="navbar_item" (click)="logout()">Выйти</div>
   </div>
 </div>
+</div>
+
 <div>
 <router-outlet></router-outlet>
 </div>

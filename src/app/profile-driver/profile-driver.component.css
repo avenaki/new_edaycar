@@ -1,0 +1,39 @@
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+}
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.container {
+  margin-top: 90px;
+  display: flex;
+  justify-content: space-between;
+}
+.accountPhoto {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+}
+.changePhotoButton {
+  margin-top: 30px;
+  width: 300px;
+  background-color: #7cc283;
+  color: white;
+  font-family: 'Exo 2', sans-serif;
+  text-align: center;
+  font-size: 14px;
+  padding: 1em 1em;
+}
+.changePhotoButton:hover {
+  opacity: 0.7;
+}
+.changePhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 8%;
+}
+/*# sourceMappingURL=profile-driver.component.css.map */

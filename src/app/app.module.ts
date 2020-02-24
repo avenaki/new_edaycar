@@ -8,10 +8,12 @@ import { AboutComponent } from "./about/about.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CreateTripComponent } from "./create-trip/create-trip.component";
+import { AuthGuard } from "./guards/auth.guard";
 import { LoginComponent } from "./login/login.component";
+import { ProfileDriverComponent } from "./profile-driver/profile-driver.component";
+import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger.component";
 import { HttpService } from "./services/http.service";
 import { SignupComponent } from "./signup/signup.component";
-
 
 
 
@@ -22,6 +24,8 @@ import { SignupComponent } from "./signup/signup.component";
     LoginComponent,
     SignupComponent,
     CreateTripComponent,
+    ProfileDriverComponent,
+    ProfilePassengerComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -35,7 +39,7 @@ import { SignupComponent } from "./signup/signup.component";
     HttpClientModule,
     FormsModule,
   ],
-  providers: [HttpService],
+  providers: [HttpService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

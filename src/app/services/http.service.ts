@@ -21,4 +21,10 @@ export class HttpService {
   public login(login: string, password: string): Observable<string> {
     return this.http.post<string>(this.apiUrl + "api/account/login", { login: login, password: password });
   }
+  public getDriverByLogin(login: string): Observable<Driver> {
+    return this.http.get<Driver>(this.apiUrl + "api/account/getdriver/" + login);
+  }
+  public getPassengerByLogin(login: string): Observable<Driver> {
+    return this.http.get<Driver>(this.apiUrl + "api/account/getpassenger/" + login);
+  }
 }

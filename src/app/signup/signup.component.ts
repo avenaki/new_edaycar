@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Driver } from "../entity/driver";
 import { HttpService } from "../services/http.service";
-import { Validator } from "./validators";
+import { Validator } from "../validators";
 
 
 @Component({
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
       btoa(this.signupForm.controls["password"].value), this.signupForm.controls["name"].value,
       this.signupForm.controls["surname"].value, this.signupForm.controls["patronymic"].value,
       new Date(this.signupForm.controls["birthdate"].value), String(this.signupForm.controls["mobileNumber"].value),
-      Number(this.signupForm.controls["experience"].value), null);
+      Number(this.signupForm.controls["experience"].value), null, null, null,  null);
     this.httpService.addDriver(newDriver);
   }
 }

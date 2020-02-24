@@ -11,4 +11,5 @@ export class Passenger implements IUser {
   surname: string;
   trips: Trip[];
   token?: string;
+  accountPhoto: string;
 }
