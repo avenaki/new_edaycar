@@ -5,11 +5,11 @@
     <div class="columnContainer">
       <div>
         <h5 class="driver-form_text">Логин</h5>
-        <input type="text" class="driver-form_input"  formControlName="login"/><br>
+        <input type="text" class="driver-form_input"  formControlName="login" readonly/><br>
       </div>
       <div>
         <h5 class="driver-form_text">Пароль</h5>
-        <input type="password" class="driver-form_input"  formControlName="password"/><br>
+        <input type="text" class="driver-form_input"  formControlName="password"/><br>
       </div>
       <div>
         <h5 class="driver-form_text">Имя</h5>
@@ -52,7 +52,10 @@
   <div *ngIf="currentDriver.accountPhoto === null">
     <img  class="accountPhoto "src="https://sun9-4.userapi.com/c849424/v849424786/15eee3/Y4C7mfELwBA.jpg?ava=1">
   </div>
-    <div > <input  type="file" (change)="handleFileInput($event.target.files)" /> </div>
+    <div  class="changePhotoButton">Изменить фотографию
+      <label for="file">
+      <input #imageInput class="input-file" type="file" accept="image/*" id="file"  />
+      </label></div>
     <div class="changePhotoButton" (click)="saveChanges()">Сохранить изменения</div>
   </div>
 </div>

@@ -5,47 +5,47 @@
   width: 80%;
   display: flex;
   flex-direction: column;
-  margin:0 auto;
-  max-width:900px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  margin: 0 auto;
+  max-width: 900px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 6px;
   margin-top: 30px;
 }
 .signup-form_button-container {
   min-width: 300px;
   width: 80%;
-  margin:0 auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 .signup-nav {
   overflow: hidden;
-  top:0;
+  top: 0;
   width: 100%;
   height: 45px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.signup-header{
+.signup-header {
   font-size: 24px;
   text-align: center;
   font-family: 'Exo 2', sans-serif;
-  color:#474747;
+  color: #474747;
 }
 .container {
   margin-top: 80px;
   font-family: 'Exo 2', sans-serif;
-  width:100%;
+  width: 100%;
 }
-.signup-nav_item{
+.signup-nav_item {
   background-color: #8bc791;
-  display:block;
-  width:100%;
-  height:40px;
+  display: block;
+  width: 100%;
+  height: 40px;
   text-align: center;
-  color:white;
+  color: white;
 }
 .highlightUser {
   background-color: #85d685;
@@ -55,22 +55,22 @@
   vertical-align: sub;
 }
 .signup-form_button {
-  height:30px;
-  width:200px;
+  height: 30px;
+  width: 200px;
   background: #7cc283;
-  border:1px solid white;
-  border-radius:20px;
+  border: 1px solid white;
+  border-radius: 20px;
   color: white;
-  text-transform:uppercase;
+  text-transform: uppercase;
   font-family: 'Ubuntu', sans-serif;
-  cursor:pointer;
+  cursor: pointer;
   margin: 10px;
-  &:hover {
-    opacity: 0.9;
-  }
+}
+.signup-form_button:hover {
+  opacity: 0.9;
 }
 .signup-driver {
-  margin:auto;
+  margin: auto;
   display: flex;
   flex-direction: column;
 }
@@ -81,19 +81,20 @@
   padding-right: 1em;
   padding-bottom: 2em;
   justify-content: space-evenly;
-
-  @media only screen and (min-width : 250px) and (max-width : 530px) {
+}
+@media only screen and (min-width: 250px) and (max-width: 530px) {
+  .rowContainer {
     flex-direction: column;
   }
 }
 .columnContainer {
   display: flex;
   flex-direction: column;
-  flex:1;
+  flex: 1;
   justify-content: center;
   align-items: center;
 }
-.columnContainer .signup-form_text{
+.columnContainer .signup-form_text {
   max-width: 600px;
   width: 50%;
   display: block;
@@ -101,34 +102,37 @@
   margin-block-start: 1em;
   margin-block-end: 1em;
   font-weight: bold;
-
-  @media only screen and (min-width : 250px) and (max-width : 530px) {
+}
+@media only screen and (min-width: 250px) and (max-width: 530px) {
+  .columnContainer .signup-form_text {
     min-width: 250px;
   }
 }
 .signup-form_input {
-  max-width:600px;
-  width:50%;
-  line-height:2em;
+  max-width: 600px;
+  width: 50%;
+  line-height: 2em;
   font-family: 'Ubuntu', sans-serif;
-  outline:none;
+  outline: none;
   border: 1px solid #8ebacc;
   font-size: 13px;
   text-align: center;
   color: #474747;
   border-radius: 5px;
-  &.ng-touched.ng-invalid {
-    border: 1px solid #E86850;
-  }
-  @media only screen and (min-width : 250px) and (max-width : 530px) {
-    min-width:250px;
+}
+.signup-form_input.ng-touched.ng-invalid {
+  border: 1px solid #E86850;
+}
+@media only screen and (min-width: 250px) and (max-width: 530px) {
+  .signup-form_input {
+    min-width: 250px;
   }
 }
 .signup-form_error_message {
   white-space: nowrap;
-  max-width:600px;
-  width:50%;
-  padding-left:10px;
+  max-width: 600px;
+  width: 50%;
+  padding-left: 10px;
   font-size: 10px;
   font-family: 'Exo 2', sans-serif;
   color: #E86850;
@@ -136,9 +140,10 @@
   text-align: left;
 }
 .signup-form_error {
-  height:5px;
+  height: 5px;
   min-width: 250px;
 }
 .stickToTop {
   justify-content: end;
 }
+/*# sourceMappingURL=signup.component.css.map */

@@ -10,11 +10,12 @@ import { Validator } from "../validators";
   templateUrl: "./profile-driver.component.html",
   styleUrls: ["./profile-driver.component.less"]
 })
+
 export class ProfileDriverComponent implements OnInit {
 
   currentDriver: Driver;
   driverForm: FormGroup;
-  fileToUpload: File;
+  selectedFile: ImageSnippet;
   constructor(private authService: AuthenticationService, private httpService: HttpService, private fb: FormBuilder,
               private validator: Validator) {
 
@@ -30,7 +31,7 @@ export class ProfileDriverComponent implements OnInit {
     this.driverForm = this.fb.group({
       login: new FormControl(this.currentDriver.login, [Validators.required,  Validators.minLength(4),
         Validators.pattern("^[A-Z a-z 0-9]+$")]),
-      password: new FormControl(this.currentDriver.password, [Validators.required, Validators.minLength(8)]),
+      password: new FormControl(atob(this.currentDriver.password), [Validators.required, Validators.minLength(8)]),
       name: new FormControl(this.currentDriver.name, [Validators.required, Validators.pattern(/[А-я]/)]),
       surname: new FormControl(this.currentDriver.surname, [Validators.required, Validators.pattern(/[А-я]/)]),
       patronymic: new FormControl(this.currentDriver.patronymic, [Validators.required, Validators.pattern(/[А-я]/)]),
@@ -50,7 +51,5 @@ export class ProfileDriverComponent implements OnInit {
     this.httpService.addDriver(changedDriver);
   }
 
-  handleFileInput(files: FileList): void {
-    this.fileToUpload = files.item(0);
-  }
+
 }

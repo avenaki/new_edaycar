@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Driver } from "../entity/driver";
 import { HttpService } from "../services/http.service";
 import { Validator } from "../validators";
@@ -15,7 +16,8 @@ export class SignupComponent implements OnInit {
   registerDriver = true;
   signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder, protected validator: Validator, private httpService: HttpService) {}
+  constructor(private fb: FormBuilder, protected validator: Validator, private httpService: HttpService,
+              private router: Router) {}
   registerAsPassenger(): void {
     this.registerDriver = false;
   }
@@ -46,5 +48,10 @@ export class SignupComponent implements OnInit {
       new Date(this.signupForm.controls["birthdate"].value), String(this.signupForm.controls["mobileNumber"].value),
       Number(this.signupForm.controls["experience"].value), null, null, null,  null);
     this.httpService.addDriver(newDriver);
+    this.router.navigate(["login"]);
+  }
+
+  navigateToLogin(): void {
+   this.router.navigate(["login"]);
   }
 }
