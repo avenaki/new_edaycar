@@ -4,6 +4,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
 import { AboutComponent } from "./about/about.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -14,6 +16,8 @@ import { ProfileDriverComponent } from "./profile-driver/profile-driver.componen
 import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger.component";
 import { HttpService } from "./services/http.service";
 import { SignupComponent } from "./signup/signup.component";
+import { UserEffects } from "./store/effects/user.effects";
+import { UserReducer } from "./store/reducers/user.reducer";
 
 
 
@@ -38,6 +42,8 @@ import { SignupComponent } from "./signup/signup.component";
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    StoreModule.forRoot({ user: UserReducer }),
+    EffectsModule.forRoot([UserEffects]),
   ],
   providers: [HttpService, AuthGuard],
   bootstrap: [AppComponent]

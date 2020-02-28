@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 import { UserModel } from "../entity/user-model";
 
@@ -9,7 +8,7 @@ import { UserModel } from "../entity/user-model";
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<UserModel>;
   public currentUser: Observable<UserModel>;
-
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem("currentUser")));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -19,19 +18,11 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
   login(username: string, password: string): Observable<UserModel> {
-    return this.http.post<UserModel>(`${environment.apiUrl}account/login`, { login: username, password: password })
-      .pipe(map(data => {
-        if (data.login && data.token && data.role) {
-          // store IUser details and jwt token in local storage to keep IUser logged in between page refreshes
-          localStorage.setItem("currentUser", JSON.stringify(data));
-          this.currentUserSubject.next(data);
-        }
-        return data;
-      }));
+    return this.http.post<UserModel>
+    (this.apiUrl + "account/login", { login: username, password: password });
   }
 
   logout(): void {
-
     localStorage.removeItem("currentUser");
     this.currentUserSubject.next(null);
   }

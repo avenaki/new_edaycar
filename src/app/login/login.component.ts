@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthenticationService } from "../services/authentication.service";
+import {  Store } from "@ngrx/store";
+import * as UserActions from "../store/actions/user.actions";
+import { UserState } from "../store/state/user.state";
 
 @Component({
   selector: "app-login",
@@ -12,9 +14,14 @@ import { AuthenticationService } from "../services/authentication.service";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private authService: AuthenticationService, private route: Router) { }
+  constructor(private fb: FormBuilder,
+              private store: Store<{ user: UserState }>,
+              private router: Router) {
+
+  }
 
   ngOnInit(): void {
+
     this.initForm();
   }
 
@@ -27,8 +34,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.authService.login(this.loginForm.controls["login"].value, btoa(this.loginForm.controls["password"].value)).subscribe(() => {
-    this.route.navigate([""]); });
+    const payload = {
+      login: this.loginForm.controls["login"].value,
+      password: btoa(this.loginForm.controls["password"].value)
+    };
+    this.store.dispatch(UserActions.login(payload));
+    this.router.navigate(["/"]);
   }
 }
 

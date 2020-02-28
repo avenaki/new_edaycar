@@ -35,11 +35,11 @@ export class ProfileDriverComponent implements OnInit {
       name: new FormControl(this.currentDriver.name, [Validators.required, Validators.pattern(/[А-я]/)]),
       surname: new FormControl(this.currentDriver.surname, [Validators.required, Validators.pattern(/[А-я]/)]),
       patronymic: new FormControl(this.currentDriver.patronymic, [Validators.required, Validators.pattern(/[А-я]/)]),
-      birthdate: new FormControl(this.currentDriver.birthDate, this.validator.birthDateValidator),
+      birthdate: new FormControl(this.currentDriver.birthDate.toDateString(), this.validator.birthDateValidator),
       mobileNumber: new FormControl(this.currentDriver.mobileNumber, [Validators.required,  Validators.pattern(/8\d{10}/)]),
-      carModel: new FormControl("ХОНДА"),
-      color: new FormControl(this.currentDriver.color),
-      experience: new FormControl(this.currentDriver.experience, [Validators.required, this.validator.experienceValidator])});
+      carModel: new FormControl(""),
+      color: new FormControl(""),
+      experience: new FormControl("", [Validators.required, this.validator.experienceValidator])});
   }
 
   saveChanges(): void {

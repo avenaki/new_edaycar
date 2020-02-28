@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import {  NavigationEnd, Router } from "@angular/router";
-import { filter } from "rxjs/operators";
+import {  Router } from "@angular/router";
+import { select, Store } from "@ngrx/store";
+import { Observable, Subscription } from "rxjs";
+import {  map } from "rxjs/operators";
 import { UserModel } from "./entity/user-model";
-import { AuthenticationService } from "./services/authentication.service";
+import * as UserActions from "./store/actions/user.actions";
+import { UserState } from "./store/state/user.state";
 
 @Component({
   selector: "app-root",
@@ -11,26 +14,37 @@ import { AuthenticationService } from "./services/authentication.service";
 })
 export class AppComponent implements OnInit {
   title = "edaycar";
-  currentUser: UserModel;
+  currentUser$: Observable<UserState>;
+  currentUserSubscription: Subscription;
+  private currentUserError: Error = null;
+  private currentUser: UserModel;
 
-    constructor(private authService: AuthenticationService, private router: Router) {
-      this.router.events.pipe(filter (event => event instanceof NavigationEnd)).subscribe(() => {
-        this.currentUser = authService.currentUserValue;
-        if ( router.url === "profile") {
-        if (this.currentUser.role === "driver") {
-          this.router.navigate(["profile-driver"]);
-        } else {
-          this.router.navigate(["profile-passenger"]);
-        }
-        }
-      });
+  constructor(private router: Router,
+              private store: Store<{ user: UserState }>) {
+    this.currentUser$ = store.pipe(select("user"));
+    console.log(this.store, this.currentUser, this.currentUserError);
     }
   ngOnInit(): void {
-    this.currentUser = this.authService.currentUserValue;
+    this.store.dispatch(UserActions.getUser());
+    this.currentUserSubscription = this.currentUser$
+      .pipe(
+        map(x => {
+          this.currentUser = x.user;
+          this.currentUserError = x.userError;
+        }),
+      )
+      .subscribe();
+
   }
 
   logout(): void {
-    this.authService.logout();
-    this.router.navigate(["login"]);
+    this.store.dispatch(UserActions.logout());
+    this.router.navigate(["/login"]);
   }
+
+  // ngOnDestroy(): void {
+    // if (this.currentUserSubscription) {
+     // this.currentUserSubscription.unsubscribe();
+   //  }
+  // }
 }
