@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Driver } from "../entity/driver";
-import { HttpService } from "../services/http.service";
+import { Store } from "@ngrx/store";
+import { Driver } from "../models/driver";
+import * as UserActions from "../store/actions/user.actions";
+import { UserState } from "../store/state/user.state";
 import { Validator } from "../validators";
 
 
@@ -13,20 +15,25 @@ import { Validator } from "../validators";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignupComponent implements OnInit {
-  registerDriver = true;
+  registerDriver: boolean;
   signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder, protected validator: Validator, private httpService: HttpService,
-              private router: Router) {}
+  constructor(private fb: FormBuilder,
+              protected validator: Validator,
+              private store: Store<{ user: UserState }>,
+              private router: Router) {
+    this.registerDriver = true;
+  }
+  ngOnInit(): void {
+    this.initForm();
+  }
   registerAsPassenger(): void {
     this.registerDriver = false;
   }
   registerAsDriver(): void {
     this.registerDriver = true;
   }
-  ngOnInit(): void {
-    this.initForm();
-  }
+
   private initForm(): void {
     this.signupForm = this.fb.group({
       name: new FormControl("", [Validators.required, Validators.pattern(/[А-я]/)]),
@@ -36,19 +43,22 @@ export class SignupComponent implements OnInit {
       mobileNumber: new FormControl("", [Validators.required,  Validators.pattern(/8\d{10}/),
         Validators.minLength(11), Validators.maxLength(11)]),
       login: new FormControl("", [Validators.required,  Validators.minLength(6), Validators.pattern("^[A-Za-z0-9]+$")]),
-      password: new FormControl("", [Validators.required, Validators.minLength(8)]),
+      passwords: new FormGroup( {
+      passwordKey: new FormControl("", [Validators.required, Validators.minLength(8)]),
+      passwordConfirm: new FormControl("", [Validators.required, Validators.minLength(8)])},
+        [Validators.required, this.validator.matchingPasswordsValidator]),
       experience: new FormControl("", [Validators.required, this.validator.experienceValidator])
     });
   }
 
   submit(): void {
     const newDriver = new Driver( this.signupForm.controls["login"].value,
-      btoa(this.signupForm.controls["password"].value), this.signupForm.controls["name"].value,
+      btoa(this.signupForm.controls["passwords"].value["passwordKey"]), this.signupForm.controls["name"].value,
       this.signupForm.controls["surname"].value, this.signupForm.controls["patronymic"].value,
       new Date(this.signupForm.controls["birthdate"].value), String(this.signupForm.controls["mobileNumber"].value),
       Number(this.signupForm.controls["experience"].value), null, null, null,  null);
-    this.httpService.addDriver(newDriver);
-    this.router.navigate(["login"]);
+    this.store.dispatch(UserActions.signDriver(newDriver));
+    this.router.navigate([""]);
   }
 
   navigateToLogin(): void {

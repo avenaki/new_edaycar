@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 
 
 @Injectable({
@@ -21,4 +21,12 @@ export class Validator {
     }
     return null;
   }
+
+  matchingPasswordsValidator(group: FormGroup): { [s: string]: boolean } {
+    if (group.controls["passwordKey"].value === group.controls["passwordConfirm"].value) {
+      return {"passwords": true};
+    }
+    return null;
+  }
+
 }

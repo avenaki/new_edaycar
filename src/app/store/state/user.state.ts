@@ -1,4 +1,4 @@
-import { UserModel } from "../../entity/user-model";
+import { UserModel } from "../../models/user-model";
 
 export interface UserState {
   user: UserModel  | null;

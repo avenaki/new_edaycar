@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
-import { UserModel } from "../entity/user-model";
+import { UserModel } from "../models/user-model";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {

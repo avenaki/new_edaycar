@@ -16,8 +16,10 @@ import { ProfileDriverComponent } from "./profile-driver/profile-driver.componen
 import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger.component";
 import { HttpService } from "./services/http.service";
 import { SignupComponent } from "./signup/signup.component";
+import { DriverEffects } from "./store/effects/driver.effects";
 import { UserEffects } from "./store/effects/user.effects";
-import { UserReducer } from "./store/reducers/user.reducer";
+import { appReducers } from "./store/reducers/app.reducers";
+
 
 
 
@@ -42,8 +44,8 @@ import { UserReducer } from "./store/reducers/user.reducer";
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({ user: UserReducer }),
-    EffectsModule.forRoot([UserEffects]),
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([UserEffects, DriverEffects]),
   ],
   providers: [HttpService, AuthGuard],
   bootstrap: [AppComponent]

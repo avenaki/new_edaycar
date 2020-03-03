@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Passenger } from "../../entity/passenger";
+import { Passenger } from "../../models/passenger";
 
 const ADD_PASSENGER = "[Passenger] passenger added";
 

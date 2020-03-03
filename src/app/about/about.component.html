@@ -1,1 +1,14 @@
-<div>about works!</div>
+<div *ngIf="currentUser; else loading">
+  <div>about works!</div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+  <div class='center'>
+
+    <p class="loading-text">ЗАГРУЗКА</p>
+
+  </div>
+  </div>
+</ng-template>
+

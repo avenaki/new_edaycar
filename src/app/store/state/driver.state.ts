@@ -1,9 +1,11 @@
-import { Driver } from "../../entity/driver";
+import { Driver } from "../../models/driver";
 
 export interface DriverState {
-  driver: Driver[];
+  drivers: Driver[];
+  currentDriver: Driver;
 }
 
 export const initialDriverState: DriverState = {
-  driver: [],
+  drivers: [],
+  currentDriver: null
 };

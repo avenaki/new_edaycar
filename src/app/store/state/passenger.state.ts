@@ -1,4 +1,4 @@
-import { Passenger } from "../../entity/passenger";
+import { Passenger } from "../../models/passenger";
 
 export interface PassengerState {
   passenger: Passenger [];

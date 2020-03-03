@@ -1,6 +1,7 @@
-import { Action, createReducer, on } from "@ngrx/store";
-import { UserModel } from "../../entity/user-model";
+import { Action, createReducer, createSelector, on } from "@ngrx/store";
+import { UserModel } from "../../models/user-model";
 import * as UserActions from "../actions/user.actions";
+import { AppState } from "../state/app.state";
 import { initialUserState, UserState } from "../state/user.state";
 
 
@@ -21,6 +22,9 @@ export const userReducer = createReducer(
   on(UserActions.getUser, (state) => {
     return {...state, user:  JSON.parse(localStorage.getItem("currentUser")), userError: null};
   }),
+  on(UserActions.signDriverFail, (state, error: Error) => {
+    return {...state, user: null, userError: error};
+  }),
 
 );
 
@@ -28,3 +32,9 @@ export function UserReducer(state: UserState | undefined, action: Action): UserS
   return userReducer(state, action);
 }
 
+
+export const selectUser = (state: AppState) => state.user;
+
+export const selectUserCurrent = createSelector(
+  selectUser,
+  (state: UserState) => state.user);

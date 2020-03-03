@@ -1,8 +1,7 @@
-import { IUser } from "./iuser";
 import { Trip } from "./trip";
 
-export class Passenger implements IUser {
-  birthDate: Date;
+export class Passenger {
+  birthdate: Date;
   login: string;
   mobileNumber: string;
   name: string;

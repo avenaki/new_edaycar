@@ -43,12 +43,21 @@
           <div class="signup-form_error">
             <div class="signup-form_error_message" *ngIf="signupForm.get('login').invalid &&  signupForm.get('login').touched">   Введите более 4 символов латиницей или цифрами</div>
           </div>
+          <div formGroupName="passwords" class="passwords-container">
           <h5 class="signup-form_text">Пароль</h5>
-          <input type="password" class="signup-form_input"  formControlName="password"/><br>
+          <input type="password" class="signup-form_input"  formControlName="passwordKey"/><br>
           <div class="signup-form_error">
-            <div class="signup-form_error_message" *ngIf="signupForm.get('password').invalid &&  signupForm.get('password').touched">
+            <div class="signup-form_error_message" *ngIf="signupForm.get('passwords.passwordKey').invalid &&  signupForm.get('passwords.passwordKey').touched">
               Пароль должен быть не менее 6 символов
             </div>
+          </div>
+          <h5 class="signup-form_text">Повторите пароль</h5>
+          <input type="password" class="signup-form_input"  formControlName="passwordConfirm"/><br>
+          <div class="signup-form_error">
+            <div class="signup-form_error_message" *ngIf="signupForm.get('passwords.passwordConfirm').invalid &&  signupForm.get('passwords.passwordConfirm').touched">
+              Пароли должны совпадать!
+            </div>
+          </div>
           </div>
           <h5 class="signup-form_text">Номер телефона</h5>
           <input type="number"  class="signup-form_input" formControlName="mobileNumber"/><br>

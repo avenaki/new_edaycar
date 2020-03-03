@@ -1,4 +1,4 @@
-import { Trip } from "../../entity/trip";
+import { Trip } from "../../models/trip";
 
 export interface TripState {
   trip: Trip[];

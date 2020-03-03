@@ -1,6 +1,6 @@
 import { MapsAPILoader } from "@agm/core";
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
-import { Trip } from "../entity/trip";
+import { Trip } from "../models/trip";
 import DateTimeFormat = Intl.DateTimeFormat;
 import { HttpService } from "../services/http.service";
 

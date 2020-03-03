@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import {  Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 import {  map } from "rxjs/operators";
-import { UserModel } from "./entity/user-model";
+import { UserModel } from "./models/user-model";
+import * as DriverActions from "./store/actions/driver.actions";
 import * as UserActions from "./store/actions/user.actions";
 import { UserState } from "./store/state/user.state";
 
@@ -31,6 +32,10 @@ export class AppComponent implements OnInit {
         map(x => {
           this.currentUser = x.user;
           this.currentUserError = x.userError;
+          const payload = { username: this.currentUser.login };
+          if ( this.currentUser.role === "driver") {
+            this.store.dispatch(DriverActions.load(payload));
+          }
         }),
       )
       .subscribe();

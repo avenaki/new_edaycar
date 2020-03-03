@@ -1,13 +1,12 @@
-import { IDriver } from "./idriver";
 import { Trip } from "./trip";
 
-export class Driver implements IDriver {
+export class Driver  {
   login: string;
   password: string;
   name: string;
   surname: string;
   patronymic: string;
-  birthDate: Date;
+  birthdate: Date;
   mobileNumber: string;
   trips: Trip[];
   experience: number;
@@ -23,7 +22,7 @@ export class Driver implements IDriver {
     this.name = name;
     this.surname = surname;
     this.patronymic = patronymic;
-    this.birthDate = birthDate;
+    this.birthdate = birthDate;
     this.mobileNumber = mobileNumber;
     this.experience = experience;
     this.trips = trips;
