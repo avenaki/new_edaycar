@@ -18,6 +18,7 @@ import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger
 import { HttpService } from "./services/http.service";
 import { SignupComponent } from "./signup/signup.component";
 import { DriverEffects } from "./store/effects/driver.effects";
+import { TripEffects } from "./store/effects/trip.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { appReducers } from "./store/reducers/app.reducers";
 
@@ -47,7 +48,7 @@ import { appReducers } from "./store/reducers/app.reducers";
     FormsModule,
     AlifeFileToBase64Module,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([UserEffects, DriverEffects]),
+    EffectsModule.forRoot([UserEffects, DriverEffects, TripEffects]),
   ],
   providers: [HttpService, AuthGuard],
   bootstrap: [AppComponent]

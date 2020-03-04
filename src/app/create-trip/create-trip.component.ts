@@ -1,8 +1,13 @@
 import { MapsAPILoader } from "@agm/core";
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
+import {  Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { Driver } from "../models/driver";
 import { Trip } from "../models/trip";
+import * as TripActions from "../store/actions/trip.actions";
 import DateTimeFormat = Intl.DateTimeFormat;
-import { HttpService } from "../services/http.service";
+import * as fromDriver from "../store/reducers/driver.reducer";
+import { AppState } from "../store/state/app.state";
 
 
 @Component({
@@ -25,6 +30,8 @@ export class CreateTripComponent implements OnInit {
   public startIconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
   public finishIconUrl = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
+  currentDriver$: Observable<Driver>;
+  currentDriver: Driver;
 
   @ViewChild("start", { static: false })
   public startElementRef: ElementRef;
@@ -32,9 +39,19 @@ export class CreateTripComponent implements OnInit {
   @ViewChild("finish", { static: false })
   public finishElementRef: ElementRef;
   selectedPassengersValue: number;
-  constructor( private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private http: HttpService) { }
+  constructor( private mapsAPILoader: MapsAPILoader,
+               private ngZone: NgZone,
+               private store: Store<AppState>) {
+
+  }
 
   ngOnInit(): void {
+    this.currentDriver$ = this.store.select(fromDriver.selectCurrentDriver);
+    this.currentDriver$.subscribe(currentDriver => {
+      if (currentDriver) {
+        this.currentDriver = currentDriver;
+      }
+    });
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
@@ -102,8 +119,12 @@ export class CreateTripComponent implements OnInit {
   if (this.startX && this.startY && this.startTime && this.finishTime
      && this.finishY && this.finishX && this.selectedPassengersValue) {
     const newTrip = new Trip(null, this.startTime, this.finishTime,
-      this.startX, this.startY, this.finishX, this.finishY, this.selectedPassengersValue, null, null );
-    this.http.addTrip(newTrip);
+      this.startX, this.startY, this.finishX, this.finishY, this.selectedPassengersValue, this.currentDriver, null );
+    const payload = {
+      trip: newTrip,
+    };
+    this.store.dispatch(TripActions.addTrip(payload));
+
   }
   }
 }

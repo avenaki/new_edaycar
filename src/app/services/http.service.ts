@@ -17,8 +17,8 @@ export class HttpService {
   public addDriver( driver: Driver ): Observable<UserModel>  {
     return this.http.post<UserModel>(this.apiUrl + "account/registerdriver", driver );
   }
-  public addTrip( trip: Trip ): void {
-    this.http.post(this.apiUrl + "trip/createtrip", trip ).subscribe();
+  public addTrip( trip: Trip ): Observable<Trip> {
+    return this.http.post<Trip>(this.apiUrl + "trip/createtrip", trip );
   }
   public login(login: string, password: string): Observable<string> {
     return this.http.post<string>(this.apiUrl + "account/login", { login: login, password: password });
