@@ -7,6 +7,7 @@ import { LoginComponent } from "./login/login.component";
 import { ProfileDriverComponent } from "./profile-driver/profile-driver.component";
 import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger.component";
 import { SignupComponent } from "./signup/signup.component";
+import { TripsTableComponent } from "./trips-table/trips-table.component";
 
 
 
@@ -19,6 +20,7 @@ export const appRoutes: Routes = [
   { path: "create", component: CreateTripComponent, canActivate: [AuthGuard], pathMatch: "full" },
   { path: "profile-driver", component: ProfileDriverComponent, canActivate: [AuthGuard],  pathMatch: "full"},
   { path: "profile-passenger", component: ProfilePassengerComponent, canActivate: [AuthGuard],  pathMatch: "full"},
+  { path: "trips", component: TripsTableComponent, canActivate: [AuthGuard],  pathMatch: "full"},
   { path: "", component: AboutComponent, canActivate: [AuthGuard], pathMatch: "full" },
 
 

@@ -1,9 +1,8 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { Driver } from "../models/driver";
-import { Passenger } from "../models/passenger";
 import { Trip } from "../models/trip";
 import { UserModel } from "../models/user-model";
 
@@ -35,7 +34,12 @@ export class HttpService {
   public updateDriver(driver: Driver): Observable<Driver> {
     return this.http.put<Driver>(this.apiUrl + "account/updatedriver/", driver);
   }
-  public updatePaasenger(passenger: Passenger): Observable<Passenger> {
-    return this.http.put<Passenger>(this.apiUrl + "account/updatedriver/", {passenger: passenger});
+  public getTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(this.apiUrl + "trip/get/");
+  }
+  public deleteTrip(id: string ): Observable<string> {
+    const httpParams = new HttpParams().set("id", id);
+    const  options = { params: httpParams };
+    return this.http.delete<string>(this.apiUrl + "trip/delete/", options);
   }
 }

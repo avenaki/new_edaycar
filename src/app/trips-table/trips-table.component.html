@@ -1,0 +1,27 @@
+<div class="container">
+  <table class="tripsTable">
+  <tr>
+    <th> </th>
+    <th>Начнётся в</th>
+    <th>Закончится в</th>
+    <th>Откуда</th>
+    <th>Куда</th>
+    <th>Свободных мест</th>
+    <th>Везёт</th>
+  </tr>
+
+  <tbody *ngFor="let trip of trips; let i = index; ">
+
+  <tr>
+    <td >{{i+1}}</td>
+    <td  >{{trip.startTime}}</td>
+    <td  >{{trip.finishTime}}</td>
+    <td  >{{trip.startX}}</td>
+    <td  >{{trip.finishX}}</td>
+    <td  >{{trip.maxPassengers}}</td>
+    <td  >{{trip.driver.login}}</td>
+  </tr>
+
+  </tbody>
+</table>
+</div>

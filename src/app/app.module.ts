@@ -21,6 +21,7 @@ import { DriverEffects } from "./store/effects/driver.effects";
 import { TripEffects } from "./store/effects/trip.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { appReducers } from "./store/reducers/app.reducers";
+import { TripsTableComponent } from "./trips-table/trips-table.component";
 
 
 
@@ -34,6 +35,7 @@ import { appReducers } from "./store/reducers/app.reducers";
     CreateTripComponent,
     ProfileDriverComponent,
     ProfilePassengerComponent,
+    TripsTableComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
