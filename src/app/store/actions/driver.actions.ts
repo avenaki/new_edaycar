@@ -28,7 +28,7 @@ export const loadDriversFail = createAction(
 );
 export const editDriver = createAction(
   "[Driver] - Driver Edit ",
-  props<Driver>(),
+  props<{ driver: Driver}>(),
 );
 export const editDriverSuccess = createAction(
   "[Driver] - Edit Driver Success",

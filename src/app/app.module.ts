@@ -6,6 +6,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
+import { AlifeFileToBase64Module } from "alife-file-to-base64";
 import { AboutComponent } from "./about/about.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -44,6 +45,7 @@ import { appReducers } from "./store/reducers/app.reducers";
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    AlifeFileToBase64Module,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([UserEffects, DriverEffects]),
   ],

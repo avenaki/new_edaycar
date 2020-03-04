@@ -33,9 +33,9 @@ export class HttpService {
     return this.http.get<Driver[]>(this.apiUrl + "account/getdrivers/");
   }
   public updateDriver(driver: Driver): Observable<Driver> {
-    return this.http.put<Driver>(this.apiUrl + "account/putdriver/", {driver: driver});
+    return this.http.put<Driver>(this.apiUrl + "account/updatedriver/", driver);
   }
   public updatePaasenger(passenger: Passenger): Observable<Passenger> {
-    return this.http.put<Passenger>(this.apiUrl + "account/putdriver/", {passenger: passenger});
+    return this.http.put<Passenger>(this.apiUrl + "account/updatedriver/", {passenger: passenger});
   }
 }

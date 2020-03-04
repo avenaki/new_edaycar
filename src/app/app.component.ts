@@ -32,10 +32,11 @@ export class AppComponent implements OnInit {
         map(x => {
           this.currentUser = x.user;
           this.currentUserError = x.userError;
+          if ( this.currentUser ) {
           const payload = { username: this.currentUser.login };
           if ( this.currentUser.role === "driver") {
             this.store.dispatch(DriverActions.load(payload));
-          }
+          }}
         }),
       )
       .subscribe();

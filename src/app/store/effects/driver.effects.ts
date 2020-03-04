@@ -48,10 +48,10 @@ export class DriverEffects {
   editDriver$ = createEffect(() => {
     return this.action$.pipe(
       ofType(DriverActions.editDriver),
-      mergeMap(driver =>
-        this.httpService.updateDriver(driver).pipe(
-          map((data: Driver) => {
-            return DriverActions.editDriverSuccess(data);
+      mergeMap(action =>
+        this.httpService.updateDriver(action.driver).pipe(
+          map(() => {
+            return DriverActions.editDriverSuccess(action.driver);
           }),
           catchError((error: Error) => {
             return of(DriverActions.editDriverFail(error));

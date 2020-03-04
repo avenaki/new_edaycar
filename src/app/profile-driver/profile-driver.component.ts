@@ -79,10 +79,11 @@ export class ProfileDriverComponent implements OnInit {
       Number(this.driverForm.get("experience").value, ), this.driverForm.get("color").value,
       this.driverForm.get("accountPhoto").value, this.driverForm.get("carModel").value,
       this.currentDriver.trips);
-      this.store.dispatch(DriverActions.editDriver(updatedDriver));
+    const payload = {
+      driver: updatedDriver,
+    };
+      this.store.dispatch(DriverActions.editDriver(payload));
   }
-
-
   onFileChange(event: Event): void {
     const reader = new FileReader();
     const target = event.target as HTMLInputElement;
