@@ -1,5 +1,5 @@
 
-<div class="container" *ngIf="driverForm !== undefined">
+<div class="container" *ngIf="(currentDriver$ | async) as driver; else loading">
   <form [formGroup]="driverForm">
     <div class="rowContainer-form">
   <div class="rowContainer">
@@ -66,4 +66,14 @@
     </div>
   </form>
 </div>
+
+
+<ng-template #loading>
+  <div class="loadingContainer">
+<div class="center">
+  <div class="loading"></div>
+</div>
+  </div>
+</ng-template>
+
 

@@ -6,7 +6,7 @@ export class Driver  {
   name: string;
   surname: string;
   patronymic: string;
-  birthdate: Date;
+  birthdate: Date | string;
   mobileNumber: string;
   trips: Trip[];
   experience: number;

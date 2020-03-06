@@ -16,9 +16,9 @@ export class TripEffects {
     return this.action$.pipe(
       ofType(TripActions.addTrip),
       mergeMap(action =>
-        this.httpService.addTrip(action.trip).pipe(
+        this.httpService.addTrip(action).pipe(
           map(() => {
-            return TripActions.addTripSuccess(action.trip);
+            return TripActions.addTripSuccess(action);
           }),
           catchError((error: Error) => {
             return of(TripActions.addTripFail(error));

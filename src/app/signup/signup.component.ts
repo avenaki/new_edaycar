@@ -55,7 +55,7 @@ export class SignupComponent implements OnInit {
     const newDriver = new Driver( this.signupForm.controls["login"].value,
       btoa(this.signupForm.controls["passwords"].value["passwordKey"]), this.signupForm.controls["name"].value,
       this.signupForm.controls["surname"].value, this.signupForm.controls["patronymic"].value,
-      new Date(this.signupForm.controls["birthdate"].value), String(this.signupForm.controls["mobileNumber"].value),
+      this.signupForm.controls["birthdate"].value, String(this.signupForm.controls["mobileNumber"].value),
       Number(this.signupForm.controls["experience"].value), null, null, null,  null);
     this.store.dispatch(UserActions.signDriver(newDriver));
     this.router.navigate([""]);

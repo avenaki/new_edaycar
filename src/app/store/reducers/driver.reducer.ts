@@ -21,8 +21,10 @@ export const driverReducer = createReducer(
     console.log(error);
     return {...state, drivers: null};
   }),
-  on(DriverActions.editDriverSuccess, (state, driver: Driver) => {
-    return {...state, currentDriver: driver};
+  on(DriverActions.editDriverSuccess, (state, action) => {
+    const newDrivers = state.drivers.filter( (driver: Driver) => driver.login !== action.login);
+    newDrivers.push(action);
+    return {...state, drivers: newDrivers, currentDriver: action};
   }),
 
   on(DriverActions.editDriverFail, (state, error) => {

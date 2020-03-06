@@ -12,6 +12,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CreateTripComponent } from "./create-trip/create-trip.component";
 import { AuthGuard } from "./guards/auth.guard";
+import { PlacePipe } from "./guards/place.pipe";
 import { LoginComponent } from "./login/login.component";
 import { ProfileDriverComponent } from "./profile-driver/profile-driver.component";
 import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger.component";
@@ -36,6 +37,7 @@ import { TripsTableComponent } from "./trips-table/trips-table.component";
     ProfileDriverComponent,
     ProfilePassengerComponent,
     TripsTableComponent,
+    PlacePipe,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -49,7 +51,14 @@ import { TripsTableComponent } from "./trips-table/trips-table.component";
     HttpClientModule,
     FormsModule,
     AlifeFileToBase64Module,
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(appReducers, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictActionSerializability: true,
+        strictStateSerializability: true,
+      }
+    }),
     EffectsModule.forRoot([UserEffects, DriverEffects, TripEffects]),
   ],
   providers: [HttpService, AuthGuard],

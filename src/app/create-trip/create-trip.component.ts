@@ -1,5 +1,6 @@
 import { MapsAPILoader } from "@agm/core";
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import {  Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Driver } from "../models/driver";
@@ -10,14 +11,19 @@ import * as fromDriver from "../store/reducers/driver.reducer";
 import { AppState } from "../store/state/app.state";
 
 
+
 @Component({
   selector: "app-create-trip",
   templateUrl: "./create-trip.component.html",
-  styleUrls: ["./create-trip.component.less"]
+  styleUrls: ["./create-trip.component.less"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateTripComponent implements OnInit {
+  createTripForm: FormGroup;
   startTime: DateTimeFormat;
   finishTime: DateTimeFormat;
+  startPlace: string;
+  finishPlace: string;
   latitude: number;
   longitude: number;
   zoom: number;
@@ -72,6 +78,7 @@ export class CreateTripComponent implements OnInit {
           this.startX = place.geometry.location.lat();
           this.startY = place.geometry.location.lng();
           this.zoom = 12;
+          this.startPlace = place.address_components[0].long_name;
         });
       });
       autocompleteFinish.addListener("place_changed", () => {
@@ -84,6 +91,12 @@ export class CreateTripComponent implements OnInit {
           this.finishX = place.geometry.location.lat();
           this.finishY = place.geometry.location.lng();
           this.zoom = 12;
+          const result = "";
+          // tslint:disable-next-line:prefer-for-of
+          for (let index = 0;  index <  place.address_components.length; index++) {
+            result.concat(place.address_components[0].long_name);
+          }
+          this.finishPlace = result;
         });
       });
     });
@@ -119,11 +132,8 @@ export class CreateTripComponent implements OnInit {
   if (this.startX && this.startY && this.startTime && this.finishTime
      && this.finishY && this.finishX && this.selectedPassengersValue) {
     const newTrip = new Trip(null, this.startTime, this.finishTime,
-      this.startX, this.startY, this.finishX, this.finishY, this.selectedPassengersValue, this.currentDriver, null );
-    const payload = {
-      trip: newTrip,
-    };
-    this.store.dispatch(TripActions.addTrip(payload));
+      this.startX, this.startY, this.finishX, this.finishY, this.startPlace, this.finishPlace, this.selectedPassengersValue, this.currentDriver, null );
+    this.store.dispatch(TripActions.addTrip(newTrip));
 
   }
   }

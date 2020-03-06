@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" *ngIf=" (trips$ | async) as trips; else loading">
   <table class="tripsTable">
-  <tr>
+  <tr class="table-headers">
     <th> </th>
     <th>Начнётся в</th>
     <th>Закончится в</th>
@@ -10,13 +10,13 @@
     <th>Везёт</th>
   </tr>
 
-  <tbody *ngFor="let trip of trips; let i = index; ">
+  <tbody *ngFor="let trip of trips$ | async; let i = index; ">
 
-  <tr>
-    <td >{{i+1}}</td>
+  <tr class="table-row">
+    <td  class>{{i+1}}</td>
     <td  >{{trip.startTime}}</td>
     <td  >{{trip.finishTime}}</td>
-    <td  >{{trip.startX}}</td>
+    <td  >{{trip.startX | place: trip.startY}}</td>
     <td  >{{trip.finishX}}</td>
     <td  >{{trip.maxPassengers}}</td>
     <td  >{{trip.driver.login}}</td>
@@ -25,3 +25,12 @@
   </tbody>
 </table>
 </div>
+
+
+<ng-template #loading>
+  <div class="loadingContainer">
+    <div class="center">
+      <div class="loading"></div>
+    </div>
+  </div>
+</ng-template>

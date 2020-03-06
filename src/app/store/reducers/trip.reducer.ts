@@ -1,5 +1,4 @@
 import { Action, createReducer, createSelector, on } from "@ngrx/store";
-import { Trip } from "../../models/trip";
 import * as TripActions from "../actions/trip.actions";
 import { AppState } from "../state/app.state";
 import { initialTripState, TripState } from "../state/trip.state";
@@ -9,9 +8,10 @@ import { initialTripState, TripState } from "../state/trip.state";
 
 export const  tripReducer = createReducer(
   initialTripState,
-  on(TripActions.addTripSuccess, (state, trip: Trip) => {
-    state.trip.push(trip);
-    return { ...state, trip: state.trip, tripError: null};
+  on(TripActions.addTripSuccess, (state, trip) => {
+    const newTrips = state.trip;
+    newTrips.push(trip);
+    return { ...state, trip: newTrips, tripError: null};
   }),
   on(TripActions.addTripFail, (state,  error: Error) => {
     return { ...state, tripError: error};

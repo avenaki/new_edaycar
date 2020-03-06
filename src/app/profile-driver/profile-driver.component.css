@@ -2,13 +2,10 @@
   display: flex;
   flex-direction: row;
 }
-
 .columnContainer {
   display: flex;
   flex-direction: column;
   margin-left: 20px;
-
-
 }
 .container {
   margin-top: 90px;
@@ -17,15 +14,12 @@
   flex-direction: column;
   padding: 1em 8em;
 }
-
 .accountPhoto {
   border-radius: 50%;
   width: 300px;
   height: 300px;
 }
-
 .changePhotoButton {
-
   margin-top: 30px;
   width: 300px;
   height: 25px;
@@ -38,9 +32,9 @@
   font-size: 18px;
   padding: 5px 5px;
   vertical-align: center;
-  &:hover {
-    opacity: 0.7;
-  }
+}
+.changePhotoButton:hover {
+  opacity: 0.7;
 }
 .changePhoto {
   display: flex;
@@ -52,22 +46,24 @@
   visibility: hidden;
 }
 .driver-form_input {
-  max-width:600px;
-  width:250px;
+  max-width: 600px;
+  width: 250px;
   height: 30px;
-  line-height:2em;
+  line-height: 2em;
   font-family: 'Ubuntu', sans-serif;
-  outline:none;
+  outline: none;
   border: 1px solid #8ebacc;
   font-size: 16px;
   text-align: center;
   color: #474747;
   border-radius: 5px;
-  &.ng-touched.ng-invalid {
-    border: 1px solid #E86850;
-  }
-  @media only screen and (min-width : 250px) and (max-width : 530px) {
-    min-width:250px;
+}
+.driver-form_input.ng-touched.ng-invalid {
+  border: 1px solid #E86850;
+}
+@media only screen and (min-width: 250px) and (max-width: 530px) {
+  .driver-form_input {
+    min-width: 250px;
   }
 }
 h5.driver-form_text {
@@ -76,15 +72,14 @@ h5.driver-form_text {
   margin-block-end: 20px;
   margin-block-start: 40px;
 }
-
-.rowContainer-form{
+.rowContainer-form {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-
 .loadingContainer {
-    display: flex;
-    margin-top:  24%;
+  display: flex;
+  margin-top: 24%;
   justify-content: center;
 }
+/*# sourceMappingURL=profile-driver.component.css.map */

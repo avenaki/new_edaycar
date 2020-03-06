@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
@@ -11,7 +11,8 @@ import { Validator } from "../validators";
 @Component({
   selector: "app-profile-driver",
   templateUrl: "./profile-driver.component.html",
-  styleUrls: ["./profile-driver.component.less"]
+  styleUrls: ["./profile-driver.component.less"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ProfileDriverComponent implements OnInit {
@@ -53,10 +54,10 @@ export class ProfileDriverComponent implements OnInit {
   }
 
   updateFormValues(driver: Driver): void {
-    driver.birthdate = new Date(driver.birthdate);
-    const day = (driver.birthdate.getDate() < 10) ? "0" + driver.birthdate.getDate() : driver.birthdate.getDate();
-    const month = (driver.birthdate.getMonth() + 1 < 10) ? "0" + (driver.birthdate.getMonth() + 1) : driver.birthdate.getMonth() + 1;
-    const year = driver.birthdate.getFullYear();
+    const newBirthdate = new Date(driver.birthdate);
+    const day = (newBirthdate.getDate() < 10) ? "0" + newBirthdate.getDate() : newBirthdate.getDate();
+    const month = (newBirthdate.getMonth() + 1 < 10) ? "0" + (newBirthdate.getMonth() + 1) : newBirthdate.getMonth() + 1;
+    const year = newBirthdate.getFullYear();
     this.driverForm.patchValue({
       login: driver.login,
       password: atob(driver.password),
@@ -75,14 +76,11 @@ export class ProfileDriverComponent implements OnInit {
     const updatedDriver = new Driver( this.driverForm.get("login").value,
       btoa(this.driverForm.get("password").value), this.driverForm.get("name").value,
       this.driverForm.get("surname").value, this.driverForm.get("patronymic").value,
-      new Date(this.driverForm.get("birthdate").value ), String(this.driverForm.get("mobileNumber").value),
+      this.driverForm.get("birthdate").value, String(this.driverForm.get("mobileNumber").value),
       Number(this.driverForm.get("experience").value, ), this.driverForm.get("color").value,
       this.driverForm.get("accountPhoto").value, this.driverForm.get("carModel").value,
       this.currentDriver.trips);
-    const payload = {
-      driver: updatedDriver,
-    };
-      this.store.dispatch(DriverActions.editDriver(payload));
+      this.store.dispatch(DriverActions.editDriver(updatedDriver));
   }
   onFileChange(event: Event): void {
     const reader = new FileReader();

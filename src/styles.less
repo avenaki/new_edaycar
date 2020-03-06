@@ -5,3 +5,27 @@
 @import (css) url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed|Unica+One&display=swap');
 @import (css) url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css');
 @main-green-color: #85d685;
+
+
+
+
+.loading {
+  width: 100px;
+  height: 100px;
+  background-color: #8ebacc;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+.center {
+  margin: 0 auto;
+}

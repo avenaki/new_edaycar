@@ -4,7 +4,7 @@ import { Trip } from "../../models/trip";
 
 export const addTrip = createAction(
   "[Trip] - Add Trip ",
-  props<{ trip: Trip}>(),
+  props< Trip>(),
 );
 
 export const addTripSuccess = createAction(

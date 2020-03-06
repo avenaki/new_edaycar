@@ -8,19 +8,26 @@ export class Trip {
   finishTime: DateTimeFormat;
   startX: number;
   startY: number;
+  startPlace: string | undefined;
+  finishPlace: string | undefined;
   finishX: number;
   finishY: number;
   maxPassengers: number;
   driver: Driver;
   passengers: Passenger[];
 
-  constructor( id: string,  startTime: DateTimeFormat, finishTime: DateTimeFormat,
-         startX: number, startY: number, finishX: number, finishY: number,
-               maxPassengers: number, driver: Driver, passengers: Passenger[]) {
+  constructor( id: string,  startTime: DateTimeFormat,
+               finishTime: DateTimeFormat, startX: number,
+               startY: number, finishX: number, finishY: number,
+               startPlace: string, finishPlace: string,
+               maxPassengers: number, driver: Driver,
+               passengers: Passenger[]) {
     this.id = id;
     this.startTime = startTime;
     this.finishTime = finishTime;
     this.startX = startX;
+    this.startPlace = startPlace;
+    this.finishPlace = finishPlace;
     this.startY = startY;
     this.finishX = finishX;
     this.finishY = finishY;
