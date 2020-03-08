@@ -12,12 +12,19 @@
   height: 50px;
   background-color: #7fc666;
   color: white;
-  font-size: 15px;
-  text-align: center;
 }
 .table-row {
   padding: 1em 1em;
   font-size: 14px;
+  border-bottom: 1px solid #4a4a4a;
+}
+.table-row td {
+  width: max-content;
+}
+.table-headers th {
+  width: max-content;
+  font-size: 16px;
+  text-align: center;
 }
 .tripsTable th:first-child,
 td:first-child {
@@ -31,18 +38,26 @@ td:first-child {
   border-right: none;
 }
 .tripsTable td {
-  border-bottom: 1px solid #4a4a4a;
   height: 34px;
   text-align: center;
   font-weight: 300;
-}
-.tripsTable th:hover {
-  opacity: 0.7;
 }
 .tripsTable tr:last-child td:first-child {
   border-radius: 0 0 0 10px;
 }
 .tripsTable tr:last-child td:last-child {
   border-radius: 0 0 10px 0;
+}
+.table-headers_content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.table-headers_content div {
+  margin-left: 1em;
+}
+.fas:hover {
+  opacity: 0.7;
 }
 /*# sourceMappingURL=trips-table.component.css.map */

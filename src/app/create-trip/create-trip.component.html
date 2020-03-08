@@ -1,5 +1,6 @@
 <div class="form">
   <div class="contentContainer">
+    <form [formGroup]="createTripForm">
 <div class="create-trip-form">
   <div class="container">
     <div class="columnContainer">
@@ -7,27 +8,27 @@
     <div class="columnContainer">
 <div class="rowContainer time">
         <div class="form_text"> начало</div>
-        <input type="time"  class="create-trip-form_input input-time" [(ngModel)]="startTime" />
+        <input type="time"  class="create-trip-form_input input-time" formControlName="startTime"/>
 </div>
       <div class="rowContainer time">
       <div class="form_text"> конец</div>
-      <input type="time"  class="create-trip-form_input input-time" [(ngModel)]="finishTime" />
+      <input type="time"  class="create-trip-form_input input-time" formControlName="finishTime" />
     </div>
     </div>
     <div>
       <div class="form_text-large"> Куда</div>
-      <input type="text"   class="create-trip-form_input" #start />
+      <input type="text"   class="create-trip-form_input" #start formControlName="startPlace" />
     </div>
     <div >
       <div class="form_text-large"> Откуда</div>
       <div class="form-group">
-        <input type="text"    class="create-trip-form_input" #finish />
+        <input type="text"    class="create-trip-form_input" #finish formControlName="finishPlace" />
       </div>
     </div>
       <div>
         <div class="form_text-large">Какое количество пассажиров Вы готовы подвезти?</div>
         <div class="custom-select">
-          <select [(ngModel)]="selectedPassengersValue"  [ngModelOptions]="{standalone: true}">
+          <select formControlName="maxPassengersValue">
             <option value="1" > 1</option>
             <option value="2" selected> 2 </option>
             <option value ="3"> 3</option>
@@ -37,6 +38,7 @@
   </div>
 </div>
 </div>
+    </form>
   <div class = "map">
     <agm-map
       [latitude]="latitude"

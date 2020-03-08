@@ -1,24 +1,22 @@
 import { MapsAPILoader } from "@agm/core";
-import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import {  Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Driver } from "../models/driver";
 import { Trip } from "../models/trip";
 import * as TripActions from "../store/actions/trip.actions";
-import DateTimeFormat = Intl.DateTimeFormat;
 import * as fromDriver from "../store/reducers/driver.reducer";
 import { AppState } from "../store/state/app.state";
-
-
+import DateTimeFormat = Intl.DateTimeFormat;
 
 @Component({
-  selector: "app-create-trip",
-  templateUrl: "./create-trip.component.html",
-  styleUrls: ["./create-trip.component.less"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: "app-trip-filter",
+  templateUrl: "./trip-filter.component.html",
+  styleUrls: ["./trip-filter.component.less"]
 })
-export class CreateTripComponent implements OnInit {
+export class TripFilterComponent implements OnInit {
+  @Output() closeEvent = new EventEmitter<void>();
   createTripForm: FormGroup;
   startTime: DateTimeFormat;
   finishTime: DateTimeFormat;
@@ -155,15 +153,15 @@ export class CreateTripComponent implements OnInit {
 
     const newTrip = new Trip(
       null,
-       this.createTripForm.get("startTime").value,
-       this.createTripForm.get("finishTime").value,
-       this.startX, this.startY,
-       this.finishX, this.finishY,
-       this.createTripForm.get("startPlace").value,
-       this.createTripForm.get("finishPlace").value,
-       this.createTripForm.get("maxPassengersValue").value,
-       this.currentDriver, null);
-       this.store.dispatch(TripActions.addTrip(newTrip));
+      this.createTripForm.get("startTime").value,
+      this.createTripForm.get("finishTime").value,
+      this.startX, this.startY,
+      this.finishX, this.finishY,
+      this.createTripForm.get("startPlace").value,
+      this.createTripForm.get("finishPlace").value,
+      this.createTripForm.get("maxPassengersValue").value,
+      this.currentDriver, null);
+    this.store.dispatch(TripActions.addTrip(newTrip));
 
   }
 

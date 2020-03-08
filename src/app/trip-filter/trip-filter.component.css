@@ -1,0 +1,21 @@
+.modal {
+  font-size: 1rem;
+  border: 1px solid #313131;
+  border-radius: 10px;
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -25%);
+  padding: 1rem;
+  min-width: 25rem;
+  max-width: 30rem;
+}
+.modal-back {
+  width: 100vw;
+  height: 100vh;
+  content: ' ';
+  color: rgba(255, 255, 255, 0.3);
+  position: absolute;
+}
+/*# sourceMappingURL=trip-filter.component.css.map */

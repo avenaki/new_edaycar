@@ -1,29 +1,35 @@
-<div class="container" *ngIf=" (trips$ | async) as trips; else loading">
-  <table class="tripsTable">
-  <tr class="table-headers">
-    <th> </th>
-    <th>Начнётся в</th>
-    <th>Закончится в</th>
-    <th>Откуда</th>
-    <th>Куда</th>
-    <th>Свободных мест</th>
-    <th>Везёт</th>
-  </tr>
+<div class="container" *ngIf=" trips; else loading">
+  <app-trip-filter *ngIf="modal"  (closeEvent)="modal = false"></app-trip-filter>
+  <table class="tripsTable" >
+    <tr class="table-headers">
+      <th> </th>
+      <th> <div class="table-headers_content"><div>Начало </div> <div (click)="sortUpStart = !sortUpStart"><div *ngIf="sortUpStart" (click)="sort('startTime', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpStart"><i class="fas fa-caret-down fa-2x" (click)="sort('startTime', 'DESC')"></i></div></div></div></th>
+      <th><div class="table-headers_content"><div>Конец</div><div (click)="sortUpFinish = !sortUpFinish"> <div *ngIf="sortUpFinish"  (click)="sort('finishTime', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpFinish"><i class="fas fa-caret-down fa-2x" (click)="sort('finishTime', 'DESC')"></i></div></div></div></th>
+      <th>Откуда</th>
+      <th>Куда</th>
+      <th><div class="table-headers_content"><div>Свободных мест</div><div (click)="sortUpMaxPassengers = !sortUpMaxPassengers"> <div *ngIf="sortUpMaxPassengers" (click)="sort('maxPassengers', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpMaxPassengers"><i class="fas fa-caret-down fa-2x" (click)="sort('maxPassengers', 'DESC')"></i></div></div></div></th>
+      <th>Везёт</th>
+      <th *ngIf="currentPassenger">Занять</th>
+      <th *ngIf="currentDriver">Редактировать</th>
+      <th *ngIf="currentDriver">Удалить</th>
+    </tr>
 
-  <tbody *ngFor="let trip of trips$ | async; let i = index; ">
+    <tbody *ngFor="let trip of trips; let i = index;">
 
-  <tr class="table-row">
-    <td  class>{{i+1}}</td>
-    <td  >{{trip.startTime}}</td>
-    <td  >{{trip.finishTime}}</td>
-    <td  >{{trip.startX | place: trip.startY}}</td>
-    <td  >{{trip.finishX}}</td>
-    <td  >{{trip.maxPassengers}}</td>
-    <td  >{{trip.driver.login}}</td>
-  </tr>
-
-  </tbody>
-</table>
+    <tr class="table-row">
+      <td >{{i+1}}</td>
+      <td  >{{trip.startTime | date:"HH:mm"}}</td>
+      <td  >{{trip.finishTime | date:"HH:mm"}}</td>
+      <td  >{{trip.startPlace | place}}</td>
+      <td  >{{trip.finishPlace | place}}</td>
+      <td  >{{trip.maxPassengers}}</td>
+      <td  >{{trip.driver.login}}</td>
+      <td *ngIf="currentPassenger"><div class="takeTripButton"></div></td>
+      <td *ngIf="currentDriver"> <div *ngIf="currentDriver.login === trip.driver.login"><i class="fas fa-pen" (click)="modal = true"></i></div> </td>
+      <td *ngIf="currentDriver"><div *ngIf="currentDriver.login === trip.driver.login"><i class="far fa-times-circle"></i></div></td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 
 
@@ -34,3 +40,7 @@
     </div>
   </div>
 </ng-template>
+
+
+
+

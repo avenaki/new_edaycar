@@ -1,9 +1,12 @@
 import { Passenger } from "../../models/passenger";
 
+
 export interface PassengerState {
-  passenger: Passenger [];
+  passengers: Passenger [];
+  currentPassenger: Passenger;
 }
 
 export const initialPassengerState: PassengerState = {
-  passenger: [],
+  passengers: [],
+  currentPassenger: null,
 };

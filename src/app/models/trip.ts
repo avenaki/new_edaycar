@@ -26,11 +26,11 @@ export class Trip {
     this.startTime = startTime;
     this.finishTime = finishTime;
     this.startX = startX;
-    this.startPlace = startPlace;
-    this.finishPlace = finishPlace;
     this.startY = startY;
     this.finishX = finishX;
     this.finishY = finishY;
+    this.startPlace = startPlace;
+    this.finishPlace = finishPlace;
     this.maxPassengers = maxPassengers;
     this.driver = driver;
     this.passengers = passengers;
