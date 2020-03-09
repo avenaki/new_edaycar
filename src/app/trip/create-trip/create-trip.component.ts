@@ -3,19 +3,19 @@ import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, ViewChi
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import {  Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { Driver } from "../models/driver";
-import { Trip } from "../models/trip";
-import * as TripActions from "../store/actions/trip.actions";
+import { Driver } from "../../models/driver";
+import { Trip } from "../../models/trip";
+import * as TripActions from "../../store/actions/trip.actions";
 import DateTimeFormat = Intl.DateTimeFormat;
-import * as fromDriver from "../store/reducers/driver.reducer";
-import { AppState } from "../store/state/app.state";
+import * as fromDriver from "../../store/reducers/driver.reducer";
+import { AppState } from "../../store/state/app.state";
 
 
 
 @Component({
   selector: "app-create-trip",
   templateUrl: "./create-trip.component.html",
-  styleUrls: ["./create-trip.component.less"],
+  styleUrls: ["../create-trip.component.less"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateTripComponent implements OnInit {
@@ -162,7 +162,7 @@ export class CreateTripComponent implements OnInit {
        this.createTripForm.get("startPlace").value,
        this.createTripForm.get("finishPlace").value,
        this.createTripForm.get("maxPassengersValue").value,
-       this.currentDriver, null);
+       this.currentDriver.login, null);
        this.store.dispatch(TripActions.addTrip(newTrip));
 
   }

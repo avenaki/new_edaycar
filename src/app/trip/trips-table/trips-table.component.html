@@ -1,5 +1,6 @@
 <div class="container" *ngIf=" trips; else loading">
-  <app-trip-filter *ngIf="modal"  (closeEvent)="modal = false"></app-trip-filter>
+  <app-trip-filter *ngIf="modal"  (closeEvent)="closeModal()"></app-trip-filter>
+  <div class="filter-button" (click)="modal=true"><div>Отфильтровать поездки</div> </div>
   <table class="tripsTable" >
     <tr class="table-headers">
       <th> </th>
@@ -23,10 +24,10 @@
       <td  >{{trip.startPlace | place}}</td>
       <td  >{{trip.finishPlace | place}}</td>
       <td  >{{trip.maxPassengers}}</td>
-      <td  >{{trip.driver.login}}</td>
+      <td  >{{trip.driverLogin}}</td>
       <td *ngIf="currentPassenger"><div class="takeTripButton"></div></td>
-      <td *ngIf="currentDriver"> <div *ngIf="currentDriver.login === trip.driver.login"><i class="fas fa-pen" (click)="modal = true"></i></div> </td>
-      <td *ngIf="currentDriver"><div *ngIf="currentDriver.login === trip.driver.login"><i class="far fa-times-circle"></i></div></td>
+      <td *ngIf="currentDriver"> <div *ngIf="currentDriver.login === trip.driverLogin"><i class="fas fa-pen" ></i></div> </td>
+      <td *ngIf="currentDriver"><div *ngIf="currentDriver.login === trip.driverLogin"><i class="far fa-times-circle"></i></div></td>
     </tr>
     </tbody>
   </table>

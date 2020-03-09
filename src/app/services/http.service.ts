@@ -5,6 +5,7 @@ import { environment } from "../../environments/environment";
 import { Driver } from "../models/driver";
 import { Passenger } from "../models/passenger";
 import { Trip } from "../models/trip";
+import { TripSearchFilter } from "../models/trip-search-filter";
 import { UserModel } from "../models/user-model";
 
 
@@ -48,5 +49,8 @@ export class HttpService {
     const httpParams = new HttpParams().set("id", id);
     const  options = { params: httpParams };
     return this.http.delete<string>(this.apiUrl + "trip/delete/", options);
+  }
+  public filterTrips(filter: TripSearchFilter): Observable<Trip[]> {
+    return this.http.post<Trip[]>(this.apiUrl + "trip/filtertrips/",  filter);
   }
 }

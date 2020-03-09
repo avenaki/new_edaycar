@@ -10,7 +10,6 @@ import { AlifeFileToBase64Module } from "alife-file-to-base64";
 import { AboutComponent } from "./about/about.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { CreateTripComponent } from "./create-trip/create-trip.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { PlacePipe } from "./guards/place.pipe";
 import { RoleGuard } from "./guards/role.guard";
@@ -25,8 +24,9 @@ import { PassengerEffects } from "./store/effects/passenger.effects";
 import { TripEffects } from "./store/effects/trip.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { appReducers } from "./store/reducers/app.reducers";
-import { TripFilterComponent } from "./trip-filter/trip-filter.component";
-import { TripsTableComponent } from "./trips-table/trips-table.component";
+import { CreateTripComponent } from "./trip/create-trip/create-trip.component";
+import { TripFilterComponent } from "./trip/trip-filter/trip-filter.component";
+import { TripsTableComponent } from "./trip/trips-table/trips-table.component";
 
 
 

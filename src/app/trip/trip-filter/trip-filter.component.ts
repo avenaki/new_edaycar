@@ -3,21 +3,21 @@ import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild 
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { Driver } from "../models/driver";
-import { Trip } from "../models/trip";
-import * as TripActions from "../store/actions/trip.actions";
-import * as fromDriver from "../store/reducers/driver.reducer";
-import { AppState } from "../store/state/app.state";
+import { Driver } from "../../models/driver";
 import DateTimeFormat = Intl.DateTimeFormat;
+import { TripSearchFilter } from "../../models/trip-search-filter";
+import * as TripActions from "../../store/actions/trip.actions";
+import * as fromDriver from "../../store/reducers/driver.reducer";
+import { AppState } from "../../store/state/app.state";
 
 @Component({
   selector: "app-trip-filter",
   templateUrl: "./trip-filter.component.html",
-  styleUrls: ["./trip-filter.component.less"]
+  styleUrls: ["../create-trip.component.less"]
 })
 export class TripFilterComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<void>();
-  createTripForm: FormGroup;
+  filterForm: FormGroup;
   startTime: DateTimeFormat;
   finishTime: DateTimeFormat;
   startPlace: string;
@@ -82,7 +82,7 @@ export class TripFilterComponent implements OnInit {
             if (status === "OK") {
               if (results[0]) {
                 this.zoom = 12;
-                this.createTripForm.patchValue({
+                this.filterForm.patchValue({
                   "startPlace": results[0].formatted_address
                 });
               }
@@ -103,7 +103,7 @@ export class TripFilterComponent implements OnInit {
             if (status === "OK") {
               if (results[0]) {
                 this.zoom = 12;
-                this.createTripForm.patchValue({
+                this.filterForm.patchValue({
                   "finishPlace": results[0].formatted_address
                 });
               }
@@ -115,12 +115,12 @@ export class TripFilterComponent implements OnInit {
   }
 
   initForm(): void {
-    this.createTripForm = this.fb.group({
+    this.filterForm = this.fb.group({
       startTime: new FormControl("", [Validators.required]),
       finishTime: new FormControl("", [Validators.required]),
       startPlace: new FormControl("", [Validators.required]),
       finishPlace: new FormControl("", [Validators.required]),
-      maxPassengersValue: new FormControl("", [Validators.required])});
+      canWalkDistance: new FormControl("", [Validators.required])});
   }
   private setCurrentLocation(): void {
     if ("geolocation" in navigator) {
@@ -150,18 +150,13 @@ export class TripFilterComponent implements OnInit {
   }
 
   submit(): void {
-
-    const newTrip = new Trip(
-      null,
-      this.createTripForm.get("startTime").value,
-      this.createTripForm.get("finishTime").value,
+    const filter = new TripSearchFilter(
+      this.filterForm.get("startTime").value,
+      this.filterForm.get("finishTime").value,
       this.startX, this.startY,
       this.finishX, this.finishY,
-      this.createTripForm.get("startPlace").value,
-      this.createTripForm.get("finishPlace").value,
-      this.createTripForm.get("maxPassengersValue").value,
-      this.currentDriver, null);
-    this.store.dispatch(TripActions.addTrip(newTrip));
+      this.filterForm.get("canWalkDistance").value, );
+    this.store.dispatch(TripActions.filterTrips(filter));
 
   }
 

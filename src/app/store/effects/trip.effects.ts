@@ -46,4 +46,23 @@ export class TripEffects {
       ),
     );
   });
+
+  filterTrips$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(TripActions.filterTrips),
+      mergeMap((filter) =>
+        this.httpService.filterTrips(filter).pipe(
+          map((data: Trip[]) => {
+            const payload = {
+              trip: data,
+            };
+            return TripActions.filterTripsSuccess(payload);
+          }),
+          catchError((error: Error) => {
+            return of(TripActions.filterTripsError(error));
+          }),
+        ),
+      ),
+    );
+  });
 }

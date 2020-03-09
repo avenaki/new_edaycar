@@ -1,14 +1,14 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from "./about/about.component";
-import { CreateTripComponent } from "./create-trip/create-trip.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { RoleGuard } from "./guards/role.guard";
 import { LoginComponent } from "./login/login.component";
 import { ProfileDriverComponent } from "./profile-driver/profile-driver.component";
 import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger.component";
 import { SignupComponent } from "./signup/signup.component";
-import { TripsTableComponent } from "./trips-table/trips-table.component";
+import { CreateTripComponent } from "./trip/create-trip/create-trip.component";
+import { TripsTableComponent } from "./trip/trips-table/trips-table.component";
 
 
 

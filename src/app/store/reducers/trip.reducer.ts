@@ -9,7 +9,7 @@ import { initialTripState, TripState } from "../state/trip.state";
 export const  tripReducer = createReducer(
   initialTripState,
   on(TripActions.addTripSuccess, (state, trip) => {
-    const newTrips = state.trip;
+    const newTrips = [...state.trip];
     newTrips.push(trip);
     return { ...state, trip: newTrips, tripError: null};
   }),
@@ -21,6 +21,12 @@ export const  tripReducer = createReducer(
   }),
   on(TripActions.loadTripsSuccess, (state,  action) => {
     return { ...state, trip:  action.trip};
+  }),
+  on(TripActions.filterTripsSuccess, (state,  action) => {
+    return { ...state, trip:  action.trip};
+  }),
+  on(TripActions.filterTripsError, (state,  error) => {
+    return { ...state, tripError: error};
   }),
   );
 

@@ -18,6 +18,30 @@
   border-radius: 50%;
   width: 300px;
   height: 300px;
+  object-fit: cover;
+}
+.accountPhoto:hover {
+  filter: blur(0.7px) opacity(90%);
+}
+.accountPhoto:hover + .textPhoto {
+  visibility: visible;
+}
+.textPhoto {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  z-index: 100;
+  top: 70%;
+  visibility: hidden;
+  right: calc(50% - 35px);
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 45%;
+  border: 1px rgba(0, 0, 0, 0.3) solid;
+  padding: 5px;
+}
+.textPhoto:hover {
+  visibility: visible;
 }
 .changePhotoButton {
   margin-top: 30px;
@@ -35,6 +59,9 @@
 }
 .changePhotoButton:hover {
   opacity: 0.7;
+}
+.changePhotoButton > label {
+  display: block;
 }
 .changePhoto {
   display: flex;

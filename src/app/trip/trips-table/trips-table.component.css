@@ -60,4 +60,21 @@ td:first-child {
 .fas:hover {
   opacity: 0.7;
 }
+.filter-button {
+  width: 250px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 2px #313131 solid;
+  color: #7fc666;
+  font-family: 'Exo 2', sans-serif;
+  background-color: #474747;
+  margin-bottom: 5vh;
+  margin-left: 80%;
+}
+.filter-button:hover {
+  opacity: 0.8;
+}
 /*# sourceMappingURL=trips-table.component.css.map */
