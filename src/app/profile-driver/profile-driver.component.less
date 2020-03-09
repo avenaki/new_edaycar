@@ -23,13 +23,18 @@
   width: 300px;
   height: 300px;
   object-fit: cover;
-  &:hover{
+}
+.profilePhoto{
+  border-radius: 50%;
+  &:hover > .accountPhoto{
     filter: blur(0.7px) opacity(90%);
   }
-  &:hover + .textPhoto{
+  &:hover > .textPhoto{
     visibility: visible;
   }
-
+  &:hover > .textPhoto:hover{
+    visibility: visible;
+  }
 }
 .textPhoto{
   width: 70px;
@@ -46,7 +51,6 @@
   padding: 5px;
 }
 .changePhotoButton {
-
   margin-top: 30px;
   width: 300px;
   height: 25px;
