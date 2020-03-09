@@ -1,0 +1,118 @@
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+
+
+}
+.container {
+  margin-top: 90px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1em 8em;
+}
+
+.accountPhoto {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+.profilePhoto{
+  border-radius: 50%;
+  &:hover > .accountPhoto{
+    filter: blur(0.7px) opacity(90%);
+  }
+  &:hover > .textPhoto{
+    visibility: visible;
+  }
+  &:hover > .textPhoto:hover{
+    visibility: visible;
+  }
+}
+.textPhoto{
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  z-index: 100;
+  top:70%;
+  visibility: hidden;
+  right: calc(50% - 35px);
+  box-sizing: border-box;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 45%;
+  border: 1px rgba(0,0,0,0.3) solid;
+  padding: 5px;
+}
+.changePhotoButton {
+  margin-top: 30px;
+  width: 300px;
+  height: 25px;
+  background-color: snow;
+  color: #313131;
+  border: 1px solid #2980b9;
+  border-radius: 3px;
+  font-family: 'Exo 2', sans-serif;
+  text-align: center;
+  font-size: 18px;
+  padding: 5px 5px;
+  vertical-align: center;
+  &:hover {
+    opacity: 0.7;
+  }
+  & > label{
+    display: block;
+  }
+}
+.changePhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em 4em;
+}
+.input-file {
+  visibility: hidden;
+}
+.driver-form_input {
+  max-width:600px;
+  width:250px;
+  height: 30px;
+  line-height:2em;
+  font-family: 'Ubuntu', sans-serif;
+  outline:none;
+  border: 1px solid #8ebacc;
+  font-size: 16px;
+  text-align: center;
+  color: #474747;
+  border-radius: 5px;
+  &.ng-touched.ng-invalid {
+    border: 1px solid #E86850;
+  }
+  @media only screen and (min-width : 250px) and (max-width : 530px) {
+    min-width:250px;
+  }
+}
+h5.driver-form_text {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 16px;
+  margin-block-end: 20px;
+  margin-block-start: 40px;
+}
+
+.rowContainer-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.loadingContainer {
+  display: flex;
+  margin-top:  24%;
+  justify-content: center;
+}
