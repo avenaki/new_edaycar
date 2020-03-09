@@ -20,10 +20,16 @@
   height: 300px;
   object-fit: cover;
 }
-.accountPhoto:hover {
+.profilePhoto {
+  border-radius: 50%;
+}
+.profilePhoto:hover > .accountPhoto {
   filter: blur(0.7px) opacity(90%);
 }
-.accountPhoto:hover + .textPhoto {
+.profilePhoto:hover > .textPhoto {
+  visibility: visible;
+}
+.profilePhoto:hover > .textPhoto:hover {
   visibility: visible;
 }
 .textPhoto {

@@ -20,8 +20,6 @@ export class TripFilterComponent implements OnInit {
   filterForm: FormGroup;
   startTime: DateTimeFormat;
   finishTime: DateTimeFormat;
-  startPlace: string;
-  finishPlace: string;
   latitude: number;
   longitude: number;
   zoom: number;
@@ -157,6 +155,7 @@ export class TripFilterComponent implements OnInit {
       this.finishX, this.finishY,
       this.filterForm.get("canWalkDistance").value, );
     this.store.dispatch(TripActions.filterTrips(filter));
+    this.closeEvent.emit();
 
   }
 

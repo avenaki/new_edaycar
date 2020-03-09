@@ -71,10 +71,14 @@ td:first-child {
   color: #7fc666;
   font-family: 'Exo 2', sans-serif;
   background-color: #474747;
-  margin-bottom: 5vh;
-  margin-left: 80%;
+  margin-bottom: 3vh;
 }
 .filter-button:hover {
   opacity: 0.8;
+}
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 /*# sourceMappingURL=trips-table.component.css.map */

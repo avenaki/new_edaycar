@@ -93,4 +93,8 @@ export class TripsTableComponent implements OnInit {
      this.modal = false;
      this.cdr.detectChanges();
   }
+
+  update(): void {
+    this.store.dispatch(TripActions.loadTrips());
+  }
 }

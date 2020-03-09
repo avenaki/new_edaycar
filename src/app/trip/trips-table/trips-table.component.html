@@ -1,6 +1,9 @@
 <div class="container" *ngIf=" trips; else loading">
   <app-trip-filter *ngIf="modal"  (closeEvent)="closeModal()"></app-trip-filter>
+  <div class="buttons-container">
   <div class="filter-button" (click)="modal=true"><div>Отфильтровать поездки</div> </div>
+  <div class="filter-button" (click)="update()"><div>Обновить</div> </div>
+  </div>
   <table class="tripsTable" >
     <tr class="table-headers">
       <th> </th>
