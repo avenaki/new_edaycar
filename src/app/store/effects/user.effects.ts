@@ -46,4 +46,19 @@ export class UserEffects {
       ),
     ); });
 
+  signPassenger$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(UserActions.signPassenger),
+      mergeMap(action =>
+        this.httpService.addPassenger(action).pipe(
+          map((user: UserModel) => {
+            return UserActions.loginSuccess(user);
+          }),
+          catchError((error: Error) => {
+            return of(UserActions.signDriverFail(error));
+          }),
+        ),
+      ),
+    ); });
+
 }
