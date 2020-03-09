@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Driver } from "../models/driver";
+import { Passenger } from "../models/passenger";
 import * as UserActions from "../store/actions/user.actions";
 import { UserState } from "../store/state/user.state";
 import { Validator } from "../validators";
@@ -29,6 +30,7 @@ export class SignupComponent implements OnInit {
   }
   registerAsPassenger(): void {
     this.registerDriver = false;
+
   }
   registerAsDriver(): void {
     this.registerDriver = true;
@@ -52,12 +54,21 @@ export class SignupComponent implements OnInit {
   }
 
   submit(): void {
+    if ( this.registerDriver) {
     const newDriver = new Driver( this.signupForm.controls["login"].value,
       btoa(this.signupForm.controls["passwords"].value["passwordKey"]), this.signupForm.controls["name"].value,
       this.signupForm.controls["surname"].value, this.signupForm.controls["patronymic"].value,
       this.signupForm.controls["birthdate"].value, String(this.signupForm.controls["mobileNumber"].value),
       Number(this.signupForm.controls["experience"].value), null, null, null,  null);
     this.store.dispatch(UserActions.signDriver(newDriver));
+    } else {
+      const newPassenger = new Passenger( this.signupForm.controls["login"].value,
+        btoa(this.signupForm.controls["passwords"].value["passwordKey"]), this.signupForm.controls["name"].value,
+        this.signupForm.controls["surname"].value, this.signupForm.controls["patronymic"].value,
+        this.signupForm.controls["birthdate"].value, String(this.signupForm.controls["mobileNumber"].value),
+      null, null);
+      this.store.dispatch(UserActions.signPassenger(newPassenger));
+    }
     this.router.navigate([""]);
   }
 
