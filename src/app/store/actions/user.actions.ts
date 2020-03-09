@@ -34,3 +34,11 @@ export const signPassenger = createAction(
   "[User] - Signup Passenger",
   props<Passenger>(),
 );
+export const signPassengerSuccess = createAction(
+  "[User] - Signup Passenger Success",
+  props<Passenger>(),
+);
+export const signPassengerFail = createAction(
+  "[User] - Signup Passenger Fail",
+  props<Error>(),
+);
