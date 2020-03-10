@@ -55,7 +55,7 @@ export class UserEffects {
             return UserActions.loginSuccess(user);
           }),
           catchError((error: Error) => {
-            return of(UserActions.signDriverFail(error));
+            return of(UserActions.signPassengerFail(error));
           }),
         ),
       ),

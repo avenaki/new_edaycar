@@ -162,7 +162,7 @@ export class CreateTripComponent implements OnInit {
        this.createTripForm.get("startPlace").value,
        this.createTripForm.get("finishPlace").value,
        this.createTripForm.get("maxPassengersValue").value,
-       this.currentDriver.login, null);
+       this.currentDriver.login,  []);
        this.store.dispatch(TripActions.addTrip(newTrip));
 
   }

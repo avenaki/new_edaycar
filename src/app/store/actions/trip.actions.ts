@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { TakeTripModel } from "../../models/take-trip-model";
 import { Trip } from "../../models/trip";
 import { TripSearchFilter } from "../../models/trip-search-filter";
 
@@ -42,5 +43,14 @@ export const filterTripsSuccess = createAction(
 
 export const filterTripsError = createAction(
   "[Trip] - Filter Trips Error ",
+  props<Error>(),
+);
+export const takeTrip = createAction(
+  "[Trip] - Filter Trips",
+  props<TakeTripModel>(),
+);
+
+export const takeTripError = createAction(
+  "[Trip] - Filter Trips Error",
   props<Error>(),
 );

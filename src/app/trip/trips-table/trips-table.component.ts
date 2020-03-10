@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Driver } from "../../models/driver";
 import { Passenger } from "../../models/passenger";
+import { TakeTripModel } from "../../models/take-trip-model";
 import { Trip } from "../../models/trip";
 import { UserModel } from "../../models/user-model";
 import * as TripActions from "../../store/actions/trip.actions";
@@ -18,7 +19,7 @@ import { AppState } from "../../store/state/app.state";
   styleUrls: ["./trips-table.component.less"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TripsTableComponent implements OnInit {
+export class TripsTableComponent implements OnInit, OnDestroy {
 
   trips$: Observable<Trip[]>;
   trips: Trip[];
@@ -43,13 +44,14 @@ export class TripsTableComponent implements OnInit {
   }
   ngOnInit(): void {
     this.currentUser$.subscribe( (currentUser) => {
+      if (currentUser) {
       if (currentUser.role === "driver") {
         this.currentDriver$ = this.store.select(fromDriver.selectCurrentDriver);
         this.userIsDriver = true;
       } else {
         this.currentPassenger$ = this.store.select(fromPassenger.selectCurrentPassenger);
       }
-    });
+    }});
 
       this.trips$.subscribe(trips => {
         if (trips) {
@@ -96,5 +98,17 @@ export class TripsTableComponent implements OnInit {
 
   update(): void {
     this.store.dispatch(TripActions.loadTrips());
+  }
+
+  takeTrip(trip: Trip): void {
+    if (trip.maxPassengers <= 0) {
+      alert("Все места заняты!");
+      return;
+    }
+    const model = new TakeTripModel( this.currentPassenger.login, trip);
+    this.store.dispatch(TripActions.takeTrip(model));
+  }
+  ngOnDestroy(): void {
+   this.cdr.detach();
   }
 }

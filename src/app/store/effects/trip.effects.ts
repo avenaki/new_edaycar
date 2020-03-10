@@ -65,4 +65,19 @@ export class TripEffects {
       ),
     );
   });
+  takeTrip$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(TripActions.takeTrip),
+      mergeMap(action =>
+        this.httpService.takeTrip(action).pipe(
+          map(() => {
+            return TripActions.loadTrips();
+          }),
+          catchError((error: Error) => {
+            return of(TripActions.takeTripError(error));
+          }),
+        ),
+      ),
+    );
+  });
 }

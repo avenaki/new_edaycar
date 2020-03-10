@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
@@ -16,7 +16,7 @@ import { Validator } from "../validators";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class ProfilePassengerComponent implements OnInit {
+export class ProfilePassengerComponent implements OnInit, OnDestroy {
 
   currentPassenger: Passenger;
   currentPassenger$: Observable<Passenger>;
@@ -72,8 +72,7 @@ export class ProfilePassengerComponent implements OnInit {
       btoa(this.passengerForm.get("password").value), this.passengerForm.get("name").value,
       this.passengerForm.get("surname").value, this.passengerForm.get("patronymic").value,
       this.passengerForm.get("birthdate").value, String(this.passengerForm.get("mobileNumber").value),
-      this.passengerForm.get("accountPhoto").value,
-      this.currentPassenger.trips);
+      this.passengerForm.get("accountPhoto").value);
     this.store.dispatch(PassengerActions.editPassenger(updatedPassenger));
   }
   onFileChange(event: Event): void {
@@ -88,6 +87,9 @@ export class ProfilePassengerComponent implements OnInit {
         });
       };
     }
+  }
+  ngOnDestroy(): void {
+
   }
 }
 

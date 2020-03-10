@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { Driver } from "../models/driver";
 import { Passenger } from "../models/passenger";
+import { TakeTripModel } from "../models/take-trip-model";
 import { Trip } from "../models/trip";
 import { TripSearchFilter } from "../models/trip-search-filter";
 import { UserModel } from "../models/user-model";
@@ -17,6 +18,9 @@ export class HttpService {
   constructor(private http: HttpClient) { }
   public addDriver( driver: Driver ): Observable<UserModel>  {
     return this.http.post<UserModel>(this.apiUrl + "account/registerdriver", driver );
+  }
+  public addPassenger( passenger: Passenger ): Observable<UserModel>  {
+    return this.http.post<UserModel>(this.apiUrl + "account/registerpassenger", passenger );
   }
   public addTrip( trip: Trip ): Observable<Trip> {
     return this.http.post<Trip>(this.apiUrl + "trip/createtrip", trip );
@@ -52,5 +56,8 @@ export class HttpService {
   }
   public filterTrips(filter: TripSearchFilter): Observable<Trip[]> {
     return this.http.post<Trip[]>(this.apiUrl + "trip/filtertrips/",  filter);
+  }
+  public takeTrip(model: TakeTripModel): Observable<Trip> {
+    return this.http.post<Trip>(this.apiUrl + "trip/taketrip/",  model);
   }
 }

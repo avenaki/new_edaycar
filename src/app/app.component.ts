@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { UserModel } from "./models/user-model";
 import * as DriverActions from "./store/actions/driver.actions";
+import * as PassengerActions from "./store/actions/passenger.actions";
 import * as UserActions from "./store/actions/user.actions";
 import { UserState } from "./store/state/user.state";
 
@@ -13,7 +14,7 @@ import { UserState } from "./store/state/user.state";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.less"]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = "edaycar";
   currentUser$: Observable<UserState>;
   currentUserSubscription: Subscription;
@@ -38,6 +39,11 @@ export class AppComponent implements OnInit {
                 username: this.currentUser.login,
               };
               this.store.dispatch(DriverActions.load(payload));
+            } else {
+              const payload = {
+                username: this.currentUser.login,
+              };
+              this.store.dispatch(PassengerActions.load(payload));
             }
           }}),
       )
@@ -50,9 +56,9 @@ export class AppComponent implements OnInit {
     this.router.navigate(["/login"]);
   }
 
-  // ngOnDestroy(): void {
-    // if (this.currentUserSubscription) {
-     // this.currentUserSubscription.unsubscribe();
-   //  }
-  // }
+  ngOnDestroy(): void {
+     if (this.currentUserSubscription) {
+      this.currentUserSubscription.unsubscribe();
+     }
+  }
 }

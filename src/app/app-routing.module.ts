@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from "./about/about.component";
-import { AuthGuard } from "./guards/auth.guard";
-import { RoleGuard } from "./guards/role.guard";
+import { AuthGuard } from "./helpers/auth.guard";
+import { RoleGuard } from "./helpers/role.guard";
 import { LoginComponent } from "./login/login.component";
 import { ProfileDriverComponent } from "./profile-driver/profile-driver.component";
 import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger.component";

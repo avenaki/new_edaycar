@@ -66,7 +66,7 @@ export class SignupComponent implements OnInit {
         btoa(this.signupForm.controls["passwords"].value["passwordKey"]), this.signupForm.controls["name"].value,
         this.signupForm.controls["surname"].value, this.signupForm.controls["patronymic"].value,
         this.signupForm.controls["birthdate"].value, String(this.signupForm.controls["mobileNumber"].value),
-      null, null);
+      null);
       this.store.dispatch(UserActions.signPassenger(newPassenger));
     }
     this.router.navigate([""]);

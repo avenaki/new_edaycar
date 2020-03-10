@@ -28,7 +28,9 @@
       <td  >{{trip.finishPlace | place}}</td>
       <td  >{{trip.maxPassengers}}</td>
       <td  >{{trip.driverLogin}}</td>
-      <td *ngIf="currentPassenger"><div class="takeTripButton"></div></td>
+      <td *ngIf="currentPassenger"><div *ngIf="trip.passengersLogins"><div *ngIf="!trip.passengersLogins.includes(currentPassenger.login)"(click)="takeTrip(trip)"><i class="fas fa-car"></i></div>
+        <div *ngIf="trip.passengersLogins.includes(currentPassenger.login)">Занято</div> </div>
+      </td>
       <td *ngIf="currentDriver"> <div *ngIf="currentDriver.login === trip.driverLogin"><i class="fas fa-pen" ></i></div> </td>
       <td *ngIf="currentDriver"><div *ngIf="currentDriver.login === trip.driverLogin"><i class="far fa-times-circle"></i></div></td>
     </tr>
