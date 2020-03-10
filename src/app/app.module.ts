@@ -13,7 +13,6 @@ import { AppComponent } from "./app.component";
 import { AuthGuard } from "./helpers/auth.guard";
 import { PlacePipe } from "./helpers/place.pipe";
 import { RoleGuard } from "./helpers/role.guard";
-import { LoadingComponent } from "./loading/loading.component";
 import { LoginComponent } from "./login/login.component";
 import { ProfileDriverComponent } from "./profile-driver/profile-driver.component";
 import { ProfilePassengerComponent } from "./profile-passenger/profile-passenger.component";
@@ -43,7 +42,6 @@ import { TripsTableComponent } from "./trip/trips-table/trips-table.component";
     TripsTableComponent,
     PlacePipe,
     TripFilterComponent,
-    LoadingComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
