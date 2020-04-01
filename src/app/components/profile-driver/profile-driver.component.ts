@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { Driver } from "../models/driver";
-import { UserModel } from "../models/user-model";
-import * as DriverActions from "../store/actions/driver.actions";
-import * as fromDriver from "../store/reducers/driver.reducer";
-import { AppState } from "../store/state/app.state";
-import { Validator } from "../validators";
+import { Observable, Subscription } from "rxjs";
+import { Driver } from "../../models/driver";
+import * as DriverActions from "../../store/actions/driver.actions";
+import * as fromDriver from "../../store/reducers/driver.reducer";
+import { AppState } from "../../store/state/app.state";
+import { Validator } from "../../validators";
+
 @Component({
   selector: "app-profile-driver",
   templateUrl: "./profile-driver.component.html",
@@ -15,11 +15,11 @@ import { Validator } from "../validators";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class ProfileDriverComponent implements OnInit {
+export class ProfileDriverComponent implements OnInit, OnDestroy {
 
   currentDriver: Driver;
   currentDriver$: Observable<Driver>;
-  currentUser: UserModel;
+  currentDriverSubscription: Subscription;
   driverForm: FormGroup;
 
   constructor( private fb: FormBuilder,
@@ -29,7 +29,7 @@ export class ProfileDriverComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.currentDriver$ = this.store.select(fromDriver.selectCurrentDriver);
-    this.currentDriver$.subscribe(currentDriver => {
+    this.currentDriverSubscription = this.currentDriver$.subscribe(currentDriver => {
       if (currentDriver) {
         this.currentDriver = currentDriver;
         this.updateFormValues(this.currentDriver);
@@ -94,5 +94,9 @@ export class ProfileDriverComponent implements OnInit {
         });
       };
     }
+  }
+
+  ngOnDestroy(): void {
+    this.currentDriverSubscription.unsubscribe();
   }
 }

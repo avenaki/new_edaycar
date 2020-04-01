@@ -1,52 +1,46 @@
+@import (less) url('../styles.less');
 .navbar {
-  background-image: linear-gradient(to bottom, #1d1d1f, #302f36 );
-  overflow: hidden;
+  background-image: linear-gradient( #1d1d1f 60%, #2e2e31);
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 8vh;
+  width:100%;
+  height: 9vh;
+  font-size: large;
   display: flex;
   flex-direction: row;
-
-  @media only screen and (min-width : 150px) and (max-width : 320px) {
-  height: 60px;
-  }
+  z-index:3;
+  padding-right: 1em;
+  padding-left: 1em;
 }
+
 .navbar_item  {
   display:block;
   margin-left: 15%;
-  color: whitesmoke;
-  font-family: 'Exo 2', sans-serif;
-  font-size: 19px;
+  color:  @main-text-color-darkbd;
   &:hover{
-    opacity: 0.7;
+    opacity: 0.9;
     cursor: pointer;
+    color:#30a3bf;
   }
 }
-
 .navbar_brand {
   align-self: center;
   cursor: default;
   margin-left: 2%;
-  font-family: 'Unica One', cursive;
+  font-family: 'Allerta Stencil', sans-serif;
   font-size: 24px;
-  font-style: revert;
-  color:#85d685;
+  color: #2980b9;
   flex-shrink: 0;
-
 }
 .navbar_container{
   display: flex;
   flex-direction: row;
   align-self: center;
-  margin-left: 3%;
+
 }
-.navbar_login {
-  display:block;
-  color: whitesmoke;
-  font-family: 'Exo 2', sans-serif;
-  font-size: 16px;
-  margin-left: 72%;
-  flex-shrink: 0;
+.navbar_item_logout {
+  position: absolute;
+  margin-right: 100px;
+  right: 0;
 }
+

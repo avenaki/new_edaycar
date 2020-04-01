@@ -1,0 +1,60 @@
+<div class="container" *ngIf=" trips && (currentPassenger||currentDriver) ; else loading">
+  <app-trip-filter *ngIf="modal"  (closeEvent)="closeModal()"></app-trip-filter>
+  <img src="../../../assets/images/people.jpg" class="background_img">
+  <div class="button-container">
+    <div class="buttons-container_buttons">
+      <div class="flex-box">
+        <div class="filter-button" (click)="modal=true"><div>Применить фильтр</div> </div>
+        <div class="update-button " (click)="update()"><div>Обновить</div> </div>
+      </div>
+    </div>
+  </div>
+  <table class="table-scroll small-first-col" >
+    <thead>
+    <tr>
+      <th> </th>
+      <th> <div class="table-headers_content"><div>Начало </div> <div (click)="sortUpStart = !sortUpStart"><div *ngIf="sortUpStart" (click)="sort('startTime', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpStart"><i class="fas fa-caret-down fa-2x" (click)="sort('startTime', 'DESC')"></i></div></div></div></th>
+      <th><div class="table-headers_content"><div>Конец</div><div (click)="sortUpFinish = !sortUpFinish"> <div *ngIf="sortUpFinish"  (click)="sort('finishTime', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpFinish"><i class="fas fa-caret-down fa-2x" (click)="sort('finishTime', 'DESC')"></i></div></div></div></th>
+      <th><div class="table-headers_content"><div>Свободных мест</div><div (click)="sortUpMaxPassengers = !sortUpMaxPassengers"> <div *ngIf="sortUpMaxPassengers" (click)="sort('maxPassengers', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpMaxPassengers"><i class="fas fa-caret-down fa-2x" (click)="sort('maxPassengers', 'DESC')"></i></div></div></div></th>
+      <th>Откуда</th>
+      <th>Куда</th>
+      <th>Везёт</th>
+      <th *ngIf="currentPassenger" class="small_th">Занять</th>
+      <th *ngIf="currentDriver" class="small_th"></th>
+      <th *ngIf="currentDriver" class="small_th"></th>
+    </tr>
+    </thead>
+
+    <tbody  class="body-half-screen" >
+    <tr *ngFor="let trip of trips; let i = index;">
+      <td >{{i+1}}</td>
+      <td  >{{trip.startTime | time }}</td>
+      <td  >{{trip.finishTime | time}}</td>
+      <td  >{{trip.maxPassengers}}</td>
+      <td  >{{trip.startPlace | place}}</td>
+      <td  >{{trip.finishPlace | place}}</td>
+      <td  >{{trip.driverLogin}}</td>
+      <td *ngIf="currentPassenger" class="small_th"><div *ngIf="trip.passengersLogins"><div *ngIf="!trip.passengersLogins.includes(currentPassenger.login)"(click)="takeTrip(trip)"><i class="fas fa-car"></i></div>
+        <div *ngIf="trip.passengersLogins.includes(currentPassenger.login)">Занято</div> </div>
+      </td>
+      <td *ngIf="currentDriver" class="small_th"> <div *ngIf="currentDriver.login === trip.driverLogin" ><i class="fas fa-pen" (click)="editTrip(trip.id)"></i></div> </td>
+      <td *ngIf="currentDriver" class="small_th"><div *ngIf="currentDriver.login === trip.driverLogin"><i class="far fa-times-circle"></i></div></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="add-trip-button " (click)="addTrip()" *ngIf="currentDriver"><div>Создать поездку</div> </div>
+</div>
+
+
+
+<ng-template #loading>
+  <div class="loadingContainer">
+    <div class="center">
+      <div class="loading"></div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+

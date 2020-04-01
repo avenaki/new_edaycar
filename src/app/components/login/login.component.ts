@@ -4,9 +4,9 @@ import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
-import { UserModel } from "../models/user-model";
-import * as UserActions from "../store/actions/user.actions";
-import { UserState } from "../store/state/user.state";
+import { UserModel } from "../../models/user-model";
+import * as UserActions from "../../store/actions/user.actions";
+import { UserState } from "../../store/state/user.state";
 
 @Component({
   selector: "app-login",

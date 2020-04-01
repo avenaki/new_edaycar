@@ -1,31 +1,31 @@
 <div class="form">
   <div class="contentContainer">
     <form [formGroup]="createTripForm">
-<div class="create-trip-form">
+<div class="form">
   <div class="container">
     <div class="columnContainer">
       <div class="form_text-large"> Выберите предположительное время начала и окончания поездки:</div>
     <div class="columnContainer">
-<div class="rowContainer time">
-        <div class="form_text"> начало</div>
-        <input type="time"  class="create-trip-form_input input-time" formControlName="startTime"/>
+<div class="rowContainer time_input">
+        <div class="form_text "> начало</div>
+        <input type="time"  class="form_input input-time" formControlName="startTime"/>
 </div>
-      <div class="rowContainer time">
+      <div class="rowContainer time_input">
       <div class="form_text"> конец</div>
-      <input type="time"  class="create-trip-form_input input-time" formControlName="finishTime" />
+      <input type="time"  class="form_input input-time" formControlName="finishTime" />
     </div>
     </div>
     <div>
       <div class="form_text-large"> Куда</div>
-      <input type="text"   class="create-trip-form_input" #start formControlName="startPlace" />
+      <input type="text"   class="form_input " #start formControlName="startPlace" />
     </div>
     <div >
       <div class="form_text-large"> Откуда</div>
       <div class="form-group">
-        <input type="text"    class="create-trip-form_input" #finish formControlName="finishPlace" />
+        <input type="text"    class="form_input " #finish formControlName="finishPlace" />
       </div>
     </div>
-      <div>
+      <div >
         <div class="form_text-large">Какое количество пассажиров Вы готовы подвезти?</div>
         <div class="custom-select">
           <select formControlName="maxPassengersValue">
@@ -40,7 +40,7 @@
 </div>
     </form>
   <div class = "map">
-    <agm-map
+    <agm-map style="position: relative"
       [latitude]="latitude"
       [longitude]="longitude"
       [zoom]="zoom" >

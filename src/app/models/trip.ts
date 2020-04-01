@@ -1,9 +1,8 @@
-import DateTimeFormat = Intl.DateTimeFormat;
 
 export class Trip {
   id: string;
-  startTime: DateTimeFormat;
-  finishTime: DateTimeFormat;
+  startTime: Date | string;
+  finishTime: Date | string;
   startX: number;
   startY: number;
   startPlace: string | undefined;
@@ -14,12 +13,12 @@ export class Trip {
   driverLogin: string;
   passengersLogins: string[];
 
-  constructor( id: string,  startTime: DateTimeFormat,
-               finishTime: DateTimeFormat, startX: number,
-               startY: number, finishX: number, finishY: number,
-               startPlace: string, finishPlace: string,
-               maxPassengers: number, driverLogin: string,
-               passengersLogins: string[]) {
+  constructor(id: string, startTime: string| Date,
+              finishTime: string | Date, startX: number,
+              startY: number, finishX: number, finishY: number,
+              startPlace: string, finishPlace: string,
+              maxPassengers: number, driverLogin: string,
+              passengersLogins: string[]) {
     this.id = id;
     this.startTime = startTime;
     this.finishTime = finishTime;

@@ -1,25 +1,40 @@
 import { MapsAPILoader } from "@agm/core";
-import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Router } from "@angular/router";
+import {  Store } from "@ngrx/store";
+import { Observable, Subscription } from "rxjs";
 import { Driver } from "../../models/driver";
-import DateTimeFormat = Intl.DateTimeFormat;
-import { TripSearchFilter } from "../../models/trip-search-filter";
+import { Trip } from "../../models/trip";
 import * as TripActions from "../../store/actions/trip.actions";
+import DateTimeFormat = Intl.DateTimeFormat;
 import * as fromDriver from "../../store/reducers/driver.reducer";
 import { AppState } from "../../store/state/app.state";
 
+
+
 @Component({
-  selector: "app-trip-filter",
-  templateUrl: "./trip-filter.component.html",
-  styleUrls: ["../create-trip.component.less"]
+  selector: "app-create-trip",
+  templateUrl: "./create-trip.component.html",
+  styleUrls: ["../create-trip.component.less"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TripFilterComponent implements OnInit {
-  @Output() closeEvent = new EventEmitter<void>();
-  filterForm: FormGroup;
+export class CreateTripComponent implements OnInit, OnDestroy, AfterViewInit {
+  createTripForm: FormGroup;
   startTime: DateTimeFormat;
   finishTime: DateTimeFormat;
+  startPlace: string;
+  finishPlace: string;
   latitude: number;
   longitude: number;
   zoom: number;
@@ -28,34 +43,42 @@ export class TripFilterComponent implements OnInit {
   finishX: number;
   startY: number;
   finishY: number;
+  currentDriver$: Observable<Driver>;
+  currentDriverSubscription: Subscription;
+  currentDriver: Driver;
 
 
   private geoCoder: google.maps.Geocoder;
   public startIconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
   public finishIconUrl = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-
-  currentDriver$: Observable<Driver>;
-  currentDriver: Driver;
-
   @ViewChild("start", { static: false })
   public startElementRef: ElementRef;
 
   @ViewChild("finish", { static: false })
   public finishElementRef: ElementRef;
-  constructor( private mapsAPILoader: MapsAPILoader,
-               private ngZone: NgZone,
-               private store: Store<AppState>,
-               private fb: FormBuilder) {
+  constructor( protected mapsAPILoader: MapsAPILoader,
+               protected ngZone: NgZone,
+               protected store: Store<AppState>,
+               protected fb: FormBuilder,
+               protected cdr: ChangeDetectorRef,
+               protected router: Router) {
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.subscribeToDriverChanges();
+    this.initGoogleApi(this.createTripForm);
+  }
+
+  subscribeToDriverChanges(): void {
     this.currentDriver$ = this.store.select(fromDriver.selectCurrentDriver);
-    this.currentDriver$.subscribe(currentDriver => {
+    this.currentDriverSubscription = this.currentDriver$.subscribe(currentDriver => {
       if (currentDriver) {
         this.currentDriver = currentDriver;
       }
     });
+  }
+  initGoogleApi(createTripForm: FormGroup): void {
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
@@ -80,7 +103,7 @@ export class TripFilterComponent implements OnInit {
             if (status === "OK") {
               if (results[0]) {
                 this.zoom = 12;
-                this.filterForm.patchValue({
+                createTripForm.patchValue({
                   "startPlace": results[0].formatted_address
                 });
               }
@@ -101,7 +124,7 @@ export class TripFilterComponent implements OnInit {
             if (status === "OK") {
               if (results[0]) {
                 this.zoom = 12;
-                this.filterForm.patchValue({
+                createTripForm.patchValue({
                   "finishPlace": results[0].formatted_address
                 });
               }
@@ -111,14 +134,13 @@ export class TripFilterComponent implements OnInit {
       });
     });
   }
-
   initForm(): void {
-    this.filterForm = this.fb.group({
+    this.createTripForm = this.fb.group({
       startTime: new FormControl("", [Validators.required]),
       finishTime: new FormControl("", [Validators.required]),
       startPlace: new FormControl("", [Validators.required]),
       finishPlace: new FormControl("", [Validators.required]),
-      canWalkDistance: new FormControl("", [Validators.required])});
+      maxPassengersValue: new FormControl("", [Validators.required])});
   }
   private setCurrentLocation(): void {
     if ("geolocation" in navigator) {
@@ -127,6 +149,7 @@ export class TripFilterComponent implements OnInit {
         this.longitude = position.coords.longitude;
         this.zoom = 8;
         this.getAddress(this.latitude, this.longitude);
+        this.cdr.detectChanges();
       });
     }
   }
@@ -148,15 +171,33 @@ export class TripFilterComponent implements OnInit {
   }
 
   submit(): void {
-    const filter = new TripSearchFilter(
-      this.filterForm.get("startTime").value,
-      this.filterForm.get("finishTime").value,
-      this.startX, this.startY,
-      this.finishX, this.finishY,
-      this.filterForm.get("canWalkDistance").value, );
-    this.store.dispatch(TripActions.filterTrips(filter));
-    this.closeEvent.emit();
+    const startTime = this.createTripForm.get("startTime").value.split(":");
+    const finishTime = this.createTripForm.get("finishTime").value.split(":");
+    const startH = Number(startTime[0]);
+    const startM = Number(startTime[1]);
+    const finishH = Number(finishTime[0]);
+    const finishM = Number(finishTime[1]);
+    const newTrip = new Trip(
+      null,
+      new Date(Date.UTC(null, null, null, startH, startM)).toISOString(),
+      new Date(Date.UTC(null, null, null, finishH, finishM)).toISOString(),
+       this.startX, this.startY,
+       this.finishX, this.finishY,
+       this.createTripForm.get("startPlace").value,
+       this.createTripForm.get("finishPlace").value,
+       this.createTripForm.get("maxPassengersValue").value,
+       this.currentDriver.login,  []);
+       this.store.dispatch(TripActions.addTrip(newTrip));
+       this.router.navigate(["trips"]);
 
+  }
+  ngAfterViewInit(): void {
+
+  }
+
+  ngOnDestroy(): void {
+    this.currentDriverSubscription.unsubscribe();
+    this.cdr.detach();
   }
 
 }
