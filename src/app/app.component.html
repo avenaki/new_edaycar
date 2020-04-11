@@ -1,13 +1,15 @@
-<div *ngIf="currentUser">
+<div>
 <div class="navbar">
   <div class="navbar_brand">
     <div> EDAYCAR  </div>
   </div>
   <div class="navbar_container">
     <div class="navbar_item" routerLink="">Главная</div>
-    <div class="navbar_item" routerLink="trips">Поездки</div>
-    <div class="navbar_item" routerLink="profile-{{currentUser.role}}" >Профиль</div>
-    <div class="navbar_item navbar_item_logout" (click)="logout()">Выйти</div>
+    <div *ngIf="currentUser" class="navbar_item" routerLink="trips">Поездки</div>
+    <div *ngIf="currentUser" class="navbar_item" routerLink="chat">Чаты</div>
+    <div *ngIf="currentUser" class="navbar_item" routerLink="profile-{{currentUser.role}}" >Профиль</div>
+    <div *ngIf="currentUser"class="navbar_item navbar_item_logout" (click)="logout()">Выйти</div>
+    <div *ngIf="!currentUser"class="navbar_item navbar_item_logout" routerLink ="login" >Войти</div>
   </div>
 </div>
 </div>

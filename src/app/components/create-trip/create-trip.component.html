@@ -1,7 +1,7 @@
 <div class="form">
   <div class="contentContainer">
     <form [formGroup]="createTripForm">
-<div class="form">
+<div class="trip-form">
   <div class="container">
     <div class="columnContainer">
       <div class="form_text-large"> Выберите предположительное время начала и окончания поездки:</div>
@@ -38,12 +38,17 @@
   </div>
 </div>
 </div>
+      <div class="button-container add-padding"><button class="form_button" (click)="submit()">Создать</button></div>
     </form>
   <div class = "map">
     <agm-map style="position: relative"
       [latitude]="latitude"
       [longitude]="longitude"
-      [zoom]="zoom" >
+      [zoom]="zoom" (mapClick)="addMarker($event.coords.lat, $event.coords.lng)">
+      <agm-direction
+        [origin]="origin"
+        [destination]="destination"
+      ></agm-direction>
       <agm-marker
         [latitude]="startX"
         [longitude]="startY"   [iconUrl]="startIconUrl"></agm-marker>
@@ -51,7 +56,7 @@
     </agm-map>
   </div>
   </div>
-  <div class="button-container"><button class="form_button" (click)="submit()">Создать</button></div>
+
 </div>
 
 

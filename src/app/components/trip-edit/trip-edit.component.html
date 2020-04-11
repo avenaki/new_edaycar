@@ -1,0 +1,45 @@
+<div class="modal-back">
+</div>
+<div class="modal-edit">
+  <div class="form">
+    <div class="contentContainer modalContainer">
+      <form [formGroup]="editTripForm">
+        <div>
+          <div class="container">
+            <div class="columnContainer">
+              <div class="form_text-large"> Выберите желаемое время начала и окончания поездки:</div>
+              <div class="columnContainer ">
+                <div class="rowContainer time_input">
+                  <div class="form_text"> Начало</div>
+                  <input type="time"   class="form_input input-time" formControlName="startTime"/>
+                </div>
+                <div class="rowContainer time_input">
+                  <div class="form_text"> Конец</div>
+                  <input type="time"  class="form_input input-time" formControlName="finishTime" />
+                </div>
+              </div>
+              <div >
+                <div class="form_text-large"> Откуда</div>
+                <input type="text"   class="form_input" #start formControlName="startPlace" />
+              </div>
+              <div >
+                <div class="form_text-large"> Куда</div>
+                <div class="form-group">
+                  <input type="text"    class="form_input" #finish formControlName="finishPlace" />
+                </div>
+              </div>
+              <div >
+                <div class="form_text-large"> Места</div>
+                <input type="text"   class="form_input"  formControlName="maxPassengersValue" />
+              </div>
+              </div>
+            </div>
+          </div>
+
+      </form>
+    </div>
+    <div class="button-container">
+      <button class="form_button" (click)="closeEvent.emit()">Назад</button>
+      <button class="form_button" (click)="submit()">Сохранить</button></div>
+  </div>
+</div>

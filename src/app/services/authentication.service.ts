@@ -24,6 +24,13 @@ export class AuthenticationService {
     return this.http.post<UserModel>
     (this.apiUrl + "account/login", { login: username, password: password });
   }
+  getToken(): string {
+    const data = JSON.parse(localStorage.getItem("currentUser"));
+    if (data === null) {
+      return " ";
+    }
+    return data.token;
+  }
 
 
 }

@@ -13,6 +13,7 @@ export class TimePipe implements PipeTransform {
       const newResult = "";
       return newResult.concat(newTimeArray[0] + ":" + newTimeArray[1]);
     }
+
     const dateTimeArray = utcTime.toString().split("T");
     const timeArray = dateTimeArray[1].split(":");
     const result = "";

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component,  OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
@@ -21,11 +21,15 @@ import { AppState } from "../../store/state/app.state";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TripsTableComponent implements OnInit, OnDestroy {
-
   trips$: Observable<Trip[]>;
   trips: Trip[];
+
   modal = false;
   editModal = false;
+  startChatModal = false;
+
+  startChatUserLogin: string;
+  currentEditTripId: string;
   userIsDriver = false;
   sortUpStart = false;
   sortUpFinish = false;
@@ -50,6 +54,7 @@ export class TripsTableComponent implements OnInit, OnDestroy {
 
     this.currentUser$.subscribe( (currentUser) => {
       if (currentUser) {
+        this.currentUser = currentUser;
       if (currentUser.role === "driver") {
         this.currentDriver$ = this.store.select(fromDriver.selectCurrentDriver);
         this.userIsDriver = true;
@@ -100,11 +105,13 @@ export class TripsTableComponent implements OnInit, OnDestroy {
 
   closeModal(): void {
      this.modal = false;
-    this.cdr.markForCheck();
+     this.editModal = false;
+     this.startChatModal = false;
+     this.cdr.markForCheck();
   }
 
   update(): void {
-    this.store.dispatch(TripActions.loadTrips());
+    this.editModal = true;
   }
 
   takeTrip(trip: Trip): void {
@@ -123,10 +130,15 @@ export class TripsTableComponent implements OnInit, OnDestroy {
 
   editTrip(id: string): void {
     this.editModal = true;
-    alert(id);
+    this.currentEditTripId = id;
   }
 
   addTrip(): void {
   this.router.navigate(["create-trip"]);
+  }
+
+  startChat(login: string): void {
+  this.startChatUserLogin = login;
+  this.startChatModal = true;
   }
 }

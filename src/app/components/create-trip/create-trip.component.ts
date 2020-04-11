@@ -1,6 +1,5 @@
 import { MapsAPILoader } from "@agm/core";
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -23,13 +22,14 @@ import { AppState } from "../../store/state/app.state";
 
 
 
+
 @Component({
   selector: "app-create-trip",
   templateUrl: "./create-trip.component.html",
   styleUrls: ["../create-trip.component.less"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateTripComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CreateTripComponent implements OnInit, OnDestroy {
   createTripForm: FormGroup;
   startTime: DateTimeFormat;
   finishTime: DateTimeFormat;
@@ -46,6 +46,8 @@ export class CreateTripComponent implements OnInit, OnDestroy, AfterViewInit {
   currentDriver$: Observable<Driver>;
   currentDriverSubscription: Subscription;
   currentDriver: Driver;
+  origin: Place;
+  destination: Place;
 
 
   private geoCoder: google.maps.Geocoder;
@@ -98,6 +100,7 @@ export class CreateTripComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           this.startX = place.geometry.location.lat();
           this.startY = place.geometry.location.lng();
+          this.origin = { lat: this.startX, lng: this.startY};
           this.zoom = 12;
           this.geoCoder.geocode({"location": {lat: this.startX, lng: this.startY}}, (results, status) => {
             if (status === "OK") {
@@ -119,6 +122,7 @@ export class CreateTripComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           this.finishX = place.geometry.location.lat();
           this.finishY = place.geometry.location.lng();
+          this.destination = { lat: this.finishX, lng: this.finishY};
           this.zoom = 12;
           this.geoCoder.geocode({"location": {lat: this.finishX, lng: this.finishY}}, (results, status) => {
             if (status === "OK") {
@@ -171,16 +175,12 @@ export class CreateTripComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   submit(): void {
-    const startTime = this.createTripForm.get("startTime").value.split(":");
-    const finishTime = this.createTripForm.get("finishTime").value.split(":");
-    const startH = Number(startTime[0]);
-    const startM = Number(startTime[1]);
-    const finishH = Number(finishTime[0]);
-    const finishM = Number(finishTime[1]);
+    const startTime = this.convertTime( this.createTripForm.get("startTime").value);
+    const finishTime = this.convertTime(this.createTripForm.get("finishTime").value);
     const newTrip = new Trip(
       null,
-      new Date(Date.UTC(null, null, null, startH, startM)).toISOString(),
-      new Date(Date.UTC(null, null, null, finishH, finishM)).toISOString(),
+      startTime,
+      finishTime,
        this.startX, this.startY,
        this.finishX, this.finishY,
        this.createTripForm.get("startPlace").value,
@@ -191,13 +191,21 @@ export class CreateTripComponent implements OnInit, OnDestroy, AfterViewInit {
        this.router.navigate(["trips"]);
 
   }
-  ngAfterViewInit(): void {
 
+  convertTime(tripTime: string): string {
+    const currentTime = tripTime.split(":");
+    const timeHours = Number(currentTime[0]);
+    const timeMinutes = Number(currentTime[1]);
+    return  new Date(Date.UTC(null, null, null, timeHours, timeMinutes)).toISOString();
   }
-
   ngOnDestroy(): void {
     this.currentDriverSubscription.unsubscribe();
     this.cdr.detach();
   }
 
+
+  addMarker(lat: number, lng: number): void {
+console.log(lat, lng);
+  }
 }
+

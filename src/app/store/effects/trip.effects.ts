@@ -6,6 +6,7 @@ import { Trip } from "../../models/trip";
 import { HttpService } from "../../services/http.service";
 import * as TripActions from "../actions/trip.actions";
 
+
 @Injectable()
 export class TripEffects {
   constructor(private action$: Actions,
@@ -75,6 +76,36 @@ export class TripEffects {
           }),
           catchError((error: Error) => {
             return of(TripActions.takeTripError(error));
+          }),
+        ),
+      ),
+    );
+  });
+  loadTrip$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(TripActions.loadTrip),
+      mergeMap((action) =>
+        this.httpService.getTrip(action.id).pipe(
+          map((data: Trip) => {
+            return TripActions.loadTripSuccess(data);
+          }),
+          catchError((error: Error) => {
+            return of(TripActions.loadTripFail(error));
+          }),
+        ),
+      ),
+    );
+  });
+  editTrip$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(TripActions.editTrip),
+      mergeMap(action =>
+        this.httpService.updateTrip(action).pipe(
+          map(() => {
+            return TripActions.editTripSuccess(action);
+          }),
+          catchError((error: Error) => {
+            return of(TripActions.editTripFail(error));
           }),
         ),
       ),

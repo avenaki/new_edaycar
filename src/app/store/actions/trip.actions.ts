@@ -4,6 +4,7 @@ import { Trip } from "../../models/trip";
 import { TripSearchFilter } from "../../models/trip-search-filter";
 
 
+
 export const addTrip = createAction(
   "[Trip] - Add Trip ",
   props< Trip>(),
@@ -52,5 +53,32 @@ export const takeTrip = createAction(
 
 export const takeTripError = createAction(
   "[Trip] - Filter Trips Error",
+  props<Error>(),
+);
+export const loadTrip = createAction(
+  "[Trip] - Load Trip ",
+  props<{id: string; }>(),
+);
+
+export const loadTripSuccess = createAction(
+  "[Trip] - Load Trip Success",
+  props<Trip>(),
+);
+
+export const loadTripFail = createAction(
+  "[Trip] - Load Trips Fail",
+  props<Error>(),
+);
+export const editTrip = createAction(
+  "[Trip] - Trip Edit ",
+  props<Trip>(),
+);
+export const editTripSuccess = createAction(
+  "[Trip] - Trip Edit  Success",
+  props< Trip>(),
+);
+
+export const editTripFail = createAction(
+  "[Trip] - Trip Edit  Fail",
   props<Error>(),
 );

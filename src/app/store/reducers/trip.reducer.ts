@@ -7,6 +7,7 @@ import { initialTripState, TripState } from "../state/trip.state";
 
 
 
+
 export const  tripReducer = createReducer(
   initialTripState,
   on(TripActions.addTripSuccess, (state, trip) => {
@@ -25,6 +26,12 @@ export const  tripReducer = createReducer(
   on(TripActions.loadTripsFail, (state,  error: Error) => {
     return { ...state, tripError: error};
   }),
+  on(TripActions.loadTripSuccess, (state,  trip: Trip) => {
+    return { ...state, currentTrip: trip};
+  }),
+  on(TripActions.loadTripFail, (state,  error: Error) => {
+    return { ...state, currentTrip: null, tripError: error};
+  }),
   on(TripActions.loadTripsSuccess, (state,  action) => {
     return { ...state, trip:  action.trip};
   }),
@@ -33,6 +40,16 @@ export const  tripReducer = createReducer(
   }),
   on(TripActions.filterTripsError, (state,  error) => {
     return { ...state, tripError: error};
+  }),
+  on(TripActions.editTripSuccess, (state, action) => {
+    const newTrips = state.trip.filter( (trip: Trip) => trip.id !== action.id);
+    newTrips.push(action);
+    return {...state,  trip: newTrips, currentTrip: action};
+  }),
+
+  on(TripActions.editTripFail, (state, error) => {
+    console.log(error);
+    return {...state, };
   }),
   );
 
@@ -46,4 +63,6 @@ export const selectAllTrips = createSelector(
   selectTrip,
   (state: TripState) => state.trip);
 
-
+export const selectCurrentTrip = createSelector(
+  selectTrip,
+  (state: TripState) => state.currentTrip);

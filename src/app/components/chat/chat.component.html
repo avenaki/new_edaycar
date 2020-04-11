@@ -1,0 +1,28 @@
+<div class="chat-page" *ngIf="currentChats">
+  <div class="chat-page_chats" id="chats">
+    <div class="chats_header"><input class="search-chat form_input" /></div>
+    <div *ngFor="let chat of currentChats">
+   <div class="chat-page_chat" (click)="selectChat(chat.id)"> {{chat.participants | receiver : currentUser.login}}</div></div>
+  </div>
+  <div class="chat-page_current-chat" *ngIf="currentChat" id="current-chat" >
+    <div class="chat_header"><div *ngIf="currentChat"> {{currentChat.participants  | receiver : currentUser.login}}</div>
+    <div *ngIf="!currentReceiverPic" class="accountPhoto ">
+      <img  class="accountPhoto_img" src="https://sun9-4.userapi.com/c849424/v849424786/15eee3/Y4C7mfELwBA.jpg?ava=1"></div>
+    <div *ngIf="currentReceiverPic" class="accountPhoto">
+      <img class="accountPhoto_img" src="{{currentReceiverPic}}">
+  </div>
+    </div>
+    <div class="chat_messages" #messagesContainer [scrollTop]="messagesContainer.scrollHeight">
+    <div *ngFor=" let message of currentChat.messages">
+    <div [style.float] ="messageSender(message.sender)" class="chat-page_current-chat_message">
+      <div class="message_text">  {{message.text}} </div>
+      <div class="message_time">{{message.sendTime | time }}</div>
+    </div>
+    </div>
+   </div>
+    <div class="chat_input-message">
+      <div class="chat_input" ><input [(ngModel)]="currentText" class="form_input" type="text" /></div>
+      <div class="chat_submit-button" (click)="sendMessage()">Отправить</div>
+    </div>
+  </div>
+</div>

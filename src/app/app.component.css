@@ -1,0 +1,71 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed|Unica+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600&display=swap');
+body {
+  margin: 0;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1rem;
+  color: #302f36;
+  overflow: hidden;
+}
+.form_input {
+  width: 100%;
+  line-height: 25px;
+  font-family: 'Ubuntu', sans-serif;
+  outline: none;
+  border: 1px solid #8ebacc;
+  font-size: 1rem;
+  text-align: center;
+  color: #474747;
+  border-radius: 5px;
+  padding: 5px 5px;
+}
+.navbar {
+  background-image: linear-gradient(#1d1d1f 60%, #2e2e31);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 9vh;
+  font-size: large;
+  display: flex;
+  flex-direction: row;
+  z-index: 3;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+.navbar_item {
+  display: block;
+  margin-left: 15%;
+  color: whitesmoke;
+}
+.navbar_item:hover {
+  opacity: 0.9;
+  cursor: pointer;
+  color: #7b9cc2;
+}
+.navbar_brand {
+  align-self: center;
+  cursor: default;
+  margin-left: 2%;
+  font-family: 'Oswald', sans-serif;
+  font-size: 24px;
+  font-weight: 200;
+  color: #8ebffa;
+  flex-shrink: 0;
+  padding-right: 15px;
+}
+.navbar_container {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+.navbar_item_logout {
+  position: absolute;
+  margin-right: 100px;
+  right: 0;
+}
+/*# sourceMappingURL=app.component.css.map */

@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from "./components/about/about.component";
+import { ChatComponent } from "./components/chat/chat.component";
 import { CreateTripComponent } from "./components/create-trip/create-trip.component";
 import { LoginComponent } from "./components/login/login.component";
 import { ProfileDriverComponent } from "./components/profile-driver/profile-driver.component";
@@ -22,7 +23,8 @@ export const appRoutes: Routes = [
   { path: "profile-driver", component: ProfileDriverComponent, canActivate: [AuthGuard],  pathMatch: "full"},
   { path: "profile-passenger", component: ProfilePassengerComponent, canActivate: [AuthGuard],  pathMatch: "full"},
   { path: "trips", component: TripsTableComponent, canActivate: [AuthGuard],  pathMatch: "full"},
-  { path: "", component: AboutComponent, canActivate: [AuthGuard], pathMatch: "full" },
+  { path: "chat", component: ChatComponent, canActivate: [AuthGuard],  pathMatch: "full"},
+  { path: "", component: AboutComponent,  pathMatch: "full" },
 
 
 
