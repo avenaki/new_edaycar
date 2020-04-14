@@ -82,3 +82,17 @@ export const editTripFail = createAction(
   "[Trip] - Trip Edit  Fail",
   props<Error>(),
 );
+
+export const deleteTrip = createAction(
+  "[Trip] - Trip Delete ",
+  props<{id: string}>(),
+);
+export const deleteTripSuccess = createAction(
+  "[Trip] - Trip Delete  Success",
+  props<{id: string}>(),
+);
+
+export const deleteTripFail = createAction(
+  "[Trip] - Trip Delete  Fail",
+  props<Error>(),
+);

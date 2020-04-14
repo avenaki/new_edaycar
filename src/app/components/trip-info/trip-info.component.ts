@@ -1,19 +1,22 @@
-import { Component, EventEmitter, Input,  OnDestroy, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable, Subscription } from "rxjs";
+import { TakeTripModel } from "../../models/take-trip-model";
 import { Trip } from "../../models/trip";
+import { UserModel } from "../../models/user-model";
 import * as TripActions from "../../store/actions/trip.actions";
 import * as fromTrip from "../../store/reducers/trip.reducer";
 import { CreateTripComponent } from "../create-trip/create-trip.component";
 
 @Component({
-  selector: "app-trip-edit",
-  templateUrl: "./trip-edit.component.html",
+  selector: "app-trip-info",
+  templateUrl: "./trip-info.component.html",
   styleUrls: ["../create-trip.component.less"]
 })
-export class TripEditComponent extends CreateTripComponent implements OnInit, OnDestroy {
+export class TripInfoComponent extends CreateTripComponent implements OnInit, OnDestroy {
   @Output() closeEvent = new EventEmitter<void>();
   @Input()  currentTripId: string;
+  @Input()  currentUser: UserModel;
   editTripForm: FormGroup;
   currentTrip$: Observable<Trip>;
   currentTrip: Trip;
@@ -46,6 +49,12 @@ export class TripEditComponent extends CreateTripComponent implements OnInit, On
         this.startY = this.currentTrip.startY;
         this.finishX = this.currentTrip.finishX;
         this.finishY = this.currentTrip.finishY;
+        if ( this.currentUser.login !== this.currentTrip.driverLogin ) {
+          this.editTripForm.disable();
+        } else {
+          this.editTripForm.enable();
+        }
+
         this.cdr.detectChanges();
 
       }
@@ -54,12 +63,12 @@ export class TripEditComponent extends CreateTripComponent implements OnInit, On
 
   updateValues(): void {
     this.editTripForm.patchValue({
-        startTime: this.convertTimeToString(this.currentTrip.startTime),
-        finishTime: this.convertTimeToString(this.currentTrip.finishTime),
-        startPlace: this.currentTrip.startPlace,
-        finishPlace: this.currentTrip.finishPlace,
-        maxPassengersValue: this.currentTrip.maxPassengers
-      });
+      startTime: this.convertTimeToString(this.currentTrip.startTime),
+      finishTime: this.convertTimeToString(this.currentTrip.finishTime),
+      startPlace: this.currentTrip.startPlace,
+      finishPlace: this.currentTrip.finishPlace,
+      maxPassengersValue: this.currentTrip.maxPassengers
+    });
   }
   ngOnDestroy(): void {
     this.currentTripSubcription.unsubscribe();
@@ -85,9 +94,23 @@ export class TripEditComponent extends CreateTripComponent implements OnInit, On
     this.closeEvent.emit();
   }
   convertTimeToString(utcTime: string | Date): string {
-  const dateTimeArray = utcTime.toString().split("T");
-  const timeArray = dateTimeArray[1].split(":");
-  const result = "";
-  return result.concat(timeArray[0] + ":" + timeArray[1]);
-}
+    const dateTimeArray = utcTime.toString().split("T");
+    const timeArray = dateTimeArray[1].split(":");
+    const result = "";
+    return result.concat(timeArray[0] + ":" + timeArray[1]);
+  }
+
+  takeTrip(trip: Trip): void {
+    if (trip.maxPassengers <= 0) {
+      alert("Все места заняты!");
+      return;
+    }
+    const model = new TakeTripModel(this.currentUser.login, trip);
+    this.store.dispatch(TripActions.takeTrip(model));
+  }
+
+  delete(): void {
+    this.store.dispatch(TripActions.deleteTrip({id: this.currentTrip.id}));
+    this.closeEvent.emit();
+  }
 }

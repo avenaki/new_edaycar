@@ -21,6 +21,7 @@ import { AppState } from "../../store/state/app.state";
 export class ChatComponent implements OnInit {
   currentChats$: Observable<Chat[]>;
   currentChats: Chat[];
+  currentChatsShow: Chat[];
   currentChat$: Observable<Chat>;
   currentChat: Chat;
   currentUser$: Observable<UserModel>;
@@ -28,6 +29,7 @@ export class ChatComponent implements OnInit {
   currentReceiverPicSubscription: Subscription;
   currentReceiverPic: string;
   currentText: string;
+  searchUser: string;
   constructor( private store: Store< AppState >,
                private chatService: ChatService,
                private ngZone: NgZone,
@@ -41,8 +43,11 @@ export class ChatComponent implements OnInit {
       this.ngZone.run(() => {
           message.type = "received";
           this.store.dispatch(ChatActions.receiveMessageSuccess( {message: message}));
+          if ( !this.currentChats.some(chat => chat.participants[0] === message.sender) ||
+               !this.currentChats.some(chat => chat.participants[1] === message.sender) ) {
+            this.store.dispatch(ChatActions.loadAllChats( {login: this.currentUser.login }));
+          }});
       });
-    });
   }
   ngOnInit(): void {
     this.currentUser$.subscribe( (user: UserModel) => {
@@ -52,6 +57,8 @@ export class ChatComponent implements OnInit {
     });
     this.currentChats$.subscribe( (chats: Chat[]) => {
       this.currentChats = chats;
+      this.currentChatsShow = chats;
+      this.cdr.markForCheck();
     });
     this.currentChat$ = this.store.select(fromChat.selectCurrentChat);
     this.currentChat$.subscribe( (chat: Chat) => {
@@ -80,5 +87,14 @@ sendMessage(): void {
 
   messageSender(sender: string): string {
     return sender === this.currentUser.login ? "right" : "left";
+  }
+
+  findUser(): void {
+    if ( this.searchUser.length === 0) {
+      this.currentChatsShow = this.currentChats;
+    } else {
+      this.currentChatsShow = this.currentChats.filter( chat =>  {  return chat.participants[1] === this.searchUser ||
+      chat.participants[0] === this.searchUser; });
+    }
   }
 }

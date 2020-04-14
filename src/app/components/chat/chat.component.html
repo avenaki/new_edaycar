@@ -1,8 +1,15 @@
 <div class="chat-page" *ngIf="currentChats">
   <div class="chat-page_chats" id="chats">
-    <div class="chats_header"><input class="search-chat form_input" /></div>
-    <div *ngFor="let chat of currentChats">
+    <div class="chats_header"><input  [(ngModel)]="searchUser" (change)="findUser()" class="search-chat form_input" /></div>
+    <div class="chats_scroll">
+      <div *ngIf="currentChatsShow">
+    <div *ngFor="let chat of currentChatsShow">
    <div class="chat-page_chat" (click)="selectChat(chat.id)"> {{chat.participants | receiver : currentUser.login}}</div></div>
+      </div>
+      <div *ngIf="!currentChatsShow">
+        Пользователи не найденыы
+      </div>
+  </div>
   </div>
   <div class="chat-page_current-chat" *ngIf="currentChat" id="current-chat" >
     <div class="chat_header"><div *ngIf="currentChat"> {{currentChat.participants  | receiver : currentUser.login}}</div>

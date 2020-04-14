@@ -111,4 +111,19 @@ export class TripEffects {
       ),
     );
   });
+  deleteTrip$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(TripActions.deleteTrip),
+      mergeMap(action =>
+        this.httpService.deleteTrip(action.id).pipe(
+          map(() => {
+            return TripActions.deleteTripSuccess({id: action.id});
+          }),
+          catchError((error: Error) => {
+            return of(TripActions.deleteTripFail(error));
+          }),
+        ),
+      ),
+    );
+  });
 }

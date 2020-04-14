@@ -1,17 +1,18 @@
 @import "../../../app/styles/_variables";
 .chat-page {
   display: grid;
-  font-family: 'Exo 2', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   grid-template-columns: 20% 1fr;
   grid-template-areas:
     "chats chat";
-  margin-top: 64px;
   height: 100vh;
 }
+
 .search-chat{
   width:90%;
   height: 20px;
   border-radius:5px;
+  text-align: left;
 }
 .chats_header {
   height: 50px;
@@ -24,6 +25,12 @@
 #chats{
   grid-area: chats;
   border-color: aliceblue;
+}
+ #chats {
+  padding-top: 75px;
+}
+#current-chat{
+  margin-top: 9vh;
 }
 .chat-page_chats, .chat-page_current-chat {
   padding: 20px;
@@ -40,12 +47,12 @@
   -webkit-box-align: center;
   align-items: center;
   font-weight: bold;
-  color: #121c22;
-  border-bottom: 2px solid #8ebacc;
+  color: #121c22cc;
+  border-bottom: 1.8px solid #8ebacc;
   padding: 1em;
   &:hover{
     opacity: 0.9;
-    color: #2980b9;
+    color: @main-blue;
     cursor: pointer;
   }
 }
@@ -55,7 +62,7 @@
     line-height: 25px;
     font-family: 'Ubuntu', sans-serif;
     outline: none;
-    border: 2px solid #8ebacc;
+    border: 1.8px solid #8ebacc;
     font-size: 1rem;
     text-align: center;
     color: #474747;
@@ -64,8 +71,8 @@
 
 }
 
-.chat_messages, .chat-page_chats, .chat_input-message, .chat_header {
-  border: 2px solid   #8ebacc;
+.chat_messages,  .chat_input-message, .chat_header {
+  background-color: #ecf1f3
 }
 
 .chat_messages,  .chat_input-message {
@@ -82,19 +89,30 @@
   padding-left: 2em;
   padding-right: 2em;
   justify-content: space-between;
-  margin: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 70px;
   border-radius: 5px;
 }
+.chats_scroll {
+  overflow-y: scroll;
+  height: 76vh;
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
 .accountPhoto {
   display: flex;
   justify-content: center;
   align-items: center;
-  height:90px;
 }
 .accountPhoto_img {
-  width:  80px;
-  height: 80px;
+  width:  60px;
+  height: 60px;
   border-radius: 50%;
+  border: 3px solid white;
 }
 .chat_input-message {
   display: flex;
@@ -103,7 +121,7 @@
   justify-content: space-between;
 }
 .chat_messages {
-  height: 340px;
+  height: 47vh;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -113,8 +131,9 @@
   flex-direction: row;
   justify-content: space-between;
   height: fit-content;
-  border: 1px solid #2980b9;
-  padding: 5px;
+  border: 1.8px solid #8ebacc;
+  background-color: #fcfeff;
+  padding: 7px;
   border-radius: 6px;
   width: fit-content;
   margin: 6px;
@@ -127,15 +146,16 @@
 
 .message_time {
   font-size: 10px;
-  color: #2980b9;
+  color: @main-blue;
   margin-left: 15px;
   align-self: flex-end;
+  font-weight: 600;
 }
 .chat_input{
   width: 100%;
 }
 .chat_submit-button {
-  background-color: #2980b9;
+  background-color: @main-blue;
   border-radius: 4px;
   width: 140px;
   height: 30px;

@@ -1,13 +1,13 @@
-<div class="container" *ngIf=" trips && (currentPassenger||currentDriver) ; else loading">
+<div class="container" *ngIf=" trips && (currentPassenger||currentDriver)">
   <app-trip-filter *ngIf="modal"  (closeEvent)="closeModal()"></app-trip-filter>
-  <app-trip-edit *ngIf="editModal&&currentEditTripId"  (closeEvent)="closeModal()" [currentTripId]="currentEditTripId"></app-trip-edit>
+  <app-trip-info *ngIf="editModal&&currentEditTripId"  (closeEvent)="closeModal()" [currentTripId]="currentEditTripId" [currentUser]="currentUser"></app-trip-info>
   <app-popup *ngIf="startChatModal"  (closeEvent)="closeModal()" [userLogin]="startChatUserLogin"  [currentUserLogin]="currentUser.login"></app-popup>
   <img src="../../../assets/images/people.jpg" class="background_img">
   <div class="button-container">
     <div class="buttons-container_buttons">
       <div class="flex-box">
         <div class="filter-button" (click)="modal=true"><div>Применить фильтр</div> </div>
-        <div class="update-button " (click)="update()"><div>Обновить</div> </div>
+        <div class="filter-button " (click)="update()"><div>Обновить</div> </div>
       </div>
     </div>
   </div>
@@ -21,14 +21,12 @@
       <th>Откуда</th>
       <th>Куда</th>
       <th class="middle_th">Везёт</th>
-      <th *ngIf="currentPassenger" class="small_th-last">Занять</th>
-      <th *ngIf="currentDriver" class="small_th-last"></th>
-      <th *ngIf="currentDriver" class="small_th-last"></th>
+      <th class="small_th"></th>
     </tr>
     </thead>
 
-    <tbody  class="body-half-screen" >
-    <tr *ngFor="let trip of trips; let i = index;">
+    <tbody  class="body-half-screen"  >
+    <tr *ngFor="let trip of trips; let i = index;" >
       <td >{{i+1}}</td>
       <td  class="small_th">{{trip.startTime | time }}</td>
       <td  class="small_th">{{trip.finishTime | time}}</td>
@@ -36,26 +34,12 @@
       <td  >{{trip.startPlace | place}}</td>
       <td  >{{trip.finishPlace | place}}</td>
       <td class="middle_th" *ngIf="currentUser.login === trip.driverLogin">{{trip.driverLogin}}</td>
-      <td class="middle_th" class="startChat"*ngIf="currentUser.login !== trip.driverLogin" (click)="startChat(trip.driverLogin)">{{trip.driverLogin}}</td>
-      <td *ngIf="currentPassenger" class="small_th-last"><div *ngIf="trip.passengersLogins"><div *ngIf="!trip.passengersLogins.includes(currentPassenger.login)"(click)="takeTrip(trip)"><i class="fas fa-car"></i></div>
-        <div *ngIf="trip.passengersLogins.includes(currentPassenger.login)">Занято</div> </div>
-      </td>
-      <td *ngIf="currentDriver" class="small_th-last"> <div *ngIf="currentDriver.login === trip.driverLogin" ><i class="fas fa-pen" (click)="editTrip(trip.id)"></i></div> </td>
-      <td *ngIf="currentDriver" class="small_th-last"><div *ngIf="currentDriver.login === trip.driverLogin"><i class="far fa-times-circle"></i></div></td>
+      <td class="middle_th startChat"*ngIf="currentUser.login !== trip.driverLogin" (click)="startChat(trip.driverLogin)">{{trip.driverLogin}}</td>
+      <td class="small_th more-info" (click)="editTrip(trip.id)">Подробнее <i class="fas fa-angle-double-right"></i> </td>
     </tr>
     </tbody>
   </table>
   <div class="add-trip-button " (click)="addTrip()" *ngIf="currentDriver"><div>Создать поездку</div> </div>
 </div>
-
-
-
-<ng-template #loading>
-  <div class="loadingContainer">
-    <div class="center">
-      <div class="loading"></div>
-    </div>
-  </div>
-</ng-template>
 
 

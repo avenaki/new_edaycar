@@ -51,6 +51,15 @@ export const  tripReducer = createReducer(
     console.log(error);
     return {...state, };
   }),
+  on(TripActions.deleteTripSuccess, (state, action) => {
+    const newTrips = state.trip.filter( (trip: Trip) => trip.id !== action.id);
+    return {...state,  trip: newTrips};
+  }),
+
+  on(TripActions.deleteTripFail, (state, error) => {
+    console.log(error);
+    return {...state, };
+  }),
   );
 
 

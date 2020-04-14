@@ -10,14 +10,13 @@ body {
   font-family: 'Exo 2', sans-serif;
   font-size: 1rem;
   color: #302f36;
-  overflow: hidden;
 }
 .form_input {
   width: 100%;
   line-height: 25px;
   font-family: 'Ubuntu', sans-serif;
   outline: none;
-  border: 1px solid #8ebacc;
+  border: 1.8px solid #8ebacc;
   font-size: 1rem;
   text-align: center;
   color: #474747;

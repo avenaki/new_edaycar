@@ -37,8 +37,14 @@ export const chatReducer = createReducer(
   }),
   on(ChatActions.receiveMessageSuccess, (state, payload) => {
     const newChat = Object.assign({}, state.currentChat);
-    newChat.messages = Object.assign([], newChat.messages);
-    newChat.messages.push(payload.message);
+    if ( newChat !== null) {
+    if ( newChat.participants[0] === payload.message.sender ||
+      newChat.participants[0] === payload.message.sender  ) {
+      newChat.messages = Object.assign([], newChat.messages);
+      newChat.messages.push(payload.message);
+    }
+    }
+
     return {...state, currentChat: newChat };
   }),
   on( ChatActions.selectChatSuccess, (state, payload) => {

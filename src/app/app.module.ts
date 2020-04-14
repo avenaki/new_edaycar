@@ -18,8 +18,8 @@ import { PopupComponent } from "./components/popup/popup.component";
 import { ProfileDriverComponent } from "./components/profile-driver/profile-driver.component";
 import { ProfilePassengerComponent } from "./components/profile-passenger/profile-passenger.component";
 import { SignupComponent } from "./components/signup/signup.component";
-import { TripEditComponent } from "./components/trip-edit/trip-edit.component";
 import { TripFilterComponent } from "./components/trip-filter/trip-filter.component";
+import { TripInfoComponent } from "./components/trip-info/trip-info.component";
 import { TripsTableComponent } from "./components/trips-table/trips-table.component";
 import { AuthGuard } from "./helpers/auth.guard";
 import { MessageReceiverPipe } from "./helpers/message-receiver.pipe";
@@ -51,14 +51,14 @@ import { appReducers } from "./store/reducers/app.reducers";
     PlacePipe,
     TimePipe,
     TripFilterComponent,
-    TripEditComponent,
     ChatComponent,
     MessageReceiverPipe,
     PopupComponent,
+    TripInfoComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyBQ2nmOQs_9PACtE1IKMX-rT7b0UcW_ZiQ",
+      apiKey: "AIzaSyDUEQ4Jgq11dSpzuCuduVdFfFlDj8khY-4",
       libraries: ["places", "geometry"]
     }),
     BrowserModule,

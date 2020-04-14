@@ -4,7 +4,6 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Driver } from "../../models/driver";
 import { Passenger } from "../../models/passenger";
-import { TakeTripModel } from "../../models/take-trip-model";
 import { Trip } from "../../models/trip";
 import { UserModel } from "../../models/user-model";
 import * as TripActions from "../../store/actions/trip.actions";
@@ -112,15 +111,6 @@ export class TripsTableComponent implements OnInit, OnDestroy {
 
   update(): void {
     this.editModal = true;
-  }
-
-  takeTrip(trip: Trip): void {
-    if (trip.maxPassengers <= 0) {
-      alert("Все места заняты!");
-      return;
-    }
-    const model = new TakeTripModel(this.currentPassenger.login, trip);
-    this.store.dispatch(TripActions.takeTrip(model));
   }
 
   ngOnDestroy(): void {
