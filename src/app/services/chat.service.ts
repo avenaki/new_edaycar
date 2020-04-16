@@ -13,6 +13,7 @@ import { AuthenticationService } from "./authentication.service";
 })
 export class ChatService {
   apiUrl = environment.apiUrl;
+  apiHub = environment.apiHub;
   messageReceived = new EventEmitter<Message>();
   connectionEstablished = new EventEmitter<Boolean>();
 
@@ -44,7 +45,7 @@ export class ChatService {
 
   private createConnection(): void {
     this._hubConnection = new HubConnectionBuilder()
-      .withUrl("http://localhost:5000/MessageHub",  { accessTokenFactory: () => this._authService.getToken() })
+      .withUrl(this.apiHub + "MessageHub",  { accessTokenFactory: () => this._authService.getToken() })
       .build();
   }
 

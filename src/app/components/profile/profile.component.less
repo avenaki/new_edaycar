@@ -1,0 +1,203 @@
+@import "../../../assets/_variables";
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.form_login {
+   font-family: 'Exo 2', sans-serif;
+   font-size: 30px;
+  margin-bottom: 1em;
+ }
+.driver-form_experience {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 20px;
+  margin: auto;
+  padding: 1em 1em;
+  display: flex;
+}
+.driver-form_experience_item {
+  margin-left: 3px;
+}
+.container-photo{
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+.form {
+  margin-top: 9vh;
+  height: 100vh;
+}
+.form_container {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  margin-left: 5em;
+  margin-right: 5em;
+  height: 76vh;
+}
+.accountPhoto {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  display: block;
+  object-fit: cover;
+}
+.profilePhoto{
+  border-radius: 50%;
+  position: relative;
+  &:hover > .accountPhoto{
+    filter: blur(0.7px) opacity(90%) brightness(30%);
+    cursor: pointer;
+  }
+  &:hover > .textPhoto{
+    visibility: visible;
+    cursor: pointer;
+  }
+  &:hover > .textPhoto:hover{
+    visibility: visible;
+    cursor: pointer;
+  }
+}
+.textPhoto{
+  height: 30px;
+  position: absolute;
+  z-index: 100;
+  font-size: 1.3em;
+  font-weight: 600;
+  top: 80%;
+  visibility: hidden;
+  box-sizing: border-box;
+  color: #c3c2c2;
+  padding: 5px;
+  left: 50%;
+  margin-right: -50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  &:hover {
+    visibility: visible;
+    cursor: pointer;
+  }
+}
+.changePhotoButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  width: 300px;
+  height: 30px;
+  background-color: @main-blue;
+  color: @main-text-color-darkbd;
+  border-radius: 3px;
+  font-family: 'Exo 2', sans-serif;
+  text-align: center;
+  font-size: 18px;
+  padding: 5px 5px;
+  vertical-align: center;
+  &:hover {
+    filter: brightness(85%);
+  }
+  & > label{
+    display: block;
+  }
+
+}
+.form_invalid {
+  background-color: #E86850;
+  &:hover{
+    opacity: 1;
+  }
+}
+.changePhoto {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  text-align: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-left: 2em;
+}
+.input-file {
+  visibility: hidden;
+}
+.form_input {
+  max-width:600px;
+  width:290px;
+  font-family: 'Ubuntu', sans-serif;
+  outline:none;
+  border: 2px solid #8ebacc;
+  font-size: 16px;
+  height: 2em;
+  text-align: center;
+  color: #474747;
+  border-radius: 5px;
+  padding: 0px 0px 0px 0px;
+  &.ng-touched.ng-invalid {
+    border: 2px solid #E86850;
+  }
+  @media only screen and (min-width : 250px) and (max-width : 530px) {
+    min-width:250px;
+  }
+}
+h5.form_text {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 16px;
+  margin-block-end: 20px;
+  margin-block-start: 40px;
+}
+
+.rowContainer-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: inherit;
+}
+
+.loadingContainer {
+    display: flex;
+    margin-top:  24%;
+  justify-content: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button,
+input[type=date]::-webkit-clear-button,
+input[type=date]::-webkit-calendar-picker-indicator{
+  -webkit-appearance: none;
+  display: none;
+  margin: 0;
+}
+.form_error_message {
+  white-space: nowrap;
+  position: absolute;
+  width: 50%;
+  font-size: 12px;
+  font-family: 'Exo 2', sans-serif;
+  color: #E86850;
+  text-align: left;
+  margin-top: 1em;
+}
+.full-form_error-message {
+  color: #E86850;
+  position: absolute;
+  font-weight: 600;
+  margin-left: 1.5em;
+}

@@ -23,7 +23,7 @@ export class Validator {
   }
 
   matchingPasswordsValidator(group: FormGroup): { [s: string]: boolean } {
-    if (group.controls["passwordKey"].value === group.controls["passwordConfirm"].value) {
+    if (group.controls["passwordKey"].value !== group.controls["passwordConfirm"].value) {
       return {"passwords": true};
     }
     return null;

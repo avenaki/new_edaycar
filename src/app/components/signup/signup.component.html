@@ -1,11 +1,11 @@
 <div class="container">
 <div class="signup-form">
   <div class="signup-nav">
-    <div class="signup-nav_item"  (click)="registerAsDriver()" [class.highlightUser] ="this.registerDriver"> <span class="signup-nav_text"  >Водитель</span></div>
-    <div class="signup-nav_item"  (click)="registerAsPassenger()" [class.highlightUser] ="!this.registerDriver"><span class="signup-nav_text" >Пассажир</span></div>
+    <div class="signup-nav_item  item-left"  (click)="registerAsDriver()" [class.highlightUser] ="this.registerDriver"> <span class="signup-nav_text"  >Водитель</span></div>
+    <div class="signup-nav_item  item-right"  (click)="registerAsPassenger()" [class.highlightUser] ="!this.registerDriver"><span class="signup-nav_text" >Пассажир</span></div>
   </div>
 <div>
-  <div class="signup-driver">
+  <div class="signup-user">
     <form [formGroup]="signupForm">
       <div class="rowContainer">
         <div class="columnContainer">
@@ -27,6 +27,7 @@
           <input type="text"  class="signup-form_input" formControlName="patronymic"/><br>
           <div class="signup-form_error">
             <div class="signup-form_error_message" *ngIf="signupForm.get('patronymic').invalid &&  signupForm.get('patronymic').touched">
+              Разрешена только кириллица
             </div>
           </div>
           <h5 class="signup-form_text">Дата рождения</h5>
@@ -41,7 +42,8 @@
           <h5 class="signup-form_text">Логин</h5>
           <input type="text"  class="signup-form_input" formControlName="login"/><br>
           <div class="signup-form_error">
-            <div class="signup-form_error_message" *ngIf="signupForm.get('login').invalid &&  signupForm.get('login').touched">   Введите более 4 символов латиницей или цифрами</div>
+            <div class="signup-form_error_message" *ngIf="signupForm.get('login').invalid &&  signupForm.get('login').touched">
+              Логин должен состоять из 6 латинских букв/цифр</div>
           </div>
           <div formGroupName="passwords" class="passwords-container">
           <h5 class="signup-form_text">Пароль</h5>
@@ -54,7 +56,7 @@
           <h5 class="signup-form_text">Повторите пароль</h5>
           <input type="password" class="signup-form_input"  formControlName="passwordConfirm"/><br>
           <div class="signup-form_error">
-            <div class="signup-form_error_message" *ngIf="signupForm.get('passwords.passwordConfirm').invalid &&  signupForm.get('passwords.passwordConfirm').touched">
+            <div class="signup-form_error_message" *ngIf="signupForm.get('passwords').invalid &&  signupForm.get('passwords.passwordConfirm').touched">
               Пароли должны совпадать!
             </div>
           </div>
@@ -63,7 +65,7 @@
           <input type="number"  class="signup-form_input" formControlName="mobileNumber"/><br>
           <div class="signup-form_error">
             <div class="signup-form_error_message" *ngIf="signupForm.get('mobileNumber').invalid &&  signupForm.get('mobileNumber').touched">
-              Номер должен начинаться с 8 </div>
+              Номер должен начинаться с 8</div>
           </div>
         </div>
       </div>
@@ -73,7 +75,7 @@
 </div>
   <div class="signup-form_button-container">
     <input type="button" value="Назад"(click)="navigateToLogin()" class="signup-form_button"/>
-  <input type="button" value="Зарегистрироваться" (click)="submit()" class="signup-form_button"/>
+    <input type="button" value="Зарегистрироваться как {{selectedOptionName}}" (click)="submit()" class="signup-form_button"/>
   </div>
 </div>
 

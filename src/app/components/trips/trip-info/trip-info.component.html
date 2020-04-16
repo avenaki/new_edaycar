@@ -1,0 +1,65 @@
+<div class="modal-back">
+</div>
+<div class="modal-edit"  *ngIf="currentTrip">
+  <div class="form">
+    <div class="form_close" (click)="closeModal()"><i class="fas fa-times-circle fa-2x"></i></div>
+    <div class="contentContainer modalContainer" >
+      <form [formGroup]="editTripForm">
+        <div>
+          <div class="container">
+            <div class="columnContainer">
+              <div class="columnContainer">
+                <div class="rowContainer time_input">
+                  <div class="form_text"> Начало</div>
+                  <input type="time"   class="form_input input-time" formControlName="startTime"/>
+                </div>
+                <div class="rowContainer time_input">
+                  <div class="form_text"> Конец</div>
+                  <input type="time"  class="form_input input-time" formControlName="finishTime" />
+                </div>
+                <div class="rowContainer time_input" >
+                  <div class="form_text "> Места</div>
+                  <input type="text"   class="form_input trip-info_input-seats input-time"  formControlName="maxPassengersValue" />
+                </div>
+                <div>
+                  <div class="form_error_message" *ngIf=" (editTripForm.get('finishTime').dirty && !editTripForm.get('finishTime').value)
+|| (editTripForm.get('startTime').dirty && !editTripForm.get('startTime').value ||editTripForm.get('maxPassengersValue').dirty &&
+ !editTripForm.get('maxPassengersValue').value )">
+                    Пожалуйста, введите время и количество мест
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form_text-large"> Откуда</div>
+                <input type="text"  [class.invalidForm]="checkIfStartInputIsValid(this.editTripForm)"  class="form_input trip-info_input" #start formControlName="startPlace" />
+                <div class="form_error_message" *ngIf="(!this.startX || !this.startY) &&  editTripForm.get('startPlace').touched
+&&  editTripForm.get('startPlace').dirty">
+                  Пожалуйста, выберите один адрес из предложенных
+                </div>
+              </div>
+              <div>
+                <div class="form_text-large"> Куда</div>
+                <div class="form-group">
+                  <input type="text"    [class.invalidForm]="checkIfFinishInputIsValid(this.editTripForm)" class="form_input trip-info_input" #finish formControlName="finishPlace" />
+                  <div class="form_error_message" *ngIf="(!this.finishX || !this.finishY) &&  editTripForm.get('finishPlace').touched
+&& editTripForm.get('finishPlace').dirty">
+                    Пожалуйста, выберите один адрес из предложенных
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div >
+      <div class="button-container" *ngIf="currentUser.login === currentTrip.driverLogin">
+        <button class="form_button delete-button" (click)="delete()">Удалить</button>
+      <button class="form_button" [class.invalidButton] = "(editTripForm.invalid|| !this.startX || !this.finishX)
+&& editTripForm.dirty" (click)="submit()">Изменить</button>
+      </div>
+    <div class="button-container" *ngIf="currentUser.login !== currentTrip.driverLogin  && currentUser.role === 'passenger'">
+      <button class="form_button" (click)="takeTrip(currentTrip)">Занять</button></div>
+  </div>
+  </div>
+</div>

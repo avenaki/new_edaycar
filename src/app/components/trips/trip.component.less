@@ -1,0 +1,254 @@
+@import "../../../assets/_variables";
+.modal, .modal-edit {
+  font-size: 1rem;
+  border: 4px solid @border-grey-color;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  background-color: white;
+  position: absolute;
+  left:50%;
+  top: 35%;
+  transform: translate(-50%,-25%);
+  padding: 2em 3em;
+  min-width: 25rem;
+  max-width: 30rem;
+  z-index:1;
+
+}
+.modal-back{
+  width: 100vw;
+  content: ' ';
+  color: rgba(255,255,255,0.3);
+  position: absolute;
+}
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.contentContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 69px;
+}
+
+.modalContainer{
+  margin-top: 0px;
+}
+.form_text-large {
+  font-family: 'Exo 2', sans-serif;
+  padding-bottom: 15px;
+  padding-top: 36px;
+}
+.form_text-large-long {
+  font-family: 'Exo 2', sans-serif;
+  padding-top: 1em;
+  padding-bottom: 15px;
+}
+.form_input {
+  width: 100%;
+  max-width: 400px;
+  line-height: 25px;
+  font-family: 'Ubuntu', sans-serif;
+  outline: none;
+  border: 2px solid #8ebacc;
+  font-size: 1rem;
+  text-align: center;
+  color: #474747;
+  border-radius: 5px;
+  padding: 5px 5px;
+  &:disabled {
+    background-color: white;
+    border: 2px solid #61616175;
+  }
+  &.ng-invalid.ng-dirty {
+    border: 2px solid @form-invalid-color;
+  }
+}
+.input-time{
+  width: 84px;
+  text-align: center;
+  margin-left: 1em;
+}
+.form_text {
+  width:100px;
+}
+.time_input {
+  justify-content: flex-start;
+  padding-top: 1em;
+}
+
+.custom-select select{
+  font-family: 'Ubuntu', sans-serif;
+  border-radius: 6px;
+  font-size: 16px;
+  text-align-last: center;
+  border:2px solid #8ebacc;
+  width: 200px;
+  height:35px;
+  color: #474747;
+}
+input[type=time]::-webkit-inner-spin-button,
+input[type=time]::-webkit-outer-spin-button,
+input[type=search]::-webkit-search-cancel-button,
+input[type=time]::-webkit-clear-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.form_button {
+  height: 5vh;
+  width: 20vw;
+  background: @main-blue;
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 3em;
+
+  &:hover{
+    opacity: 0.8;
+  }
+
+  @media only screen and (min-width: 150px) and (max-width: 530px) {
+    margin-bottom: 10px;
+    width: 300px;
+  }
+}
+
+.map{
+  box-shadow: 10px 10px 29px 0px #b5b5b5;
+  height: fit-content;
+  margin: auto;
+  margin-left: 3em;
+}
+agm-map {
+  content: " ";
+  position: relative;
+  width: 30vw;
+  height: 79vh;
+
+  @media only screen and (min-width: 150px) and (max-width: 530px) {
+    display:none;
+  }
+}
+body.modal {
+  overflow: hidden;
+}
+.popup-text {
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.popup-buttons {
+  width: 150px;
+}
+.trip-form {
+  padding: 2em 2em 2em 2em;
+  border: 3px solid #6161611c;
+  box-shadow: 10px 10px 29px 0px #b5b5b5;
+  border-radius: 8px;
+  height: fit-content;
+  width: 28vw;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.add-padding{
+  padding-right: 2em;
+}
+.delete-button {
+  background-color: #f14052;
+}
+.form_close {
+  top: 0;
+  right: 0;
+  position: absolute;
+  margin-right: 1em;
+  margin-top: 1em;
+  color: #aeaeae;
+  &:hover{
+    filter: brightness(80%);
+  }
+}
+.form {
+  margin: auto;
+}
+.create-trip_input {
+  line-height: unset;
+  height: 20px;
+  &.ng-invalid.ng-touched {
+    border: 2px solid @form-invalid-color;
+  }
+}
+.container-large {
+  display: flex;
+  height:100vh;
+
+}
+.trip-info_input {
+  min-width: 380px;
+}
+.trip-info_input-seats {
+  min-width: 84px;
+  height: 25px;
+  align-self: flex-end;
+}
+.modal-filter {
+  margin-top: 9vh;
+}
+.create-trip_button {
+  margin-top: 3em;
+}
+.form_error_message, .form_error_message-main {
+  white-space: nowrap;
+  max-width: 600px;
+  font-size: 11px;
+  font-family: 'Exo 2', sans-serif;
+  color: #E86850;
+  text-align: left;
+  font-weight: 600;
+  position: absolute;
+  margin-top: 7px;
+}
+.invalidForm {
+  border: 2px solid @form-invalid-color;
+}
+.form_error_message-main {
+  font-size: 11px;
+  padding: 1em 1em;
+  bottom:0;
+}
+.container-for-main-message {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.invalidButton {
+  background-color: #e6e6e6;
+  color: #8a8a8aa8;
+  &:hover{
+    opacity:1;
+    cursor: unset;
+  }
+}

@@ -1,3 +1,4 @@
+@import "../../../assets/_variables";
 .carpool-img {
   width: 80%;
   height: 70%;
@@ -12,27 +13,47 @@
   padding: 1em 1em;
 }
 .carpool_text {
-  z-index: 1;
-  top:50%;
   font-size: 24px;
   font-family: 'Exo 2', sans-serif;
-  position: absolute;
-  right: 0;
-  width:40vw;
-  border-left-color: #8ebffa;
+  border-left-color: @bright-blue;
   border-left-width: 10px;
   border-left-style: dashed;
-  padding: 1em ;
+  padding-left: 1.3em;
+  margin-top: 2em;
 }
 .carpool_text_large{
-  z-index: 1;
-  right: 0;
-  margin-top: 40px;
-  padding-right: 1em;
-  position: absolute;
-  font-size: 80px;
-  color: #8ebffa;
+  font-size: 5em;
+  color: @bright-blue;
   font-weight: 600;
   font-family: 'Exo 2', sans-serif;
 
+}
+.text-container{
+  position: absolute;
+  padding: 1em ;
+  width: 40vw;
+  right: 0;
+  top:10%;
+  z-index: 1;
+}
+.form_button {
+  height: 7vh;
+  width: 80%;
+  background: #36a6ef;
+  border: 1px solid white;
+  border-radius: 20px;
+  text-shadow: black 0px 0px 1px;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor: pointer;
+  margin-top: 4em;
+  &:hover {
+    background-color: @dark-bright-blue;
+  }
+}
+.form_button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

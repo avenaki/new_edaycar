@@ -51,9 +51,11 @@ export class ChatComponent implements OnInit {
   }
   ngOnInit(): void {
     this.currentUser$.subscribe( (user: UserModel) => {
-      this.currentUser = user;
-      const payload = { login: this.currentUser.login };
-      this.store.dispatch(ChatActions.loadAllChats(payload));
+      if ( user ) {
+        this.currentUser = user;
+        const payload = {login: this.currentUser.login};
+        this.store.dispatch(ChatActions.loadAllChats(payload));
+      }
     });
     this.currentChats$.subscribe( (chats: Chat[]) => {
       this.currentChats = chats;

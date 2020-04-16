@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed|Unica+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300&display=swap');
 body {
   margin: 0;
   font-family: 'Exo 2', sans-serif;
@@ -50,9 +50,9 @@ body {
   align-self: center;
   cursor: default;
   margin-left: 2%;
-  font-family: 'Oswald', sans-serif;
-  font-size: 24px;
-  font-weight: 200;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 26px;
+  font-weight: 300;
   color: #8ebffa;
   flex-shrink: 0;
   padding-right: 15px;

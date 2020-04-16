@@ -1,0 +1,51 @@
+<div class="modal-back">
+</div>
+<div class="modal modal-filter">
+  <div class="form">
+    <div class="contentContainer modalContainer">
+      <form [formGroup]="filterForm">
+        <div>
+          <div class="container">
+            <div class="columnContainer">
+              <div class="form_text-large"> Выберите желаемое время начала и окончания поездки:</div>
+              <div class="columnContainer ">
+                <div class="rowContainer time_input">
+                  <div class="form_text"> Начало</div>
+                  <input type="time"  class="form_input input-time" formControlName="startTime"/>
+                </div>
+                <div class="rowContainer time_input">
+                  <div class="form_text"> Конец</div>
+                  <input type="time"  class="form_input input-time" formControlName="finishTime" />
+                </div>
+              </div>
+              <div >
+                <div class="form_text-large"> Откуда</div>
+                <input type="text"   class="form_input " #start formControlName="startPlace" />
+              </div>
+              <div >
+                <div class="form_text-large"> Куда</div>
+                <div class="form-group">
+                  <input type="text"    class="form_input" #finish formControlName="finishPlace" />
+                </div>
+              </div>
+              <div>
+                <div class="form_text-large">Сколько метров Вы готовы пройти до начального/конечного пункта?</div>
+                <div class="custom-select">
+                  <select formControlName="canWalkDistance">
+                    <option value="500" > 500</option>
+                    <option value="1000" selected> 1000 </option>
+                    <option value ="1500"> 1500</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="button-container">
+    <button class="form_button" (click)="closeEvent.emit()">Назад</button>
+      <button class="form_button" (click)="submit()">Найти</button></div>
+
+  </div>
+</div>

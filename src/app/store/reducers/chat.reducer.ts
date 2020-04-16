@@ -24,7 +24,7 @@ export const chatReducer = createReducer(
   on(ChatActions.startChatSuccess, (state,  chat: Chat) => {
     const newChats = [...state.chats];
     newChats.push(chat);
-    return { ...state, chats: newChats, currentChat: chat};
+    return { ...state, chats: newChats};
   }),
   on(ChatActions.startChatFail, (state,  error) => {
     return { ...state,  currentError: error};

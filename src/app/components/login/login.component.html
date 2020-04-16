@@ -1,3 +1,5 @@
+<img src="../../../assets/images/signup-pic2.jpg" class="img">
+<img src="../../../assets/images/signup-pic-second.jpg" class="img2">
 <div class="login">
   <div class="login-form">
     <div class="login-form-header">
@@ -5,16 +7,16 @@
     </div>
     <form [formGroup]="loginForm">
 <div class="login-form_input-container">
-    <input class="login-form_input"   type="text" name="login"  formControlName="login"/> <br>
-  <div class="login-form_error">
-      <div class="login-form_error_message"  *ngIf="loginForm.get('login').invalid &&  loginForm.get('login').touched">
+  <div class="form_inputs">
+  <input class="login-form_input"   type="text" name="login" placeholder="username"  formControlName="login"/> <br>
+      <div class="form_error_message"  *ngIf="loginForm.get('login').invalid &&  loginForm.get('login').touched">
         Логин должен быть не менее 4 символов латинских букв или цифр.
       </div>
-  </div>
+    </div>
   <br>
-    <input class="login-form_input" name="password"  type="password" formControlName="password" /> <br>
-  <div class="login-form_error">
-      <div class="login-form_error_message"  *ngIf="loginForm.get('password').invalid &&  loginForm.get('password').touched">
+  <div class="form_inputs">
+    <input class="login-form_input" name="password"  placeholder="password"   type="password" formControlName="password" /> <br>
+      <div class="form_error_message"  *ngIf="loginForm.get('password').invalid &&  loginForm.get('password').touched">
         Пароль должен быть не менее 6 символов.
       </div>
   </div>

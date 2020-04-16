@@ -17,6 +17,7 @@ import { Validator } from "../../validators";
 })
 export class SignupComponent implements OnInit {
   registerDriver: boolean;
+  selectedOptionName = "водитель";
   signupForm: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -30,17 +31,18 @@ export class SignupComponent implements OnInit {
   }
   registerAsPassenger(): void {
     this.registerDriver = false;
-
+    this.selectedOptionName = "пассажир";
   }
   registerAsDriver(): void {
     this.registerDriver = true;
+    this.selectedOptionName = "водитель";
   }
 
   private initForm(): void {
     this.signupForm = this.fb.group({
-      name: new FormControl("", [Validators.required, Validators.pattern(/[А-я]/)]),
-      surname: new FormControl("", [Validators.required, Validators.pattern(/[А-я]/)]),
-      patronymic: new FormControl("", [Validators.required, Validators.pattern(/[А-я]/)]),
+      name: new FormControl("", [Validators.required, Validators.pattern(/^[А-я]+$/)]),
+      surname: new FormControl("", [Validators.required, Validators.pattern(/^[А-я]+$/)]),
+      patronymic: new FormControl("", [Validators.required, Validators.pattern(/^[А-я]+$/)]),
       birthdate: new FormControl("", this.validator.birthDateValidator),
       mobileNumber: new FormControl("", [Validators.required,  Validators.pattern(/8\d{10}/),
         Validators.minLength(11), Validators.maxLength(11)]),
@@ -49,7 +51,6 @@ export class SignupComponent implements OnInit {
       passwordKey: new FormControl("", [Validators.required, Validators.minLength(8)]),
       passwordConfirm: new FormControl("", [Validators.required, Validators.minLength(8)])},
         [Validators.required, this.validator.matchingPasswordsValidator]),
-      experience: new FormControl("", [Validators.required, this.validator.experienceValidator])
     });
   }
 

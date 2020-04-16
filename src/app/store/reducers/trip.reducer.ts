@@ -60,6 +60,9 @@ export const  tripReducer = createReducer(
     console.log(error);
     return {...state, };
   }),
+  on(TripActions.dropCurrentTrip, (state) => {
+    return {...state, currentTrip: null };
+  }),
   );
 
 
