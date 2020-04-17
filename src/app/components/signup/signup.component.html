@@ -75,7 +75,7 @@
 </div>
   <div class="signup-form_button-container">
     <input type="button" value="Назад"(click)="navigateToLogin()" class="signup-form_button"/>
-    <input type="button" value="Зарегистрироваться как {{selectedOptionName}}" (click)="submit()" class="signup-form_button"/>
+    <input type="button" [class.invalidButton] = "signupForm.invalid" value="Зарегистрироваться как {{selectedOptionName}}" (click)="submit()" class="signup-form_button"/>
   </div>
 </div>
 

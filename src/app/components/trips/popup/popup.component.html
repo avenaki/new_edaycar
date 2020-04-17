@@ -1,8 +1,8 @@
 <div class="modal-back">
 </div>
-<div class="modal-edit" >
+<div class="modal-edit" *ngIf="chatChecked">
   <div class="form">
-    <div class="contentContainer modalContainer" *ngIf="chatChecked">
+    <div class="contentContainer modalContainer">
       <div *ngIf="!mistakeMessage">
       <div class="popup-text"> Начать чат с пользователем: {{userLogin}} ?</div>
     <div class="button-container">

@@ -38,8 +38,11 @@ export const chatReducer = createReducer(
   on(ChatActions.receiveMessageSuccess, (state, payload) => {
     const newChat = Object.assign({}, state.currentChat);
     if ( newChat !== null) {
-    if ( newChat.participants[0] === payload.message.sender ||
-      newChat.participants[0] === payload.message.sender  ) {
+    if ( (newChat.participants[0] === payload.message.sender &&
+      newChat.participants[1] === payload.message.receiver) || (
+      newChat.participants[1] === payload.message.sender &&
+      newChat.participants[0] === payload.message.receiver
+    )  ) {
       newChat.messages = Object.assign([], newChat.messages);
       newChat.messages.push(payload.message);
     }
@@ -50,7 +53,11 @@ export const chatReducer = createReducer(
   on( ChatActions.selectChatSuccess, (state, payload) => {
     const currentChat = state.chats.find( (chat) => chat.id === payload.id);
     return{...state, currentChat: currentChat};
-  }));
+  }),
+  on( ChatActions.leaveChatSuccess, (state) => {
+    return{...state, currentChat: null};
+  }),
+  );
 
 
 export const selectChat = (state: AppState) => state.chat;

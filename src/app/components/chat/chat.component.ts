@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
@@ -18,7 +18,7 @@ import { AppState } from "../../store/state/app.state";
   templateUrl: "./chat.component.html",
   styleUrls: ["./chat.component.less"]
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   currentChats$: Observable<Chat[]>;
   currentChats: Chat[];
   currentChatsShow: Chat[];
@@ -32,7 +32,6 @@ export class ChatComponent implements OnInit {
   searchUser: string;
   constructor( private store: Store< AppState >,
                private chatService: ChatService,
-               private ngZone: NgZone,
                private _httpService: HttpService,
                private cdr: ChangeDetectorRef,
              ) {
@@ -40,15 +39,13 @@ export class ChatComponent implements OnInit {
     this.currentUser$ = store.select(fromUser.selectUserCurrent);
     this.currentChat$ = store.select(fromChat.selectCurrentChat);
     this.chatService.messageReceived.subscribe((message: Message) => {
-      this.ngZone.run(() => {
-          message.type = "received";
           this.store.dispatch(ChatActions.receiveMessageSuccess( {message: message}));
-          if ( !this.currentChats.some(chat => chat.participants[0] === message.sender) ||
+          if ( !this.currentChats.some(chat => chat.participants[0] === message.sender) &&
                !this.currentChats.some(chat => chat.participants[1] === message.sender) ) {
-            this.store.dispatch(ChatActions.loadAllChats( {login: this.currentUser.login }));
+            this.store.dispatch(ChatActions.loadAllChats({login: this.currentUser.login}));
           }});
-      });
   }
+
   ngOnInit(): void {
     this.currentUser$.subscribe( (user: UserModel) => {
       if ( user ) {
@@ -98,5 +95,8 @@ sendMessage(): void {
       this.currentChatsShow = this.currentChats.filter( chat =>  {  return chat.participants[1] === this.searchUser ||
       chat.participants[0] === this.searchUser; });
     }
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(ChatActions.leaveChatSuccess());
   }
 }

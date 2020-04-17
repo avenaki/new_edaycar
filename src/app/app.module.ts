@@ -16,6 +16,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { ProfileDriverComponent } from "./components/profile/profile-driver/profile-driver.component";
 import { ProfilePassengerComponent } from "./components/profile/profile-passenger/profile-passenger.component";
 import { SignupComponent } from "./components/signup/signup.component";
+import { BaseTripComponent } from "./components/trips/base-trip/base-trip.component";
 import { CreateTripComponent } from "./components/trips/create-trip/create-trip.component";
 import { PopupComponent } from "./components/trips/popup/popup.component";
 import { TripFilterComponent } from "./components/trips/trip-filter/trip-filter.component";
@@ -55,6 +56,7 @@ import { appReducers } from "./store/reducers/app.reducers";
     MessageReceiverPipe,
     PopupComponent,
     TripInfoComponent,
+    BaseTripComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({

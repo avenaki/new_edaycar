@@ -35,8 +35,7 @@ export class ChatEffects {
       mergeMap(action =>
         this.chatService.sendMessage(action.message).pipe(
           map(() => {
-            const payload = { message: action.message};
-            return ChatActions.sendMessageSuccess(payload);
+            return ChatActions.sendMessageSuccess();
           }),
           catchError((error: Error) => {
             return of(ChatActions.sendMessageFail(error));

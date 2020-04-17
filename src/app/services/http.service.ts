@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
@@ -51,9 +51,7 @@ export class HttpService {
     return this.http.get<Trip[]>(this.apiUrl + "trip/get/");
   }
   public deleteTrip(id: string ): Observable<string> {
-    const httpParams = new HttpParams().set("id", id);
-    const  options = { params: httpParams };
-    return this.http.delete<string>(this.apiUrl + "trip/delete/", options);
+    return this.http.delete<string>(this.apiUrl + "trip/delete/" + id);
   }
   public filterTrips(filter: TripSearchFilter): Observable<Trip[]> {
     return this.http.post<Trip[]>(this.apiUrl + "trip/filtertrips/",  filter);

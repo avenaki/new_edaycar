@@ -1,21 +1,24 @@
-import { Component, EventEmitter,  OnInit, Output } from "@angular/core";
+import { AfterContentInit, Component, EventEmitter, OnInit, Output } from "@angular/core";
 import {  FormControl, FormGroup, Validators } from "@angular/forms";
 import { TripSearchFilter } from "../../../models/trip-search-filter";
 import * as TripActions from "../../../store/actions/trip.actions";
-import { CreateTripComponent } from "../create-trip/create-trip.component";
+import { BaseTripComponent } from "../base-trip/base-trip.component";
+
 
 @Component({
   selector: "app-trip-filter",
   templateUrl: "./trip-filter.component.html",
   styleUrls: ["../trip.component.less"]
 })
-export class TripFilterComponent extends CreateTripComponent implements OnInit {
+export class TripFilterComponent extends BaseTripComponent implements OnInit, AfterContentInit {
   @Output() closeEvent = new EventEmitter<void>();
   filterForm: FormGroup;
 
   ngOnInit(): void {
     this.initForm();
     this.subscribeToDriverChanges();
+  }
+  ngAfterContentInit(): void {
     this.initGoogleApi(this.filterForm);
   }
 

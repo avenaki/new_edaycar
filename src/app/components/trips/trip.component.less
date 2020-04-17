@@ -26,6 +26,13 @@
   flex-direction: row;
   justify-content: center;
 }
+.filter-columnContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2em;
+  flex-direction: column;
+}
 .contentContainer {
   width: 100%;
   height: 100%;
@@ -42,6 +49,7 @@
   font-family: 'Exo 2', sans-serif;
   padding-bottom: 15px;
   padding-top: 36px;
+  width: 20vw;
 }
 .form_text-large-long {
   font-family: 'Exo 2', sans-serif;
@@ -81,7 +89,7 @@
   padding-top: 1em;
 }
 
-.custom-select select{
+.custom-select select, .custom-select-filter select{
   font-family: 'Ubuntu', sans-serif;
   border-radius: 6px;
   font-size: 16px;
@@ -90,6 +98,21 @@
   width: 200px;
   height:35px;
   color: #474747;
+}
+.custom-select-filter {
+  float: right;
+}
+.custom-select-filter select {
+  width: 313px;
+  text-align: center;
+  padding: 5px 5px;
+}
+.filter-inputs {
+  width: 300px;
+}
+.custom-select-filter-text {
+  font-family: 'Exo 2', sans-serif;
+  width: 50%;
 }
 input[type=time]::-webkit-inner-spin-button,
 input[type=time]::-webkit-outer-spin-button,
@@ -215,7 +238,17 @@ body.modal {
   align-self: flex-end;
 }
 .modal-filter {
-  margin-top: 9vh;
+  padding: 1.5em 1.5em;
+  width: 33vw;
+}
+.filter-large-text {
+  margin-top: 1em;
+}
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .create-trip_button {
   margin-top: 3em;

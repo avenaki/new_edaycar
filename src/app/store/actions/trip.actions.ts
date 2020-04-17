@@ -94,7 +94,7 @@ export const deleteTripSuccess = createAction(
 
 export const deleteTripFail = createAction(
   "[Trip] - Trip Delete  Fail",
-  props<Error>(),
+  props<{error: string}>(),
 );
 export const dropCurrentTrip = createAction(
   "[Trip] - Current Trip drop",

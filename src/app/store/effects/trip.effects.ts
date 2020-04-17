@@ -116,11 +116,11 @@ export class TripEffects {
       ofType(TripActions.deleteTrip),
       mergeMap(action =>
         this.httpService.deleteTrip(action.id).pipe(
-          map(() => {
-            return TripActions.deleteTripSuccess({id: action.id});
-          }),
-          catchError((error: Error) => {
-            return of(TripActions.deleteTripFail(error));
+          map((data: string) => {
+            if ( data === "success") {
+              return TripActions.deleteTripSuccess({id: action.id});
+            }
+              return TripActions.deleteTripFail({error:  "Failed to delete user"});
           }),
         ),
       ),

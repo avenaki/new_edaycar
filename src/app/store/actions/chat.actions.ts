@@ -35,7 +35,6 @@ export const sendMessage = createAction(
 );
 export const  sendMessageSuccess = createAction(
   "[Chat] - Send  Message Success",
-  props<{message: Message}>(),
 );
 export const sendMessageFail = createAction(
   "[Chat] -Send  Message Fail",
@@ -65,4 +64,7 @@ export const receiveMessageSuccess = createAction(
 export const selectChatSuccess = createAction(
   "[Chat] -  Select  Chat  ",
   props<{id: string}>(),
+);
+export const leaveChatSuccess = createAction(
+  "[Chat] -  Leave  Chat  ",
 );

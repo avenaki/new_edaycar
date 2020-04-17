@@ -22,11 +22,9 @@ import { AppState } from "../../../store/state/app.state";
 export class TripsTableComponent implements OnInit, OnDestroy {
   trips$: Observable<Trip[]>;
   trips: Trip[];
-
   modal = false;
   editModal = false;
   startChatModal = false;
-
   startChatUserLogin: string;
   currentEditTripId: string;
   userIsDriver = false;
@@ -50,36 +48,30 @@ export class TripsTableComponent implements OnInit, OnDestroy {
     this.trips$ = this.store.select(fromTrip.selectAllTrips);
   }
   ngOnInit(): void {
-
     this.currentUser$.subscribe( (currentUser) => {
       if (currentUser) {
         this.currentUser = currentUser;
       if (currentUser.role === "driver") {
         this.currentDriver$ = this.store.select(fromDriver.selectCurrentDriver);
         this.userIsDriver = true;
-
+        this.currentDriver$.subscribe( (currentDriver) => {
+          if ( currentDriver) {
+            this.currentDriver = currentDriver;
+            this.cdr.markForCheck();
+          }
+        });
       } else {
         this.currentPassenger$ = this.store.select(fromPassenger.selectCurrentPassenger);
+        this.currentPassenger$.subscribe( (currentPassenger) => {
+          this.currentPassenger = currentPassenger;
+          this.cdr.markForCheck();
+        });
       }
     }});
-
       this.trips$.subscribe(trips => {
         if (trips) {
           this.trips = trips;
           this.cdr.markForCheck();
-          if ( this.userIsDriver) {
-            this.currentDriver$.subscribe( (currentDriver) => {
-              if ( currentDriver) {
-                this.currentDriver = currentDriver;
-                this.cdr.markForCheck();
-              }
-            });
-          } else {
-            this.currentPassenger$.subscribe( (currentPassenger) => {
-              this.currentPassenger = currentPassenger;
-              this.cdr.markForCheck();
-            });
-          }
         }
       });
     }

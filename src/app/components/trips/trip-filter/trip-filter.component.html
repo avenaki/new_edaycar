@@ -6,8 +6,7 @@
       <form [formGroup]="filterForm">
         <div>
           <div class="container">
-            <div class="columnContainer">
-              <div class="form_text-large"> Выберите желаемое время начала и окончания поездки:</div>
+            <div class="columnContainer  filter-container">
               <div class="columnContainer ">
                 <div class="rowContainer time_input">
                   <div class="form_text"> Начало</div>
@@ -18,19 +17,19 @@
                   <input type="time"  class="form_input input-time" formControlName="finishTime" />
                 </div>
               </div>
-              <div >
+              <div>
                 <div class="form_text-large"> Откуда</div>
-                <input type="text"   class="form_input " #start formControlName="startPlace" />
+                <input type="text"   class="form_input filter-inputs" #start formControlName="startPlace" />
               </div>
               <div >
                 <div class="form_text-large"> Куда</div>
                 <div class="form-group">
-                  <input type="text"    class="form_input" #finish formControlName="finishPlace" />
+                  <input type="text"    class="form_input filter-inputs" #finish formControlName="finishPlace" />
                 </div>
               </div>
               <div>
                 <div class="form_text-large">Сколько метров Вы готовы пройти до начального/конечного пункта?</div>
-                <div class="custom-select">
+                <div class="custom-select-filter">
                   <select formControlName="canWalkDistance">
                     <option value="500" > 500</option>
                     <option value="1000" selected> 1000 </option>

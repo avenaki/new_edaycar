@@ -55,12 +55,15 @@ export class SignupComponent implements OnInit {
   }
 
   submit(): void {
+    if ( this.signupForm.invalid ) {
+      return;
+    }
     if ( this.registerDriver) {
     const newDriver = new Driver( this.signupForm.controls["login"].value,
       btoa(this.signupForm.controls["passwords"].value["passwordKey"]), this.signupForm.controls["name"].value,
       this.signupForm.controls["surname"].value, this.signupForm.controls["patronymic"].value,
       this.signupForm.controls["birthdate"].value, String(this.signupForm.controls["mobileNumber"].value),
-      Number(this.signupForm.controls["experience"].value), null, null, null,  null);
+      3, null, null, null,  null);
     this.store.dispatch(UserActions.signDriver(newDriver));
     } else {
       const newPassenger = new Passenger( this.signupForm.controls["login"].value,

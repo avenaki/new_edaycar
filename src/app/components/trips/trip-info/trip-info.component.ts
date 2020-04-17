@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from "@angular/core";
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component, ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,  ViewChild,
+} from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable, Subscription } from "rxjs";
 import { TakeTripModel } from "../../../models/take-trip-model";
@@ -6,7 +15,8 @@ import { Trip } from "../../../models/trip";
 import { UserModel } from "../../../models/user-model";
 import * as TripActions from "../../../store/actions/trip.actions";
 import * as fromTrip from "../../../store/reducers/trip.reducer";
-import { CreateTripComponent } from "../create-trip/create-trip.component";
+import { BaseTripComponent } from "../base-trip/base-trip.component";
+
 
 @Component({
   selector: "app-trip-info",
@@ -14,24 +24,40 @@ import { CreateTripComponent } from "../create-trip/create-trip.component";
   styleUrls: ["../trip.component.less"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TripInfoComponent extends CreateTripComponent implements OnInit, OnDestroy {
+export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDestroy, AfterContentInit {
   @Output() closeEvent = new EventEmitter<void>();
   @Input()  currentTripId: string;
   @Input()  currentUser: UserModel;
+  @ViewChild("start", { static: false}) set content(content: ElementRef) {
+    if ( content) {
+      this.startElementRef = content;
+      if ( this.finishElementRef ) {
+      this.initGoogleApi(this.editTripForm);
+      }
+    }
+    }
+  @ViewChild("finish", { static: false}) set content2(content: ElementRef) {
+    if ( content) {
+      this.finishElementRef = content;
+      if ( this.startElementRef ) {
+        this.initGoogleApi(this.editTripForm);
+      }
+    }
+  }
+  public finishElementRef: ElementRef;
+  public startElementRef: ElementRef;
   editTripForm: FormGroup;
   currentTrip$: Observable<Trip>;
   currentTrip: Trip;
   currentTripSubcription: Subscription;
-  @ViewChild("start", { static: false })
-  public startElementRef: ElementRef;
-
-  @ViewChild("finish", { static: false })
-  public finishElementRef: ElementRef;
   ngOnInit(): void {
     this.initForm();
     this.subscribeToDriverChanges();
-    this.initGoogleApi(this.editTripForm);
     this.subscribeToTrip();
+  }
+
+  ngAfterContentInit(): void {
+
   }
 
   initForm(): void {
@@ -111,13 +137,16 @@ export class TripInfoComponent extends CreateTripComponent implements OnInit, On
     return result.concat(timeArray[0] + ":" + timeArray[1]);
   }
 
+  checkIfSeatIsAlreadyTaken(trip: Trip): boolean {
+    return trip.passengersLogins.some((login: string) => login === this.currentUser.login) || trip.maxPassengers === 0;
+  }
   takeTrip(trip: Trip): void {
-    if (trip.maxPassengers <= 0) {
-      alert("Все места заняты!");
+    if (trip.passengersLogins.some((login: string) => login === this.currentUser.login)) {
       return;
     }
     const model = new TakeTripModel(this.currentUser.login, trip);
     this.store.dispatch(TripActions.takeTrip(model));
+    this.closeEvent.emit();
   }
 
   delete(): void {
