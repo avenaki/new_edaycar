@@ -2,7 +2,7 @@ import { Action, createReducer, createSelector, on } from "@ngrx/store";
 import { Passenger } from "../../models/passenger";
 import * as PassengerActions from "../actions/passenger.actions";
 import { AppState } from "../state/app.state";
-import { initialPassengerState, PassengerState } from "../state/Passenger.state";
+import { initialPassengerState, PassengerState } from "../state/passenger.state";
 
 
 
