@@ -13,6 +13,7 @@ import * as fromTrip from "../../../store/reducers/trip.reducer";
 import * as fromUser from "../../../store/reducers/user.reducer";
 import { AppState } from "../../../store/state/app.state";
 
+
 @Component({
   selector: "app-trips-table",
   templateUrl: "./trips-table.component.html",
@@ -42,7 +43,7 @@ export class TripsTableComponent implements OnInit, OnDestroy {
 
   constructor( private store: Store< AppState >,
                private cdr: ChangeDetectorRef,
-               private router: Router) {
+               private router: Router ) {
     this.currentUser$ = store.select(fromUser.selectUserCurrent);
     this.store.dispatch(TripActions.loadTrips());
     this.trips$ = this.store.select(fromTrip.selectAllTrips);

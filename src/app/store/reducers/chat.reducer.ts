@@ -1,4 +1,4 @@
-import {  createReducer, createSelector, on } from "@ngrx/store";
+import { Action, createReducer, createSelector, on } from "@ngrx/store";
 import { Chat } from "../../models/chat";
 import * as ChatActions from "../actions/chat.actions";
 import { AppState } from "../state/app.state";
@@ -59,7 +59,6 @@ export const chatReducer = createReducer(
   }),
   );
 
-
 export const selectChat = (state: AppState) => state.chat;
 export const selectAllChats = createSelector(
   selectChat,
@@ -69,3 +68,6 @@ export const selectCurrentChat = createSelector(
   selectChat,
   (state: ChatState) => state.currentChat);
 
+export function chatReducerFunction(state: ChatState | undefined, action: Action): ChatState {
+  return chatReducer(state, action);
+}

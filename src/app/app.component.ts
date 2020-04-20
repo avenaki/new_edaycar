@@ -18,8 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
   title = "edaycar";
   currentUser$: Observable<UserState>;
   currentUserSubscription: Subscription;
-  private currentUserError: Error = null;
-  private currentUser: UserModel;
+  public currentUserError: Error = null;
+  public currentUser: UserModel;
 
   constructor(private router: Router,
               private store: Store<{ user: UserState }>) {

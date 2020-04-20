@@ -3,43 +3,69 @@
   <app-trip-filter *ngIf="modal"  (closeEvent)="closeModal()"></app-trip-filter>
   <app-trip-info *ngIf="editModal&&currentEditTripId"  (closeEvent)="closeModal()" [currentTripId]="currentEditTripId" [currentUser]="currentUser"></app-trip-info>
   <app-popup *ngIf="startChatModal"  (closeEvent)="closeModal()" [userLogin]="startChatUserLogin"  [currentUserLogin]="currentUser.login"></app-popup>
-  <div class="button-container">
-    <div class="buttons-container_buttons">
-      <div class="flex-box">
-        <div class="filter-button" (click)="modal=true"><div>Применить фильтр</div> </div>
-        <div class="filter-button " (click)="update()"><div>Обновить</div> </div>
-      </div>
-    </div>
+ <div class="button-container">
+  <div class="flex-box">
+        <div class="filter-button"  (click)="modal=true"><div>Фильтр</div> </div>
+        <div class="filter-button" (click)="update()"><div>Обновить</div> </div>
+        <div class="filter-button add-trip-top-button" (click)="addTrip()" *ngIf="currentDriver"><div>Создать поездку</div> </div>
   </div>
+ </div>
   <table class="table-scroll small-first-col" >
     <thead>
     <tr>
-      <th> </th>
+      <th class="smallest_th"></th>
       <th class="small_th"> <div class="table-headers_content"><div>Начало </div> <div (click)="sortUpStart = !sortUpStart"><div *ngIf="sortUpStart" (click)="sort('startTime', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpStart"><i class="fas fa-caret-down fa-2x" (click)="sort('startTime', 'DESC')"></i></div></div></div></th>
       <th class="small_th"><div class="table-headers_content"><div>Конец</div><div (click)="sortUpFinish = !sortUpFinish"> <div *ngIf="sortUpFinish"  (click)="sort('finishTime', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpFinish"><i class="fas fa-caret-down fa-2x" (click)="sort('finishTime', 'DESC')"></i></div></div></div></th>
       <th class="small_th"><div class="table-headers_content"><div>Свободных мест</div><div (click)="sortUpMaxPassengers = !sortUpMaxPassengers"> <div *ngIf="sortUpMaxPassengers" (click)="sort('maxPassengers', 'ASC')"><i class="fas fa-caret-up fa-2x"></i></div><div *ngIf="!sortUpMaxPassengers"><i class="fas fa-caret-down fa-2x" (click)="sort('maxPassengers', 'DESC')"></i></div></div></div></th>
-      <th>Откуда</th>
-      <th>Куда</th>
+      <th class="large_th">Откуда</th>
+      <th class="large_th">Куда</th>
       <th class="middle_th">Везёт</th>
-      <th class="small_th more-info"></th>
+      <th class="more-info"></th>
     </tr>
     </thead>
 
     <tbody  class="body-half-screen"  >
     <tr *ngFor="let trip of trips; let i = index;" >
-      <td >{{i+1}}</td>
+      <td class="smallest_th">{{i+1}}</td>
       <td  class="small_th">{{trip.startTime | time }}</td>
       <td  class="small_th">{{trip.finishTime | time}}</td>
-      <td class="small_th">{{trip.maxPassengers}}</td>
-      <td  >{{trip.startPlace | place}}</td>
-      <td  >{{trip.finishPlace | place}}</td>
-      <td class="middle_th" *ngIf="currentUser.login === trip.driverLogin">{{trip.driverLogin}}</td>
-      <td class="middle_th startChat"*ngIf="currentUser.login !== trip.driverLogin" (click)="startChat(trip.driverLogin)">{{trip.driverLogin}}</td>
-      <td class="small_th more-info" (click)="editTrip(trip.id)">Подробнее <i class="fas fa-angle-double-right"></i> </td>
+      <td  class="small_th">{{trip.maxPassengers}}</td>
+      <td  class="large_th">{{trip.startPlace | place}}</td>
+      <td  class="large_th" >{{trip.finishPlace | place}}</td>
+      <td  class="middle_th" *ngIf="currentUser.login === trip.driverLogin">{{trip.driverLogin}}</td>
+      <td  class="middle_th startChat" *ngIf="currentUser.login !== trip.driverLogin" (click)="startChat(trip.driverLogin)">{{trip.driverLogin}}</td>
+      <td  class="more-info" (click)="editTrip(trip.id)">Подробнее <i class="fas fa-angle-double-right"></i> </td>
     </tr>
     </tbody>
   </table>
   <div class="add-trip-button " (click)="addTrip()" *ngIf="currentDriver"><div>Создать поездку</div> </div>
+  <div class="cards" >
+    <div class="cards_item" *ngFor="let trip of trips">
+      <div class="card">
+        <div class="card_content">
+          <h2 class="card_title">{{trip.driverLogin}}</h2>
+          <div class="card_trip_content">
+          <div class="rowContainer">
+           <div class="card_header_text">Начало:</div>   <div class="card_text"> {{trip.startTime | time }}</div>
+          </div>
+          <div class="rowContainer">
+            <div class="card_header_text">Конец:</div>   <div class="card_text"> {{trip.finishTime | time }}</div>
+          </div>
+            <div class="rowContainer">
+              <div class="card_header_text">Осталось мест:</div>   <div class="card_text">{{trip.maxPassengers}}</div>
+            </div>
+          <div class="rowContainer">
+            <div class="card_header_text">Откуда:</div>   <div class="card_text"> {{trip.startPlace}}</div>
+          </div>
+          <div class="rowContainer">
+            <div class="card_header_text">Куда:</div>   <div class="card_text"> {{trip.finishPlace}}</div>
+          </div>
+          </div>
+          <button class="btn card_btn" (click)="editTrip(trip.id)">Подробнее</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 

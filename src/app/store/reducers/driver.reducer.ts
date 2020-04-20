@@ -1,8 +1,9 @@
-import { createReducer, createSelector, on } from "@ngrx/store";
+import { Action, createReducer, createSelector, on } from "@ngrx/store";
 import { Driver } from "../../models/driver";
 import * as DriverActions from "../actions/driver.actions";
 import { AppState } from "../state/app.state";
 import { DriverState, initialDriverState } from "../state/driver.state";
+
 
 
 export const driverReducer = createReducer(
@@ -38,3 +39,6 @@ export const selectDriver = (state: AppState) => state.driver;
 export const selectCurrentDriver = createSelector(
   selectDriver,
   (state: DriverState) => state.currentDriver);
+export function driverReducerFunction(state: DriverState | undefined, action: Action): DriverState {
+  return driverReducer(state, action);
+}

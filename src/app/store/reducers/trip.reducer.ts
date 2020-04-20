@@ -66,7 +66,7 @@ export const  tripReducer = createReducer(
   );
 
 
-export function TripReducer(state: TripState | undefined, action: Action): TripState {
+export function tripReducerFunction(state: TripState | undefined, action: Action): TripState {
   return tripReducer(state, action);
 }
 
