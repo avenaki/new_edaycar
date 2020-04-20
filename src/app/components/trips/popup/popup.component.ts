@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
@@ -9,9 +9,10 @@ import { AppState } from "../../../store/state/app.state";
 @Component({
   selector: "app-popup",
   templateUrl: "./popup.component.html",
-  styleUrls: ["../trip.component.less"]
+  styleUrls: ["../trip.component.less"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PopupComponent  implements  OnInit {
+export class PopupComponent  implements  OnInit, OnDestroy {
   @Output() closeEvent = new EventEmitter<void>();
   @Input()  userLogin: string;
   @Input()  currentUserLogin: string;
@@ -24,7 +25,6 @@ export class PopupComponent  implements  OnInit {
                  private router: Router,
                  private cdr: ChangeDetectorRef) {
   }
-
   ngOnInit(): void {
     const payload = { login: this.currentUserLogin};
     this.store.dispatch(ChatActions.loadAllChats(payload));
@@ -45,12 +45,14 @@ export class PopupComponent  implements  OnInit {
 
       }});
     }
-
   submit(): void {
     const newChat = new Chat(null, [this.userLogin, this.currentUserLogin], []);
     this.store.dispatch(ChatActions.startChat(newChat));
     this.router.navigate(["/chat"]);
     this.chatChecked = false;
     this.closeEvent.emit();
+  }
+  ngOnDestroy(): void {
+  this.existingChatsSubscription.unsubscribe();
   }
 }

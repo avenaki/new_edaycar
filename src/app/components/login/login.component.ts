@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   currentUser$: Observable<UserState>;
   currentUserSubscription: Subscription;
-  // private currentUserError: Error = null;
   private currentUser: UserModel;
   constructor(private fb: FormBuilder,
               private store: Store<{ user: UserState }>,
@@ -33,7 +32,6 @@ export class LoginComponent implements OnInit {
       .pipe(
         map(x => {
           this.currentUser = x.user;
-          // this.currentUserError = x.userError;
           if ( this.currentUser) {
             this.router.navigate([""]);
           }

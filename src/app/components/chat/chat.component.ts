@@ -20,13 +20,17 @@ import { AppState } from "../../store/state/app.state";
 })
 export class ChatComponent implements OnInit, OnDestroy {
   currentChats$: Observable<Chat[]>;
+  currentChat$: Observable<Chat>;
+  currentUser$: Observable<UserModel>;
+  currentReceiverPicSubscription: Subscription;
+  currentChatMessagesSubscription: Subscription;
+  currentChatsSubscription: Subscription;
+  currentChatSubscription: Subscription;
+  currentUserSubscription: Subscription;
   currentChats: Chat[];
   currentChatsShow: Chat[];
-  currentChat$: Observable<Chat>;
   currentChat: Chat;
-  currentUser$: Observable<UserModel>;
   currentUser: UserModel;
-  currentReceiverPicSubscription: Subscription;
   currentReceiverPic: string;
   currentText: string;
   searchUser: string;
@@ -38,7 +42,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.currentChats$ = store.select(fromChat.selectAllChats);
     this.currentUser$ = store.select(fromUser.selectUserCurrent);
     this.currentChat$ = store.select(fromChat.selectCurrentChat);
-    this.chatService.messageReceived.subscribe((message: Message) => {
+    this.currentChatMessagesSubscription =  this.chatService.messageReceived.subscribe((message: Message) => {
           this.store.dispatch(ChatActions.receiveMessageSuccess( {message: message}));
           if ( !this.currentChats.some(chat => chat.participants[0] === message.sender) &&
                !this.currentChats.some(chat => chat.participants[1] === message.sender) ) {
@@ -47,20 +51,20 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.currentUser$.subscribe( (user: UserModel) => {
+    this.currentUserSubscription = this.currentUser$.subscribe( (user: UserModel) => {
       if ( user ) {
         this.currentUser = user;
         const payload = {login: this.currentUser.login};
         this.store.dispatch(ChatActions.loadAllChats(payload));
       }
     });
-    this.currentChats$.subscribe( (chats: Chat[]) => {
+    this.currentChatsSubscription = this.currentChats$.subscribe( (chats: Chat[]) => {
       this.currentChats = chats;
       this.currentChatsShow = chats;
       this.cdr.markForCheck();
     });
     this.currentChat$ = this.store.select(fromChat.selectCurrentChat);
-    this.currentChat$.subscribe( (chat: Chat) => {
+    this.currentChatSubscription = this.currentChat$.subscribe( (chat: Chat) => {
       if (chat) {
         this.currentChat = chat;
         this.currentReceiverPicSubscription = this._httpService.loadPhoto(this.currentChat.participants.find((user => user !== this.currentUser.login))).subscribe(photo => this.currentReceiverPic = photo.picture);
@@ -98,5 +102,9 @@ sendMessage(): void {
   }
   ngOnDestroy(): void {
     this.store.dispatch(ChatActions.leaveChatSuccess());
+    this.currentChatMessagesSubscription.unsubscribe();
+    this.currentChatsSubscription.unsubscribe();
+    this.currentChatSubscription.unsubscribe();
+    this.currentUserSubscription.unsubscribe();
   }
 }

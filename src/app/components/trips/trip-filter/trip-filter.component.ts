@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { AfterContentInit, Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
 import {  FormControl, FormGroup, Validators } from "@angular/forms";
 import { TripSearchFilter } from "../../../models/trip-search-filter";
 import * as TripActions from "../../../store/actions/trip.actions";
@@ -10,13 +10,14 @@ import { BaseTripComponent } from "../base-trip/base-trip.component";
   templateUrl: "./trip-filter.component.html",
   styleUrls: ["../trip.component.less"]
 })
-export class TripFilterComponent extends BaseTripComponent implements OnInit, AfterContentInit {
+export class TripFilterComponent extends BaseTripComponent implements OnInit, AfterContentInit, OnDestroy {
   @Output() closeEvent = new EventEmitter<void>();
   filterForm: FormGroup;
 
   ngOnInit(): void {
     this.initForm();
     this.subscribeToDriverChanges();
+    this.onChanges(this.filterForm);
   }
   ngAfterContentInit(): void {
     this.initGoogleApi(this.filterForm);
@@ -41,5 +42,16 @@ export class TripFilterComponent extends BaseTripComponent implements OnInit, Af
       this.store.dispatch(TripActions.filterTrips(filter));
       this.closeEvent.emit();
  }
+ ngOnDestroy(): void {
+    this.formFinishPlaceSubscription.unsubscribe();
+    this.formStartPlaceSubscription.unsubscribe();
+ }
 
+  checkIfStartInputIsValid(myForm: FormGroup): boolean {
+    return (!this.startX || !this.startY) && myForm.get("startPlace").dirty;
+  }
+
+  checkIfFinishInputIsValid(myForm: FormGroup): boolean {
+    return (!this.finishX || !this.finishY) && myForm.get("finishPlace").dirty;
+  }
 }

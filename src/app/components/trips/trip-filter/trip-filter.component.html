@@ -16,15 +16,28 @@
                   <div class="form_text"> Конец</div>
                   <input type="time"  class="form_input input-time" formControlName="finishTime" />
                 </div>
+                <div>
+                  <div  class="form_error_message" *ngIf=" (filterForm.get('finishTime').dirty && !filterForm.get('finishTime').value)
+|| (filterForm.get('startTime').dirty && !filterForm.get('startTime').value)">
+                    Пожалуйста, введите время и количество мест
+                  </div>
               </div>
               <div>
                 <div class="form_text-large"> Откуда</div>
-                <input type="text"   class="form_input filter-inputs" #start formControlName="startPlace" />
+                <input type="text" [class.invalidForm]="checkIfStartInputIsValid(this.filterForm)"   class="form_input filter-inputs" #start formControlName="startPlace" />
+                <div class="form_error_message" *ngIf="(!this.startX || !this.startY) &&  filterForm.get('startPlace').touched
+&&  filterForm.get('startPlace').dirty">
+                  Пожалуйста, выберите один адрес из предложенных
+                </div>
               </div>
               <div >
                 <div class="form_text-large"> Куда</div>
                 <div class="form-group">
-                  <input type="text"    class="form_input filter-inputs" #finish formControlName="finishPlace" />
+                  <input type="text"     [class.invalidForm]="checkIfFinishInputIsValid(this.filterForm)"  class="form_input filter-inputs" #finish formControlName="finishPlace" />
+                </div>
+                <div class="form_error_message" *ngIf="(!this.finishX || !this.finishY) &&  filterForm.get('finishPlace').touched
+&& filterForm.get('finishPlace').dirty">
+                  Пожалуйста, выберите один адрес из предложенных
                 </div>
               </div>
               <div>
@@ -40,11 +53,13 @@
             </div>
           </div>
         </div>
+        </div>
       </form>
     </div>
     <div class="button-container">
     <button class="form_button" (click)="closeEvent.emit()">Назад</button>
-      <button class="form_button" (click)="submit()">Найти</button></div>
+      <button class="form_button" [class.invalidButton] = "(filterForm.invalid|| !this.startX || !this.finishX)
+&& filterForm.dirty" (click)="submit()">Найти</button></div>
 
   </div>
 </div>

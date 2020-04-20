@@ -83,6 +83,8 @@ export class CreateTripComponent extends BaseTripComponent implements OnInit, On
   }
   ngOnDestroy(): void {
     this.currentDriverSubscription.unsubscribe();
+    this.formStartPlaceSubscription.unsubscribe();
+    this.formFinishPlaceSubscription.unsubscribe();
     this.cdr.detach();
   }
   checkIfStartInputIsValid(myForm: FormGroup): boolean {

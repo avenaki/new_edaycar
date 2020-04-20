@@ -29,6 +29,8 @@ export class BaseTripComponent {
   finishY: number;
   currentDriver$: Observable<Driver>;
   currentDriverSubscription: Subscription;
+  formStartPlaceSubscription: Subscription;
+  formFinishPlaceSubscription: Subscription;
   currentDriver: Driver;
   origin:   google.maps.LatLng;
   destination: google.maps.LatLng;
@@ -60,14 +62,14 @@ export class BaseTripComponent {
     return  new Date(Date.UTC(null, null, null, timeHours, timeMinutes)).toISOString();
   }
   onChanges(myForm: FormGroup): void {
-    myForm.get("startPlace").valueChanges.subscribe(() => {
+    this.formStartPlaceSubscription = myForm.get("startPlace").valueChanges.subscribe(() => {
       if ( !this.autocompleteStartIsUsed) {
         this.startX = undefined;
         this.startY = undefined;
       }
       this.autocompleteStartIsUsed = false;
     });
-    myForm.get("finishPlace").valueChanges.subscribe(() => {
+    this.formFinishPlaceSubscription = myForm.get("finishPlace").valueChanges.subscribe(() => {
       if ( !this.autocompleteFinishIsUsed) {
         this.finishX = undefined;
         this.finishY = undefined;

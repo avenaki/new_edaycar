@@ -55,8 +55,7 @@
     <div >
       <div class="button-container" *ngIf="currentUser.login === currentTrip.driverLogin">
         <button class="form_button delete-button" (click)="delete()">Удалить</button>
-      <button class="form_button" [class.invalidButton] = "(editTripForm.invalid|| !this.startX || !this.finishX)
-&& editTripForm.dirty" (click)="submit()">Изменить</button>
+      <button class="form_button" [class.invalidButton] = "disableButton()" (click)="submit()">Изменить</button>
       </div>
     <div class="button-container" *ngIf="currentUser.login !== currentTrip.driverLogin  && currentUser.role === 'passenger'">
       <button class="form_button" [class.invalidButton]="checkIfSeatIsAlreadyTaken(currentTrip)" (click)="takeTrip(currentTrip)">Занять</button></div>

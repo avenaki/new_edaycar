@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { Passenger } from "../../../models/passenger";
 import { UserModel } from "../../../models/user-model";
 import * as PassengerActions from "../../../store/actions/passenger.actions";
@@ -13,13 +13,14 @@ import { Validator } from "../../../validators";
     selector: "app-profile-passenger",
     templateUrl: "./profile-passenger.component.html",
     styleUrls: ["../profile.component.less"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ProfilePassengerComponent implements OnInit, OnDestroy {
 
   currentPassenger: Passenger;
   currentPassenger$: Observable<Passenger>;
+  currentPassengerSubscription: Subscription;
   currentUser: UserModel;
   passengerForm: FormGroup;
   errorTextMessage = "";
@@ -32,7 +33,7 @@ export class ProfilePassengerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.currentPassenger$ = this.store.select(fromPassenger.selectCurrentPassenger);
-    this.currentPassenger$.subscribe(currentPassenger => {
+    this.currentPassengerSubscription = this.currentPassenger$.subscribe(currentPassenger => {
       if (currentPassenger) {
         this.currentPassenger = currentPassenger;
         this.updateFormValues(this.currentPassenger);
@@ -97,7 +98,7 @@ export class ProfilePassengerComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(): void {
-
+  this.currentPassengerSubscription.unsubscribe();
   }
 }
 

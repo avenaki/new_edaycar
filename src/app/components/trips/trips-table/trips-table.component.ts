@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component,  OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { Driver } from "../../../models/driver";
 import { Passenger } from "../../../models/passenger";
 import { Trip } from "../../../models/trip";
@@ -22,7 +22,13 @@ import { AppState } from "../../../store/state/app.state";
 })
 export class TripsTableComponent implements OnInit, OnDestroy {
   trips$: Observable<Trip[]>;
-  trips: Trip[];
+  currentUser$: Observable<UserModel>;
+  currentDriver$: Observable<Driver>;
+  currentPassenger$: Observable<Passenger>;
+  tripsSubscription: Subscription;
+  driverSubscription: Subscription;
+  passengerSubscription: Subscription;
+  userSubsctiption: Subscription;
   modal = false;
   editModal = false;
   startChatModal = false;
@@ -32,9 +38,7 @@ export class TripsTableComponent implements OnInit, OnDestroy {
   sortUpStart = false;
   sortUpFinish = false;
   sortUpMaxPassengers = false;
-  currentUser$: Observable<UserModel>;
-  currentDriver$: Observable<Driver>;
-  currentPassenger$: Observable<Passenger>;
+  trips: Trip[];
   currentUser: UserModel;
   currentDriver: Driver;
   currentPassenger: Passenger;
@@ -49,13 +53,13 @@ export class TripsTableComponent implements OnInit, OnDestroy {
     this.trips$ = this.store.select(fromTrip.selectAllTrips);
   }
   ngOnInit(): void {
-    this.currentUser$.subscribe( (currentUser) => {
+    this.userSubsctiption = this.currentUser$.subscribe( (currentUser) => {
       if (currentUser) {
         this.currentUser = currentUser;
       if (currentUser.role === "driver") {
         this.currentDriver$ = this.store.select(fromDriver.selectCurrentDriver);
         this.userIsDriver = true;
-        this.currentDriver$.subscribe( (currentDriver) => {
+        this.driverSubscription = this.currentDriver$.subscribe( (currentDriver) => {
           if ( currentDriver) {
             this.currentDriver = currentDriver;
             this.cdr.markForCheck();
@@ -63,20 +67,19 @@ export class TripsTableComponent implements OnInit, OnDestroy {
         });
       } else {
         this.currentPassenger$ = this.store.select(fromPassenger.selectCurrentPassenger);
-        this.currentPassenger$.subscribe( (currentPassenger) => {
+        this.passengerSubscription = this.currentPassenger$.subscribe( (currentPassenger) => {
           this.currentPassenger = currentPassenger;
           this.cdr.markForCheck();
         });
       }
     }});
-      this.trips$.subscribe(trips => {
+      this.tripsSubscription = this.trips$.subscribe(trips => {
         if (trips) {
           this.trips = trips;
           this.cdr.markForCheck();
         }
       });
     }
-
   sort(propName: keyof Trip, order: string): void {
     const sortedTrips = [...this.trips];
     sortedTrips.sort((a, b) => {
@@ -94,32 +97,33 @@ export class TripsTableComponent implements OnInit, OnDestroy {
     this.trips = sortedTrips;
     this.cdr.markForCheck();
 }
-
   closeModal(): void {
      this.modal = false;
      this.editModal = false;
      this.startChatModal = false;
      this.cdr.markForCheck();
   }
-
   update(): void {
-    this.editModal = true;
+    this.store.dispatch(TripActions.loadTrips());
   }
-
   ngOnDestroy(): void {
-   this.cdr.detach();
-
+    if ( this.passengerSubscription ) {
+      this.passengerSubscription.unsubscribe();
+    }
+   if ( this.driverSubscription ) {
+     this.driverSubscription.unsubscribe();
+   }
+    this.tripsSubscription.unsubscribe();
+    this.userSubsctiption.unsubscribe();
+    this.cdr.detach();
   }
-
   editTrip(id: string): void {
     this.editModal = true;
     this.currentEditTripId = id;
   }
-
   addTrip(): void {
   this.router.navigate(["create-trip"]);
   }
-
   startChat(login: string): void {
   this.startChatUserLogin = login;
   this.startChatModal = true;

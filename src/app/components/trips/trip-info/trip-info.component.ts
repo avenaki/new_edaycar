@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component, ElementRef,
   EventEmitter,
@@ -24,7 +23,13 @@ import { BaseTripComponent } from "../base-trip/base-trip.component";
   styleUrls: ["../trip.component.less"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDestroy, AfterContentInit {
+export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDestroy {
+  public finishElementRef: ElementRef;
+  public startElementRef: ElementRef;
+  editTripForm: FormGroup;
+  currentTrip$: Observable<Trip>;
+  currentTrip: Trip;
+  currentTripSubcription: Subscription;
   @Output() closeEvent = new EventEmitter<void>();
   @Input()  currentTripId: string;
   @Input()  currentUser: UserModel;
@@ -44,22 +49,11 @@ export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDe
       }
     }
   }
-  public finishElementRef: ElementRef;
-  public startElementRef: ElementRef;
-  editTripForm: FormGroup;
-  currentTrip$: Observable<Trip>;
-  currentTrip: Trip;
-  currentTripSubcription: Subscription;
   ngOnInit(): void {
     this.initForm();
     this.subscribeToDriverChanges();
     this.subscribeToTrip();
   }
-
-  ngAfterContentInit(): void {
-
-  }
-
   initForm(): void {
     this.editTripForm = this.fb.group({
       startTime: new FormControl("", [Validators.required]),
@@ -70,7 +64,6 @@ export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDe
     this.onChanges(this.editTripForm);
   }
   subscribeToTrip(): void {
-
     this.store.dispatch(TripActions.loadTrip({id: this.currentTripId}));
     this.currentTrip$ = this.store.select(fromTrip.selectCurrentTrip);
     this.currentTripSubcription = this.currentTrip$.subscribe( trip => {
@@ -92,7 +85,6 @@ export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDe
       }
     });
   }
-
   updateValues(): void {
     this.editTripForm.patchValue({
       startTime: this.convertTimeToString(this.currentTrip.startTime),
@@ -104,6 +96,7 @@ export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDe
   }
   ngOnDestroy(): void {
     this.currentTripSubcription.unsubscribe();
+    this.currentDriverSubscription.unsubscribe();
   }
   submit(): void {
     if ( this.editTripForm.invalid || !this.startX || !this.startY || !this.finishX || !this.finishY ) {
@@ -127,8 +120,8 @@ export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDe
       this.editTripForm.get("finishPlace").value,
       this.editTripForm.get("maxPassengersValue").value,
       this.currentDriver.login,  this.currentTrip.passengersLogins);
-    this.store.dispatch(TripActions.editTrip(newTrip));
-    this.closeEvent.emit();
+      this.store.dispatch(TripActions.editTrip(newTrip));
+      this.closeEvent.emit();
   }
   convertTimeToString(utcTime: string | Date): string {
     const dateTimeArray = utcTime.toString().split("T");
@@ -136,7 +129,6 @@ export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDe
     const result = "";
     return result.concat(timeArray[0] + ":" + timeArray[1]);
   }
-
   checkIfSeatIsAlreadyTaken(trip: Trip): boolean {
     return trip.passengersLogins.some((login: string) => login === this.currentUser.login) || trip.maxPassengers === 0;
   }
@@ -148,12 +140,10 @@ export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDe
     this.store.dispatch(TripActions.takeTrip(model));
     this.closeEvent.emit();
   }
-
   delete(): void {
     this.store.dispatch(TripActions.deleteTrip({id: this.currentTrip.id}));
     this.closeEvent.emit();
   }
-
   closeModal(): void {
     this.store.dispatch(TripActions.dropCurrentTrip());
     this.closeEvent.emit();
@@ -161,9 +151,19 @@ export class TripInfoComponent extends BaseTripComponent implements OnInit, OnDe
   checkIfStartInputIsValid(myForm: FormGroup): boolean {
     return (!this.startX || !this.startY) && myForm.get("startPlace").dirty;
   }
-
   checkIfFinishInputIsValid(myForm: FormGroup): boolean {
     return (!this.finishX || !this.finishY) && myForm.get("finishPlace").dirty;
   }
-
+  disableButton(): boolean {
+    if ( this.editTripForm.get("startPlace").dirty && this.editTripForm.get("finishPlace").dirty) {
+      return this.editTripForm.invalid || !this.startX || !this.finishX && this.editTripForm.dirty;
+    }
+    if ( !this.editTripForm.get("startPlace").dirty && this.editTripForm.get("finishPlace").dirty) {
+      return this.editTripForm.invalid ||  !this.finishX && this.editTripForm.dirty;
+    }
+    if ( this.editTripForm.get("startPlace").dirty && !this.editTripForm.get("finishPlace").dirty) {
+      return this.editTripForm.invalid ||  !this.startX && this.editTripForm.dirty;
+    }
+    return this.editTripForm.invalid  && this.editTripForm.dirty;
+  }
 }
